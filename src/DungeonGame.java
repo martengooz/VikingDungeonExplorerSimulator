@@ -42,6 +42,7 @@ public class DungeonGame extends BasicGame {
 	     try {
 	          AppGameContainer container = new AppGameContainer(game);
 	          AppGameContainer container = new AppGameContainer(game, WIDTH, HEIGHT, false);
+	          container.setShowFPS(false); // Removes FPS counter
 	          container.start();
 	     } catch (SlickException e) {
 	          // TODO Auto-generated catch block

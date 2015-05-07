@@ -6,9 +6,14 @@ import org.newdawn.slick.SlickException;
 
 
 public class DungeonGame extends BasicGame {
-
-	public DungeonGame(String title) {
-		super(title);
+	
+	// Application Properties
+    public static final int WIDTH   = 1280;
+    public static final int HEIGHT  = 720;
+    public static final String VERSION = "Alpha";
+    	
+	public DungeonGame(String game) {
+		super(game);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -33,8 +38,10 @@ public class DungeonGame extends BasicGame {
 
 	public static void main(String[] args) {
 	     DungeonGame game = new DungeonGame("Slick Tutorial");
+	     DungeonGame game = new DungeonGame("Viking Dungeon Explorer Simulator " + VERSION);
 	     try {
 	          AppGameContainer container = new AppGameContainer(game);
+	          AppGameContainer container = new AppGameContainer(game, WIDTH, HEIGHT, false);
 	          container.start();
 	     } catch (SlickException e) {
 	          // TODO Auto-generated catch block

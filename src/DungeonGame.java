@@ -37,10 +37,8 @@ public class DungeonGame extends BasicGame {
 	}
 
 	public static void main(String[] args) {
-	     DungeonGame game = new DungeonGame("Slick Tutorial");
 	     DungeonGame game = new DungeonGame("Viking Dungeon Explorer Simulator " + VERSION);
 	     try {
-	          AppGameContainer container = new AppGameContainer(game);
 	          AppGameContainer container = new AppGameContainer(game, WIDTH, HEIGHT, false);
 	          container.setShowFPS(false); // Removes FPS counter
 	          container.start();

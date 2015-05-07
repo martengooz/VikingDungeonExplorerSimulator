@@ -3,10 +3,10 @@ import org.newdawn.slick.opengl.Texture;
 
 public class Item extends Entity {
 	
-	final String id;
-	final String name;
-	final String description;
-	final Texture texture;
+	private final String id;
+	private final String name;
+	private final String description;
+	private final Texture texture;
 	
 	/**
 	 * Create a new item.

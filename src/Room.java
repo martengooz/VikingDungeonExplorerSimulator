@@ -4,9 +4,9 @@ import java.util.Set;
 
 public class Room implements Drawable {
 	
-	Set<NPC> npcs = new HashSet<>();
-	Set<Item> items = new HashSet<>();
-	Set<Entity> entities = new HashSet<>(); 
+	private Set<NPC> npcs = new HashSet<>();
+	private Set<Item> items = new HashSet<>();
+	private Set<Entity> entities = new HashSet<>(); 
 	
 	Room[] neighbors = new Room[4];
 	

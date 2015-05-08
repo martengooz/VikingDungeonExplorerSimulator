@@ -43,16 +43,21 @@ public class Player extends Entity {
 	 * {@inheritDoc Entity} 
 	 */
 	@Override
-	public void update() {
-		Point velocity = new Point(0,0);
+	public void update(int delta) {
+		Point velocity = new Point(0, 0);
 		
-		if (directionsToMove[0] && !directionsToMove[2]) { velocity.setY(speed);} //Up
-		if (directionsToMove[2] && !directionsToMove[0]) { velocity.setY(-speed);} //Down
+		if (directionsToMove[0] && !directionsToMove[2]) { velocity.setY(-speed);} //Up
+		if (directionsToMove[2] && !directionsToMove[0]) { velocity.setY(speed);} //Down
 		
-		if (directionsToMove[3] && !directionsToMove[1]) { velocity.setX(-speed);} //Left
-		if (directionsToMove[1] && !directionsToMove[3]) { velocity.setX(speed);} //Right
+		if (directionsToMove[3] && !directionsToMove[1]) { velocity.setX(speed);} //Left
+		if (directionsToMove[1] && !directionsToMove[3]) { velocity.setX(-speed);} //Right
+		
+		directionsToMove[0] = false;
+		directionsToMove[1] = false;
+		directionsToMove[2] = false;
+		directionsToMove[3] = false;
 		
 		setVelocity(velocity);
-		super.update();
+		super.update(delta);
 	}
 }

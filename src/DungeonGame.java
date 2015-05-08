@@ -2,6 +2,7 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Point;
 
@@ -12,6 +13,14 @@ public class DungeonGame extends BasicGame {
 	public static final String VERSION = "Alpha";
     private static final int WIDTH   = 1280;
     private static final int HEIGHT  = 720;
+    
+    //Input handling
+    Input input = new Input(HEIGHT);
+    public final int keyMoveUp = Input.KEY_W;
+    public final int keyMoveDown = Input.KEY_S;
+    public final int keyMoveLeft = Input.KEY_A;
+    public final int keyMoveRight = Input.KEY_D;
+    public final int keyExit = Input.KEY_ESCAPE;
     
     // Players
     private static Player redbeard; 
@@ -28,7 +37,7 @@ public class DungeonGame extends BasicGame {
 	public void render(GameContainer gameContainer, Graphics g) throws SlickException {
 		// TODO Auto-generated method stub
 		//redbeardImage.draw();
-		redbeard.getImage().draw();
+		redbeard.getImage().draw(redbeard.getPosition().getX(), redbeard.getPosition().getY());
 		
 	}
 
@@ -42,7 +51,15 @@ public class DungeonGame extends BasicGame {
 
 	@Override
 	public void update(GameContainer gameContainer, int delta) throws SlickException {
-		// TODO Auto-generated method stub
+		//Update input
+		if(input.isKeyDown(keyMoveUp)) {redbeard.move(0);}
+		if(input.isKeyDown(keyMoveDown)) {redbeard.move(2);}
+		if(input.isKeyDown(keyMoveLeft)) {redbeard.move(1);}
+		if(input.isKeyDown(keyMoveRight)) {redbeard.move(3);}
+		
+		if(input.isKeyDown(keyExit)) {System.exit(1);}
+		
+		redbeard.update(delta);
 	}
 
 	public static void main(String[] args) throws SlickException {

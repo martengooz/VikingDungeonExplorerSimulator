@@ -25,15 +25,16 @@ public class Entity implements Drawable {
 	
 	/**
 	 * Update the position of this entity by moving it according to set velocity and acceleration.
+	 * @param delta The number of milliseconds since last update.
 	 */
-	public void update() {
+	public void update(int delta) {
 		//Update position
-		position.setX(position.getX() + velocity.getX());
-		position.setY(position.getY() + velocity.getY());
+		position.setX(position.getX() + velocity.getX() * delta);
+		position.setY(position.getY() + velocity.getY() * delta);
 		
 		//Update velocity
-		velocity.setX(velocity.getX() + acceleration.getX());
-		velocity.setY(velocity.getY() + acceleration.getY());
+		velocity.setX(velocity.getX() + acceleration.getX() * delta);
+		velocity.setY(velocity.getY() + acceleration.getY() * delta);
 	}
 
 	/**

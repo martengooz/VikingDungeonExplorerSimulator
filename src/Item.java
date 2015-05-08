@@ -23,7 +23,7 @@ public class Item extends Entity {
 		this.name = name;
 		this.description = description;
 		this.texture = texture;
-	};
+	}
 	
 	/**
 	 *  Get a unique identifier of this item.

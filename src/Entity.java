@@ -1,7 +1,5 @@
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.geom.Point;
 
+import org.newdawn.slick.geom.Point;
 
 public class Entity implements Drawable {
 	
@@ -16,7 +14,7 @@ public class Entity implements Drawable {
 	}
 	
 	@Override
-	public void draw(GameContainer gameContainer, Graphics g) {
+	public void draw() {
 	}
 	
 	public void update() {

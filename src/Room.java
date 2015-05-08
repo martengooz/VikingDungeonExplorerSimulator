@@ -1,9 +1,6 @@
 import java.util.HashSet;
 import java.util.Set;
 
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-
 
 public class Room implements Drawable {
 	
@@ -74,6 +71,6 @@ public class Room implements Drawable {
 	/**
 	 * {@inheritDoc Drawable}
 	 */
-	public void draw(GameContainer gameContainer, Graphics g) {
+	public void draw() {
 	}
 }

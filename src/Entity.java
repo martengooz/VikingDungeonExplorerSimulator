@@ -9,7 +9,7 @@ public class Entity implements Drawable {
 	private Point velocity;
 	private Point acceleration;
 	
-	public void Entity(Point position, Point velocity, Point acceleration) {
+	public Entity(Point position, Point velocity, Point acceleration) {
 		this.position = position;
 		this.velocity = velocity;
 		this.acceleration = acceleration;

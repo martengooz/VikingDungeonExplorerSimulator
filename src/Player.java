@@ -3,14 +3,9 @@ import org.newdawn.slick.geom.Point;
 
 public class Player extends Entity {
 	private final String name;
-<<<<<<< HEAD
-=======
-	private final Image image;
 	private float speed = 0.2f;
 	
 	private boolean[] directionsToMove = new boolean[4];
->>>>>>> origin/master
-	
 	/**
 	 * Create a new Player.
 	 * @param name The name of the player. Also used to identify players.
@@ -30,18 +25,14 @@ public class Player extends Entity {
 	public String getName() {return name;}
 	
 	/**
-<<<<<<< HEAD
 	 * Handles player movement. 
-=======
 	 * Returns the players image.
 	 * @return The image of the player.
 	 */
-	public Image getImage() {return image;}
 	
 	/**
 	 * Specify that the player should move in this direction on the next update.
 	 * @param direction An integer in the range 0-3 specifying which direction (up, right, down, left).
->>>>>>> origin/master
 	 */
 	public void move(int direction) {
 		if (direction > 3 || direction < 0) {throw new IllegalArgumentException("Direction must be between 0 and 3");}

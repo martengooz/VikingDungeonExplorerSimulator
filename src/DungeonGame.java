@@ -26,6 +26,8 @@ public class DungeonGame extends BasicGame {
     private static Player redbeard; 
     private static String redbeardImageLocation = "res\\images\\player1.png";
     	
+    private Room currentRoom;
+    
 	public DungeonGame(String game) {
 		super(game);
 	   
@@ -37,7 +39,9 @@ public class DungeonGame extends BasicGame {
 	public void render(GameContainer gameContainer, Graphics g) throws SlickException {
 		// TODO Auto-generated method stub
 		//redbeardImage.draw();
+		currentRoom.draw();
 		redbeard.draw();
+		
 		
 	}
 
@@ -45,8 +49,11 @@ public class DungeonGame extends BasicGame {
 	public void init(GameContainer gameContainer) throws SlickException {
 		// TODO Auto-generated method stub
 		redbeard = new Player("Redbeard", redbeardImageLocation, new Point(100, 100), new Point(0, 0), new Point(0, 0));
+		currentRoom = MapManager.getFirstRoom();
+		
 		redbeard.loadTexture();
-		//MapManager.getFirstRoom().loadTexture(); // Load first room 
+		currentRoom.loadTexture(); // Load first room 
+
 	}
 
 	@Override

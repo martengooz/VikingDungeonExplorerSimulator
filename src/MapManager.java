@@ -13,6 +13,6 @@ public class MapManager {
 	 * Generate the map of the game.
 	 */
 	public static void generateMap() {
-		//ToDo: Put code to generate map here
+		firstRoom = new Room("res\\images\\Room.png");
 	}
 }

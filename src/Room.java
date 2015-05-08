@@ -77,6 +77,7 @@ public class Room implements Drawable {
 	 * {@inheritDoc Drawable}
 	 */
 	public void draw() {
+		image.draw(0, 0);
 	}
 	
 	

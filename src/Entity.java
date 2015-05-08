@@ -17,10 +17,13 @@ public class Entity implements Drawable {
 	public void draw() {
 	}
 	
+	/**
+	 * Update the position of this entity by moving it according to set velocity and acceleration.
+	 */
 	public void update() {
 		//Update position
-		position.setX(velocity.getX() + velocity.getX());
-		position.setY(velocity.getY() + velocity.getY());
+		position.setX(position.getX() + velocity.getX());
+		position.setY(position.getY() + velocity.getY());
 		
 		//Update velocity
 		velocity.setX(velocity.getX() + acceleration.getX());

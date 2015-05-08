@@ -37,7 +37,7 @@ public class DungeonGame extends BasicGame {
 	public void render(GameContainer gameContainer, Graphics g) throws SlickException {
 		// TODO Auto-generated method stub
 		//redbeardImage.draw();
-		redbeard.getImage().draw(redbeard.getPosition().getX(), redbeard.getPosition().getY());
+		redbeard.draw();
 		
 	}
 

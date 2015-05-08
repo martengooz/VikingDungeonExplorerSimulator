@@ -18,9 +18,12 @@ public class Entity implements Drawable {
 		this.imageLocation = imageLocation;
 	}
 	
+	/**
+	 * Draw this entity.
+	 */
 	@Override
 	public void draw() {
-		
+		getImage().draw(getPosition().getX(), getPosition().getY());
 	}
 	
 	/**

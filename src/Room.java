@@ -1,19 +1,24 @@
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public class Room implements Drawable {
 	
 	private Set<NPC> npcs = new HashSet<>();
 	private Set<Item> items = new HashSet<>();
 	private Set<Entity> entities = new HashSet<>(); 
+	private String imageLocation;
+	private Image image;
 	
 	Room[] neighbors = new Room[4];
 	
 	/**
 	 * Create a new room
 	 */
-	public Room() {};
+	public Room(String imageLocation) {this.imageLocation = imageLocation;};
 	
 	/**
 	 * Get a set of the NPCs in this room.
@@ -72,5 +77,27 @@ public class Room implements Drawable {
 	 * {@inheritDoc Drawable}
 	 */
 	public void draw() {
+	}
+	
+	
+	/**
+	 * {@inheritDoc Drawable}
+	 */
+	public void loadTexture() {
+		try {
+			this.image = new Image(imageLocation); // Load room image
+			
+			Iterator itNpcs = npcs.iterator();
+			Iterator itItems = items.iterator();
+			Iterator itEntities = entities.iterator();
+			
+			// Does not work yet
+			/*while (itNpcs.hasNext()){itNpcs.next().loadImage();} // Load npcs images
+			while (itItems.hasNext()){itItems.next().loadImage();} // Load npcs images
+			while (itEntities.hasNext()){itEntities.next().loadImage();} // Load npcs images
+			*/
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
 	}
 }

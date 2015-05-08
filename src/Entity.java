@@ -1,4 +1,6 @@
 
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Point;
 
 public class Entity implements Drawable {
@@ -6,15 +8,19 @@ public class Entity implements Drawable {
 	private Point position;
 	private Point velocity;
 	private Point acceleration;
+	private String imageLocation;
+	private Image image;
 	
-	public Entity(Point position, Point velocity, Point acceleration) {
+	public Entity(Point position, Point velocity, Point acceleration, String imageLocation) {
 		this.position = position;
 		this.velocity = velocity;
 		this.acceleration = acceleration;
+		this.imageLocation = imageLocation;
 	}
 	
 	@Override
 	public void draw() {
+		
 	}
 	
 	public void update() {
@@ -63,5 +69,20 @@ public class Entity implements Drawable {
 	 * @param acceleration The new acceleration.
 	 */
 	public void setAcceleration(Point acceleration) {this.acceleration = acceleration;}
-	
+
+	/**
+	 * @return the image
+	 */
+	public Image getImage() {return image;	}
+
+	/**
+	 * {@inheritDoc Drawable}
+	 */
+	public void loadTexture() {
+		try {
+			this.image = new Image(imageLocation);
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+	}
 }

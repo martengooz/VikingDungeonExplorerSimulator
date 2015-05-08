@@ -1,11 +1,8 @@
-import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Point;
-import org.newdawn.slick.opengl.Texture;
 
 
 public class Player extends Entity {
 	private final String name;
-	private final Image image;
 	
 	/**
 	 * Create a new Player.
@@ -14,11 +11,9 @@ public class Player extends Entity {
 	 * @param description A description of this item.
 	 * @param image A image of this item.
 	 */
-	public Player(String name, Image image, Point position, Point velocity, Point acceleration) {
-		super(position, velocity, acceleration);
-		
+	public Player(String name, String imageLocation, Point position, Point velocity, Point acceleration) {
+		super(position, velocity, acceleration, imageLocation);
 		this.name = name;
-		this.image = image;
 	}
 	
 	/**
@@ -26,12 +21,6 @@ public class Player extends Entity {
 	 * @return The players name. 
 	 */
 	public String getName() {return name;}
-	
-	/**
-	 * Returns the players image.
-	 * @return The image of the player.
-	 */
-	public Image getImage() {return image;}
 	
 	/**
 	 * Handles player movement. 

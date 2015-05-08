@@ -1,13 +1,10 @@
 import org.newdawn.slick.geom.Point;
-import org.newdawn.slick.opengl.Texture;
-
 
 public class Item extends Entity {
 	
 	private final String id;
 	private final String name;
 	private final String description;
-	private final Texture texture;
 	
 	/**
 	 * Create a new item.
@@ -16,13 +13,12 @@ public class Item extends Entity {
 	 * @param description A description of this item.
 	 * @param texture A texture of this item.
 	 */
-	public Item(String id, String name, String description, Texture texture, Point position, Point velocity, Point acceleration) {
-		super(position, velocity, acceleration);
+	public Item(String id, String name, String description, Point position, Point velocity, Point acceleration, String imageLocation) {
+		super(position, velocity, acceleration, imageLocation);
 		
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.texture = texture;
 	}
 	
 	/**
@@ -42,12 +38,6 @@ public class Item extends Entity {
 	 * @return The description of this item.
 	 */
 	public String getDescription() {return description;}
-	
-	/**
-	 * Return the texture of this item.
-	 * @return The texture of this item.
-	 */
-	public Texture getTexture() {return texture;}
 	
 	/**
 	 * Return the name of this item.

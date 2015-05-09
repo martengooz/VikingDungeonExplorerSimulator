@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -5,14 +7,16 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Point;
+import org.newdawn.slick.geom.Rectangle;
 
 
 public class DungeonGame extends BasicGame {
 	
 	// Application Properties
 	public static final String VERSION = "Alpha";
-    private static final int WIDTH   = 1280;
-    private static final int HEIGHT  = 720;
+	public static final int WIDTH   = 1280;
+	public static final int HEIGHT  = 720;
+    public static final int[] WALLWIDTH = {40, 40, 60, 40}; //How close the player can be to the walls in following order: up, right, down, left.
     
     //Input handling
     Input input = new Input(HEIGHT);
@@ -47,12 +51,13 @@ public class DungeonGame extends BasicGame {
 
 	@Override
 	public void init(GameContainer gameContainer) throws SlickException {
-		// TODO Auto-generated method stub
-		redbeard = new Player("Redbeard", redbeardImageLocation, new Point(100, 100), new Point(0, 0), new Point(0, 0));
+		MapManager.generateMap();
+		
+		redbeard = new Player("Redbeard", redbeardImageLocation, new Rectangle(100, 100, 128, 128), new Point(0, 0), new Point(0, 0));
 		currentRoom = MapManager.getFirstRoom();
 		
-		redbeard.loadTexture();
-		currentRoom.loadTexture(); // Load first room 
+		redbeard.loadImage(); //Load player texture
+		currentRoom.loadImage(); // Load first room 
 
 	}
 
@@ -66,7 +71,7 @@ public class DungeonGame extends BasicGame {
 		
 		if(input.isKeyDown(keyExit)) {System.exit(1);}
 		
-		redbeard.update(delta);
+		redbeard.update(delta, currentRoom);
 	}
 
 	public static void main(String[] args) throws SlickException {

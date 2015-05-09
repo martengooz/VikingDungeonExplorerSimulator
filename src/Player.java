@@ -1,4 +1,5 @@
 import org.newdawn.slick.geom.Point;
+import org.newdawn.slick.geom.Rectangle;
 
 
 public class Player extends Entity {
@@ -9,13 +10,15 @@ public class Player extends Entity {
 	/**
 	 * Create a new Player.
 	 * @param name The name of the player. Also used to identify players.
-	 * @param position The starting position of the Player. 
+	 * @param position The starting position and size of the Player. 
 	 * @param description A description of this item.
 	 * @param image A image of this item.
 	 */
-	public Player(String name, String imageLocation, Point position, Point velocity, Point acceleration) {
+	public Player(String name, String imageLocation, Rectangle position, Point velocity, Point acceleration) {
 		super(position, velocity, acceleration, imageLocation);
 		this.name = name;
+		
+		setCollide(true, true); //The player always has collision
 	}
 	
 	/**
@@ -23,12 +26,6 @@ public class Player extends Entity {
 	 * @return The players name. 
 	 */
 	public String getName() {return name;}
-	
-	/**
-	 * Handles player movement. 
-	 * Returns the players image.
-	 * @return The image of the player.
-	 */
 	
 	/**
 	 * Specify that the player should move in this direction on the next update.
@@ -43,7 +40,7 @@ public class Player extends Entity {
 	 * {@inheritDoc Entity} 
 	 */
 	@Override
-	public void update(int delta) {
+	public void update(int delta, Room currentRoom) {
 		Point velocity = new Point(0, 0);
 		
 		if (directionsToMove[0] && !directionsToMove[2]) { velocity.setY(-speed);} //Up
@@ -58,6 +55,6 @@ public class Player extends Entity {
 		directionsToMove[3] = false;
 		
 		setVelocity(velocity);
-		super.update(delta);
+		super.update(delta, currentRoom);
 	}
 }

@@ -9,5 +9,5 @@ public interface Drawable {
 	/**
 	 * Loads the necessary textures
 	 */
-	public void loadTexture();
+	public void loadImage();
 }

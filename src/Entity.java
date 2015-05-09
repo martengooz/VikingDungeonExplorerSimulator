@@ -1,17 +1,24 @@
 
+import java.util.Iterator;
+
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Point;
+import org.newdawn.slick.geom.Rectangle;
 
 public class Entity implements Drawable {
 	
-	private Point position;
+	private Rectangle position;
 	private Point velocity;
 	private Point acceleration;
 	private String imageLocation;
 	private Image image;
 	
-	public Entity(Point position, Point velocity, Point acceleration, String imageLocation) {
+	private boolean checkCollision;
+	private boolean doesCollide;
+	
+	public Entity(Rectangle position, Point velocity, Point acceleration, String imageLocation) {
 		this.position = position;
 		this.velocity = velocity;
 		this.acceleration = acceleration;
@@ -29,22 +36,75 @@ public class Entity implements Drawable {
 	/**
 	 * Update the position of this entity by moving it according to set velocity and acceleration.
 	 * @param delta The number of milliseconds since last update.
+	 * @param currentRoom The currentRoom of the game, used to detect collision with other entities in this room.
 	 */
-	public void update(int delta) {
-		//Update position
-		position.setX(position.getX() + velocity.getX() * delta);
-		position.setY(position.getY() + velocity.getY() * delta);
-		
+	public void update(int delta, Room currentRoom) {	
 		//Update velocity
 		velocity.setX(velocity.getX() + acceleration.getX() * delta);
 		velocity.setY(velocity.getY() + acceleration.getY() * delta);
+		
+		//Update position X
+		Rectangle newPosition = new Rectangle(position.getX() + velocity.getX() * delta, position.getY(), position.getWidth(), position.getHeight()); //Calculate new new position to compare collisions
+		if (newPosition.getX() > 0 + DungeonGame.WALLWIDTH[1] && newPosition.getX() < DungeonGame.WIDTH - position.getWidth() - DungeonGame.WALLWIDTH[3]) { //Check that we are within bounds
+			boolean willCollide = false;			
+			if (checkCollision) {
+				Iterator<NPC> itNpcs = currentRoom.getNPCs().iterator();
+				Iterator<Item> itItems = currentRoom.getItems().iterator();
+				Iterator<Entity> itEntities = currentRoom.getEntities().iterator();
+				
+				while (itNpcs.hasNext()) { //Check against NPCs
+					NPC npc = itNpcs.next();
+					if (npc.getDoesCollide() && npc.getPosition().intersects(newPosition)) {willCollide = true;}
+				}
+				
+				while (itItems.hasNext()) { //Check against items 
+					Item item = itItems.next();
+					if (item.getDoesCollide() && item.getPosition().intersects(newPosition)) {willCollide = true;}
+				}
+				
+				while (itEntities.hasNext()) { //Check against entities
+					Entity entity = itEntities.next();
+					if (entity.getDoesCollide() && entity.getPosition().intersects(newPosition)) {willCollide = true;}
+				}
+			}
+			
+			if (!willCollide) {position = newPosition;}
+		}
+		
+		//Update position Y
+		newPosition = new Rectangle(position.getX(), position.getY() + velocity.getY() * delta, position.getWidth(), position.getHeight()); //Calculate new new position to compare collisions
+		if (newPosition.getY() > 0 + DungeonGame.WALLWIDTH[0] && newPosition.getY() < DungeonGame.HEIGHT - position.getHeight() - DungeonGame.WALLWIDTH[2]) { //Check that we are within bounds
+			boolean willCollide = false;
+			if (checkCollision) {
+				Iterator<NPC> itNpcs = currentRoom.getNPCs().iterator();
+				Iterator<Item> itItems = currentRoom.getItems().iterator();
+				Iterator<Entity> itEntities = currentRoom.getEntities().iterator();
+				
+				while (itNpcs.hasNext()) { //Check against NPCs
+					NPC npc = itNpcs.next();
+					if (npc.getDoesCollide() && npc.getPosition().intersects(newPosition)) {willCollide = true;}
+				}
+				
+				while (itItems.hasNext()) { //Check against items 
+					Item item = itItems.next();
+					if (item.getDoesCollide() && item.getPosition().intersects(newPosition)) {willCollide = true;}
+				}
+				
+				while (itEntities.hasNext()) { //Check against entities
+					Entity entity = itEntities.next();
+					if (entity.getDoesCollide() && entity.getPosition().intersects(newPosition)) {willCollide = true;}
+				}
+			}
+		
+			if (!willCollide) {position = newPosition;}
+		}		
 	}
 
 	/**
 	 * Returns the position of this entity.
 	 * @return The position of this entity.
 	 */
-	public Point getPosition() {return position;}
+	public Rectangle getPosition() {return position;}
 
 	/**
 	 * Returns the velocity of this entity.
@@ -60,10 +120,16 @@ public class Entity implements Drawable {
 	public Point getAcceleration() {return acceleration;}
 	
 	/**
+	 * Return a boolean signaling if other entities should collide with this entity.
+	 * @return A boolean signaling if entities does collide with this entity.
+	 */
+	public boolean getDoesCollide() {return doesCollide;}
+	
+	/**
 	 * Set the position of this entity.
 	 * @param position The new position.
 	 */
-	public void setPosition(Point position) {this.position = position;}
+	public void setPosition(Rectangle position) {this.position = position;}
 	
 	/**
 	 * Set the velocity of this entity.
@@ -78,6 +144,16 @@ public class Entity implements Drawable {
 	public void setAcceleration(Point acceleration) {this.acceleration = acceleration;}
 
 	/**
+	 * Set the collision properties of this entity.
+	 * @param doesCollide A boolean signaling if other entities should check against collision with this one.
+	 * @param checkCollision A boolean signaling if this entity should check collision against other entities.
+	 */
+	public void setCollide(boolean doesCollide, boolean checkCollision) {
+		this.doesCollide = doesCollide;
+		this.checkCollision = checkCollision;
+	}
+	
+	/**
 	 * @return the image
 	 */
 	public Image getImage() {return image;	}
@@ -85,7 +161,7 @@ public class Entity implements Drawable {
 	/**
 	 * {@inheritDoc Drawable}
 	 */
-	public void loadTexture() {
+	public void loadImage() {
 		try {
 			this.image = new Image(imageLocation);
 		} catch (SlickException e) {

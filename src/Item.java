@@ -1,4 +1,5 @@
 import org.newdawn.slick.geom.Point;
+import org.newdawn.slick.geom.Rectangle;
 
 public class Item extends Entity {
 	
@@ -13,7 +14,7 @@ public class Item extends Entity {
 	 * @param description A description of this item.
 	 * @param texture A texture of this item.
 	 */
-	public Item(String id, String name, String description, Point position, Point velocity, Point acceleration, String imageLocation) {
+	public Item(String id, String name, String description, Rectangle position, Point velocity, Point acceleration, String imageLocation) {
 		super(position, velocity, acceleration, imageLocation);
 		
 		this.id = id;

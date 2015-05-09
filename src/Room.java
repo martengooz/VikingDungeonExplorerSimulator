@@ -78,25 +78,32 @@ public class Room implements Drawable {
 	 */
 	public void draw() {
 		image.draw(0, 0);
+		
+		Iterator<NPC> itNpcs = npcs.iterator();
+		Iterator<Item> itItems = items.iterator();
+		Iterator<Entity> itEntities = entities.iterator();
+		
+		while (itNpcs.hasNext()){itNpcs.next().draw();} // Draw npcs images
+		while (itItems.hasNext()){itItems.next().draw();} // Draw item images
+		while (itEntities.hasNext()){itEntities.next().draw();} // Draw entity images
 	}
 	
 	
 	/**
 	 * {@inheritDoc Drawable}
 	 */
-	public void loadTexture() {
+	public void loadImage() {
 		try {
 			this.image = new Image(imageLocation); // Load room image
 			
-			Iterator itNpcs = npcs.iterator();
-			Iterator itItems = items.iterator();
-			Iterator itEntities = entities.iterator();
+			Iterator<NPC> itNpcs = npcs.iterator();
+			Iterator<Item> itItems = items.iterator();
+			Iterator<Entity> itEntities = entities.iterator();
 			
-			// Does not work yet
-			/*while (itNpcs.hasNext()){itNpcs.next().loadImage();} // Load npcs images
-			while (itItems.hasNext()){itItems.next().loadImage();} // Load npcs images
-			while (itEntities.hasNext()){itEntities.next().loadImage();} // Load npcs images
-			*/
+			while (itNpcs.hasNext()){itNpcs.next().loadImage();} // Load npcs images
+			while (itItems.hasNext()){itItems.next().loadImage();} // Load item images
+			while (itEntities.hasNext()){itEntities.next().loadImage();} // Load entity images
+			
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}

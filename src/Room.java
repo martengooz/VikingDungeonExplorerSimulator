@@ -52,7 +52,19 @@ public class Room implements Drawable {
 	 * Add an item to the room.
 	 * @param item The item to add.
 	 */
-	public void setItem(Item item) {items.add(item);}
+	public void addItem(Item item) {items.add(item);}
+	
+	/**
+	 * Add a NPC to the room.
+	 * @param npc The npc to add.
+	 */
+	public void addNPC(NPC npc) {npcs.add(npc);}
+	
+	/**
+	 * Add an entity to the room.
+	 * @param entity The entity to add.
+	 */
+	public void addEntity(Entity entity) {entities.add(entity);}
 	
 	/**
 	 * Add an exit to this room.

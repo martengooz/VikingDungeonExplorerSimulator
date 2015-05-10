@@ -52,21 +52,20 @@ public class Player extends Entity {
 		if (directionsToMove[3] && !directionsToMove[1]) { velocity.setX(speed);} //Left
 		if (directionsToMove[1] && !directionsToMove[3]) { velocity.setX(-speed);} //Right
 		
+		// FIXDIS
+		// Check if going through door
+		if (directionsToMove[0] && !directionsToMove[2] && currentRoom.getNeighbor(0) != null) {currentRoom = currentRoom.getNeighbor(0);} // Up
+		if (directionsToMove[2] && !directionsToMove[0] && currentRoom.getNeighbor(2) != null) {currentRoom = currentRoom.getNeighbor(2);} // Down
+		if (directionsToMove[3] && !directionsToMove[1] && currentRoom.getNeighbor(3) != null) {currentRoom = currentRoom.getNeighbor(3);} // Left
+		if (directionsToMove[1] && !directionsToMove[3] && currentRoom.getNeighbor(1) != null) {currentRoom = currentRoom.getNeighbor(1);} // Right
+		
+		// Resetting (Must be last!)
 		directionsToMove[0] = false;
 		directionsToMove[1] = false;
 		directionsToMove[2] = false;
 		directionsToMove[3] = false;
 		
 		setVelocity(velocity);
-		
-		// FIXDIS
-		// Check if going through door
-		if (directionsToMove[0] && !directionsToMove[2] && currentRoom.getNeighbor(0) != null) {currentRoom = currentRoom.getNeighbor(0); } // Up
-		if (directionsToMove[2] && !directionsToMove[0] && currentRoom.getNeighbor(2) != null) {currentRoom = currentRoom.getNeighbor(2); } // Down
-		if (directionsToMove[3] && !directionsToMove[1] && currentRoom.getNeighbor(3) != null) {currentRoom = currentRoom.getNeighbor(3); } // Left
-		if (directionsToMove[1] && !directionsToMove[3] && currentRoom.getNeighbor(1) != null) {currentRoom = currentRoom.getNeighbor(1); } // Right
-		
-		System.out.println(currentRoom); 
 		super.update(delta, currentRoom);
 	}
 

@@ -4,7 +4,7 @@ import org.newdawn.slick.geom.Rectangle;
 
 public class Player extends Entity {
 	private final String name;
-	private float speed = 0.2f;
+	private float speed = 0.4f;
 	private Room currentRoom;
 	
 	private boolean[] directionsToMove = new boolean[4];
@@ -43,6 +43,7 @@ public class Player extends Entity {
 	 */
 	@Override
 	public void update(int delta, Room currentRoom) {
+		// Movement
 		Point velocity = new Point(0, 0);
 		
 		if (directionsToMove[0] && !directionsToMove[2]) { velocity.setY(-speed);} //Up
@@ -57,6 +58,15 @@ public class Player extends Entity {
 		directionsToMove[3] = false;
 		
 		setVelocity(velocity);
+		
+		// FIXDIS
+		// Check if going through door
+		if (directionsToMove[0] && !directionsToMove[2] && currentRoom.getNeighbor(0) != null) {currentRoom = currentRoom.getNeighbor(0); } // Up
+		if (directionsToMove[2] && !directionsToMove[0] && currentRoom.getNeighbor(2) != null) {currentRoom = currentRoom.getNeighbor(2); } // Down
+		if (directionsToMove[3] && !directionsToMove[1] && currentRoom.getNeighbor(3) != null) {currentRoom = currentRoom.getNeighbor(3); } // Left
+		if (directionsToMove[1] && !directionsToMove[3] && currentRoom.getNeighbor(1) != null) {currentRoom = currentRoom.getNeighbor(1); } // Right
+		
+		System.out.println(currentRoom); 
 		super.update(delta, currentRoom);
 	}
 

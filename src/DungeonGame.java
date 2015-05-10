@@ -54,7 +54,7 @@ public class DungeonGame extends BasicGame {
 		MapManager.generateMap();
 		
 		redbeard = new Player("Redbeard", redbeardImageLocation, new Rectangle(100, 100, 128, 128), new Point(0, 0), new Point(0, 0));
-		currentRoom = MapManager.getFirstRoom();
+		currentRoom = redbeard.getCurrentRoom();
 		
 		redbeard.loadImage(); //Load player texture
 		currentRoom.loadImage(); // Load first room 
@@ -71,6 +71,9 @@ public class DungeonGame extends BasicGame {
 		
 		if(input.isKeyDown(keyExit)) {System.exit(1);}
 		
+		if (!redbeard.getCurrentRoom().equals(currentRoom)) {currentRoom = redbeard.getCurrentRoom();}// Update room changes
+			
+		
 		redbeard.update(delta, currentRoom);
 	}
 
@@ -78,7 +81,8 @@ public class DungeonGame extends BasicGame {
 	     DungeonGame game = new DungeonGame("Viking Dungeon Explorer Simulator " + VERSION);
 	     try {
 	          AppGameContainer container = new AppGameContainer(game, WIDTH, HEIGHT, false);
-	          container.setShowFPS(false); // Removes FPS counter
+	          //container.setShowFPS(false); // Removes FPS counter
+	          container.setVSync(true);
 	          container.start();
 	     } catch (SlickException e) {
 	          e.printStackTrace();

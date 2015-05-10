@@ -5,6 +5,7 @@ import org.newdawn.slick.geom.Rectangle;
 public class Player extends Entity {
 	private final String name;
 	private float speed = 0.2f;
+	private Room currentRoom;
 	
 	private boolean[] directionsToMove = new boolean[4];
 	/**
@@ -17,6 +18,7 @@ public class Player extends Entity {
 	public Player(String name, String imageLocation, Rectangle position, Point velocity, Point acceleration) {
 		super(position, velocity, acceleration, imageLocation);
 		this.name = name;
+		this.setCurrentRoom(MapManager.getFirstRoom()); // Player is starting in the first room. 
 		
 		setCollide(true, true); //The player always has collision
 	}
@@ -56,5 +58,19 @@ public class Player extends Entity {
 		
 		setVelocity(velocity);
 		super.update(delta, currentRoom);
+	}
+
+	/**
+	 * @return the Room Player is currently in.
+	 */
+	public Room getCurrentRoom() {
+		return currentRoom;
+	}
+
+	/**
+	 * @param currentRoom the new Room Player should be in. 
+	 */
+	public void setCurrentRoom(Room currentRoom) {
+		this.currentRoom = currentRoom;
 	}
 }

@@ -18,8 +18,10 @@ public class MapManager {
 	 */
 	public static void generateMap() {
 		firstRoom = new Room("res\\images\\Room.png");
-		firstRoom.addEntity(new Entity(new Rectangle(200, 200, 230, 250), new Point(0, 0), new Point(0, 0), "res\\images\\player1.png")); // TOFIX: Wont load new textures
 		secondRoom = new Room("res\\images\\Room.png");
+		
+		firstRoom.addItem(new Item("ID", "Viking", "A viking buddy", new Rectangle(200, 200, 230, 250), new Point(0, 0), new Point(0, 0), "res\\images\\player1.png"));
+		
 		firstRoom.setExit(secondRoom, 0);
 		secondRoom.setExit(firstRoom, 2);
 		

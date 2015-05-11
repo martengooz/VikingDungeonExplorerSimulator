@@ -1,3 +1,7 @@
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
 
@@ -6,6 +10,7 @@ public class Player extends Entity {
 	private final String name;
 	private float speed = 0.4f;
 	private Room currentRoom;
+	private Map<String, Item> items = new HashMap<>();
 	
 	private boolean[] directionsToMove = new boolean[4];
 	/**
@@ -36,6 +41,7 @@ public class Player extends Entity {
 	public void move(int direction) {
 		if (direction > 3 || direction < 0) {throw new IllegalArgumentException("Direction must be between 0 and 3");}
 		directionsToMove[direction] = true;
+		setDirection(direction);
 	}
 	
 	/**
@@ -100,6 +106,60 @@ public class Player extends Entity {
 		}
 		return false;
 	}
+	
+	/**
+	 * Interact with the object in front of the player.
+	 */
+	public void act() {
+		Rectangle area = null;
+		int actAreaSize = 30;
+		
+		switch (getDirection()) {
+		case 0: 
+			area = new Rectangle(getPosition().getX(), getPosition().getY() - actAreaSize, getPosition().getWidth(), actAreaSize*2);
+			break;
+			
+		case 1:
+			area = new Rectangle(getPosition().getX() + getPosition().getWidth() - actAreaSize, getPosition().getY(), actAreaSize*2, getPosition().getHeight());
+			break;
+			
+		case 2: 
+			area = new Rectangle(getPosition().getX(), getPosition().getY() + getPosition().getHeight() - actAreaSize, getPosition().getWidth(), actAreaSize*2);
+			break;
+			
+		case 3: 
+			area = new Rectangle(getPosition().getX() - actAreaSize, getPosition().getY(), actAreaSize*2, getPosition().getHeight());
+			break;
+		}
+		
+		Iterator<NPC> itNpcs = currentRoom.getNPCs().iterator();
+		Iterator<Item> itItems = currentRoom.getItems().iterator();
+		Iterator<Entity> itEntities = currentRoom.getEntities().iterator();
+		
+		while (itNpcs.hasNext()) { //Check against NPCs
+			NPC npc = itNpcs.next();
+			if (npc.getPosition().intersects(area)) {
+				npc.interact();
+			}
+		}
+		
+		while (itItems.hasNext()) { //Check against items 
+			Item item = itItems.next();
+			if (item.getPosition().intersects(area)) {
+				currentRoom.removeItem(item);
+				items.put(item.getID(), item);
+			}
+		}
+		
+		while (itEntities.hasNext()) { //Check against entities
+			Entity entity = itEntities.next();
+			if (entity.getPosition().intersects(area)) {
+				entity.interact();
+			}
+		}
+		
+	}
+		
 	/**
 	 * @return the Room Player is currently in.
 	 */

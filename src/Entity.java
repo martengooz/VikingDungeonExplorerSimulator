@@ -14,6 +14,7 @@ public class Entity implements Drawable {
 	private Point acceleration;
 	private String imageLocation;
 	private Image image;
+	private int direction;
 	
 	private boolean checkCollision;
 	private boolean doesCollide;
@@ -101,6 +102,14 @@ public class Entity implements Drawable {
 	}
 
 	/**
+	 * Interact with this Entity.
+	 * @return The item returned in the interaction.
+	 */
+	public Item interact() {
+		return null;
+	}
+	
+	/**
 	 * Returns the position of this entity.
 	 * @return The position of this entity.
 	 */
@@ -126,6 +135,12 @@ public class Entity implements Drawable {
 	public boolean getDoesCollide() {return doesCollide;}
 	
 	/**
+	 * Return an integer specifying the direction this entity is facing.
+	 * @return An integer in the range 0-3 specifying which direction (up, right, down, left).
+	 */
+	public int getDirection() {return direction;}
+	
+	/**
 	 * Set the position of this entity.
 	 * @param position The new position.
 	 */
@@ -142,6 +157,15 @@ public class Entity implements Drawable {
 	 * @param acceleration The new acceleration.
 	 */
 	public void setAcceleration(Point acceleration) {this.acceleration = acceleration;}
+	
+	/**
+	 * Set the direction of this entity
+	 * @param direction An integer in the range 0-3 specifying which direction (up, right, down, left).
+	 */
+	public void setDirection(int direction) {
+		if (direction > 3 || direction < 0) {throw new IllegalArgumentException("Direction must be between 0 and 3");}
+		this.direction = direction;
+	}
 
 	/**
 	 * Set the collision properties of this entity.

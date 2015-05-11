@@ -30,6 +30,7 @@ public class DungeonGame extends BasicGame {
     public final int keyMoveDown = Input.KEY_S;
     public final int keyMoveLeft = Input.KEY_A;
     public final int keyMoveRight = Input.KEY_D;
+    public final int keyAct = Input.KEY_E;
     public final int keyExit = Input.KEY_ESCAPE;
     
     // Players
@@ -73,6 +74,7 @@ public class DungeonGame extends BasicGame {
 		if(input.isKeyDown(keyMoveLeft)) {redbeard.move(3);}
 		if(input.isKeyDown(keyMoveRight)) {redbeard.move(1);}
 		
+		if(input.isKeyDown(keyAct)) {redbeard.act();}
 		if(input.isKeyDown(keyExit)) {System.exit(1);}
 		
 		if (!redbeard.getCurrentRoom().equals(currentRoom)) {currentRoom = redbeard.getCurrentRoom();}// Update room changes

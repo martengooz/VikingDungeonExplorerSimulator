@@ -21,5 +21,9 @@ public class MapManager {
 		firstRoom.addEntity(new Entity(new Rectangle(200, 200, 230, 250), new Point(0, 0), new Point(0, 0), "res\\images\\player1.png")); // TOFIX: Wont load new textures
 		secondRoom = new Room("res\\images\\Room.png");
 		firstRoom.setExit(secondRoom, 0);
+		secondRoom.setExit(firstRoom, 2);
+		
+		firstRoom.setExit(firstRoom, 1);
+		firstRoom.setExit(firstRoom, 3);
 	}
 }

@@ -2,6 +2,7 @@ import java.util.Iterator;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -17,6 +18,11 @@ public class DungeonGame extends BasicGame {
 	public static final int WIDTH   = 1280;
 	public static final int HEIGHT  = 720;
     public static final int[] WALLWIDTH = {40, 40, 60, 40}; //How close the player can be to the walls in following order: up, right, down, left.
+    public static final Rectangle[] DOORAREA = { //The area the player can stand in to trigger going through a door
+    	new Rectangle(565, WALLWIDTH[0], 150, 20), //Up
+    	new Rectangle(WIDTH - WALLWIDTH[1] - 20, 285, 20, 150), //Right
+    	new Rectangle(565, HEIGHT - WALLWIDTH[2] - 20, 150, 20), //Down
+    	new Rectangle(WALLWIDTH[3], 285, 20, 150)}; //Left
     
     //Input handling
     Input input = new Input(HEIGHT);
@@ -45,8 +51,6 @@ public class DungeonGame extends BasicGame {
 		//redbeardImage.draw();
 		currentRoom.draw();
 		redbeard.draw();
-		
-		
 	}
 
 	@Override
@@ -66,8 +70,8 @@ public class DungeonGame extends BasicGame {
 		//Update input
 		if(input.isKeyDown(keyMoveUp)) {redbeard.move(0);}
 		if(input.isKeyDown(keyMoveDown)) {redbeard.move(2);}
-		if(input.isKeyDown(keyMoveLeft)) {redbeard.move(1);}
-		if(input.isKeyDown(keyMoveRight)) {redbeard.move(3);}
+		if(input.isKeyDown(keyMoveLeft)) {redbeard.move(3);}
+		if(input.isKeyDown(keyMoveRight)) {redbeard.move(1);}
 		
 		if(input.isKeyDown(keyExit)) {System.exit(1);}
 		

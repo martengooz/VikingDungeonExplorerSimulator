@@ -49,27 +49,57 @@ public class Player extends Entity {
 		if (directionsToMove[0] && !directionsToMove[2]) { velocity.setY(-speed);} //Up
 		if (directionsToMove[2] && !directionsToMove[0]) { velocity.setY(speed);} //Down
 		
-		if (directionsToMove[3] && !directionsToMove[1]) { velocity.setX(speed);} //Left
-		if (directionsToMove[1] && !directionsToMove[3]) { velocity.setX(-speed);} //Right
+		if (directionsToMove[3] && !directionsToMove[1]) { velocity.setX(-speed);} //Left
+		if (directionsToMove[1] && !directionsToMove[3]) { velocity.setX(speed);} //Right
+		
+		setVelocity(velocity);
+		
+		
+		// Check if going through door by check that the two corners of the player are in the door area
+		if (directionsToMove[0] && !directionsToMove[2] && DungeonGame.DOORAREA[0].contains(getPosition().getX(), getPosition().getY()) && DungeonGame.DOORAREA[0].contains(getPosition().getX() + getPosition().getWidth(), getPosition().getY())) {changeRoom(0);} // Up
+		if (directionsToMove[2] && !directionsToMove[0] && DungeonGame.DOORAREA[2].contains(getPosition().getX(), getPosition().getY() + getPosition().getHeight()) && DungeonGame.DOORAREA[2].contains(getPosition().getX() + getPosition().getWidth(), getPosition().getY() + getPosition().getHeight())) {changeRoom(2);} // Down
+		if (directionsToMove[3] && !directionsToMove[1] && DungeonGame.DOORAREA[3].contains(getPosition().getX(), getPosition().getY()) && DungeonGame.DOORAREA[3].contains(getPosition().getX(), getPosition().getY() + getPosition().getHeight())) {changeRoom(3);} // Left
+		if (directionsToMove[1] && !directionsToMove[3] && DungeonGame.DOORAREA[1].contains(getPosition().getX() + getPosition().getWidth(), getPosition().getY()) && DungeonGame.DOORAREA[1].contains(getPosition().getX() + getPosition().getWidth(), getPosition().getY() + getPosition().getHeight())) {changeRoom(1);} // Right
+		
+		super.update(delta, currentRoom);
 		
 		directionsToMove[0] = false;
 		directionsToMove[1] = false;
 		directionsToMove[2] = false;
 		directionsToMove[3] = false;
-		
-		setVelocity(velocity);
-		
-		// FIXDIS
-		// Check if going through door
-		if (directionsToMove[0] && !directionsToMove[2] && currentRoom.getNeighbor(0) != null) {currentRoom = currentRoom.getNeighbor(0); } // Up
-		if (directionsToMove[2] && !directionsToMove[0] && currentRoom.getNeighbor(2) != null) {currentRoom = currentRoom.getNeighbor(2); } // Down
-		if (directionsToMove[3] && !directionsToMove[1] && currentRoom.getNeighbor(3) != null) {currentRoom = currentRoom.getNeighbor(3); } // Left
-		if (directionsToMove[1] && !directionsToMove[3] && currentRoom.getNeighbor(1) != null) {currentRoom = currentRoom.getNeighbor(1); } // Right
-		
-		System.out.println(currentRoom); 
-		super.update(delta, currentRoom);
 	}
 
+	/**
+	 * Change the current room to the room in the specified direction, if there is such a room.
+	 * @param direction An integer in the range 0-3 specifying which direction (up, right, down, left).
+	 * @return true if the room was changed. 
+	 */
+	private boolean changeRoom(int direction) throws IllegalArgumentException {
+		if (currentRoom.getNeighbor(direction) != null) {
+			currentRoom.getNeighbor(direction).loadImage(); 
+			setCurrentRoom(currentRoom.getNeighbor(direction));
+			
+			switch (direction) {
+			case 0: 
+				setPosition(new Rectangle((DungeonGame.WIDTH - getPosition().getWidth())/2, DungeonGame.HEIGHT - DungeonGame.WALLWIDTH[2] - getPosition().getHeight(),getPosition().getWidth(), getPosition().getHeight()));
+				break;
+				
+			case 1: 
+				setPosition(new Rectangle(DungeonGame.WALLWIDTH[3], (DungeonGame.HEIGHT - getPosition().getHeight())/2,getPosition().getWidth(), getPosition().getHeight()));
+				break;
+				
+			case 2: 
+				setPosition(new Rectangle((DungeonGame.WIDTH - getPosition().getWidth())/2, DungeonGame.WALLWIDTH[0],getPosition().getWidth(), getPosition().getHeight()));
+				break;
+				
+			case 3: 
+				setPosition(new Rectangle(DungeonGame.WIDTH - DungeonGame.WALLWIDTH[1] - getPosition().getWidth(), (DungeonGame.HEIGHT - getPosition().getHeight())/2, getPosition().getWidth(), getPosition().getHeight()));
+				break;
+			}
+			return true;
+		}
+		return false;
+	}
 	/**
 	 * @return the Room Player is currently in.
 	 */

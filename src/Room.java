@@ -9,16 +9,22 @@ public class Room implements Drawable {
 	
 	private Set<NPC> npcs = new HashSet<>();
 	private Set<Item> items = new HashSet<>();
-	private Set<Entity> entities = new HashSet<>(); 
+	private Set<Entity> entities = new HashSet<>();
+	
 	private String imageLocation;
+	private String doorImageLocation;
 	private Image image;
+	private Image doorImage;
 	
 	Room[] neighbors = new Room[4];
 	
 	/**
 	 * Create a new room
 	 */
-	public Room(String imageLocation) {this.imageLocation = imageLocation;};
+	public Room(String imageLocation, String doorImageLocation) {
+		this.imageLocation = imageLocation;
+		this.doorImageLocation = doorImageLocation;
+	}
 	
 	/**
 	 * Get a set of the NPCs in this room.
@@ -90,6 +96,13 @@ public class Room implements Drawable {
 	 */
 	public void draw() {
 		image.draw(0, 0);
+		doorImage.setCenterOfRotation(doorImage.getWidth()/2, doorImage.getHeight()/2);
+		
+		//Draw the doors
+		if (neighbors[0] != null) {doorImage.setRotation(0); doorImage.draw((DungeonGame.WIDTH - doorImage.getWidth())/2,0);}
+		if (neighbors[2] != null) {doorImage.setRotation(180); doorImage.draw((DungeonGame.WIDTH - doorImage.getWidth())/2, DungeonGame.HEIGHT - doorImage.getHeight());}		
+		if (neighbors[1] != null) {doorImage.setRotation(90); doorImage.draw(DungeonGame.WIDTH - 2*doorImage.getHeight() + 8, (DungeonGame.HEIGHT - doorImage.getHeight())/2);}
+		if (neighbors[3] != null) {doorImage.setRotation(270); doorImage.draw(8-doorImage.getHeight(), (DungeonGame.HEIGHT - doorImage.getHeight())/2);}
 		
 		Iterator<NPC> itNpcs = npcs.iterator();
 		Iterator<Item> itItems = items.iterator();
@@ -107,6 +120,7 @@ public class Room implements Drawable {
 	public void loadImage() {
 		try {
 			this.image = new Image(imageLocation); // Load room image
+			this.doorImage = new Image(doorImageLocation); // Load door image
 			
 			Iterator<NPC> itNpcs = npcs.iterator();
 			Iterator<Item> itItems = items.iterator();

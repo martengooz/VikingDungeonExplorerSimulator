@@ -17,8 +17,8 @@ public class MapManager {
 	 * Generate the map of the game.
 	 */
 	public static void generateMap() {
-		firstRoom = new Room("res\\images\\Room.png");
-		secondRoom = new Room("res\\images\\Room.png");
+		firstRoom = new Room("res\\images\\Room.png", "res\\images\\Door.png");
+		secondRoom = new Room("res\\images\\Room.png", "res\\images\\Door.png");
 		
 		firstRoom.addItem(new Item("ID", "Viking", "A viking buddy", new Rectangle(200, 200, 230, 250), new Point(0, 0), new Point(0, 0), "res\\images\\player1.png"));
 		

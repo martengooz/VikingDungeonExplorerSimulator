@@ -17,27 +17,27 @@ public class MapManager {
 	 */
 	public static void generateMap() {
 		//Create rooms
-		firstRoom = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Door.png");
-		Room secondRoom = new Room("res\\images\\Rooms\\Room2.png", "res\\images\\Door.png");
+		firstRoom = new Room("res\\images\\Rooms\\Room2.png", "res\\images\\Door.png");
+		Room secondRoom = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Door.png");
 		Room thirdRoom = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Door.png");
 		Room fourthRoom = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Door.png");
 		
 		//Add exits
-		firstRoom.setExit(secondRoom, 0);
-		secondRoom.setExit(firstRoom, 2);
+		firstRoom.setExit(secondRoom, 2);
+		secondRoom.setExit(firstRoom, 0);
 		
-		firstRoom.setExit(thirdRoom, 1);
-		thirdRoom.setExit(firstRoom, 3);
+		secondRoom.setExit(thirdRoom, 1);
+		thirdRoom.setExit(secondRoom, 3);
 		
 		thirdRoom.setExit(fourthRoom, 2);
 		fourthRoom.setExit(thirdRoom, 0);
 			
 		//Add items and entities
-		firstRoom.addItem(new Item("IRON_SHOVEL", "Shovel", "A shovel to dig with.", new Rectangle(200, 200, 100, 100), new Point(0, 0), new Point(0, 0), "res\\images\\Items\\Shovel.png"));
+		secondRoom.addItem(new Item("IRON_SHOVEL", "Shovel", "A shovel to dig with.", new Rectangle(200, 200, 100, 100), new Point(0, 0), new Point(0, 0), "res\\images\\Items\\Shovel.png"));
 		
-		secondRoom.addEntity(new Entity(new Rectangle(350, 500, 100, 100), "res\\images\\Items\\GrassPatch.png", false));
-		secondRoom.addEntity(new Entity(new Rectangle(950, 550, 95, 75), "res\\images\\Items\\Rock.png", true));
-		secondRoom.addEntity(new Entity(new Rectangle(750, 70, 95, 75), "res\\images\\Items\\Rock.png", true));
+		firstRoom.addEntity(new Entity(new Rectangle(350, 500, 100, 100), "res\\images\\Items\\GrassPatch.png", false));
+		firstRoom.addEntity(new Entity(new Rectangle(950, 550, 95, 75), "res\\images\\Items\\Rock.png", true));
+		firstRoom.addEntity(new Entity(new Rectangle(750, 70, 95, 75), "res\\images\\Items\\Rock.png", true));
 		
 		thirdRoom.addEntity(new Entity(new Rectangle(650, 470, 95, 75), "res\\images\\Items\\GrassPatch.png", false));
 		

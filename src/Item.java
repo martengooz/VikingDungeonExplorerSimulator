@@ -23,7 +23,7 @@ public class Item extends Entity {
 	}
 	
 	/**
-	 *  Get a unique identifier of this item.
+	 * Get a unique identifier of this item.
 	 * @return The id of this item.
 	 */
 	public String getID() {return id;}

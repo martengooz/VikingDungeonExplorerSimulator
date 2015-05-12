@@ -5,10 +5,9 @@ import org.newdawn.slick.geom.Rectangle;
 public class MapManager {
 
 	private static Room firstRoom;
-	private static Room secondRoom;
 	
 	/**
-	 * Get the starting room in the game
+	 * Get the starting room in the game.
 	 * @return The room the game starts in.
 	 */
 	public static Room getFirstRoom() {return firstRoom;}
@@ -17,9 +16,31 @@ public class MapManager {
 	 * Generate the map of the game.
 	 */
 	public static void generateMap() {
-		firstRoom = new Room("res\\images\\Room.png");
-		firstRoom.addEntity(new Entity(new Rectangle(200, 200, 230, 250), new Point(0, 0), new Point(0, 0), "res\\images\\player1.png")); // TOFIX: Wont load new textures
-		secondRoom = new Room("res\\images\\Room.png");
-		firstRoom.setExit(secondRoom, 0);
+		//Create rooms
+		firstRoom = new Room("res\\images\\Rooms\\Room2.png", "res\\images\\Door.png");
+		Room secondRoom = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Door.png");
+		Room thirdRoom = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Door.png");
+		Room fourthRoom = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Door.png");
+		
+		//Add exits
+		firstRoom.setExit(secondRoom, 2);
+		secondRoom.setExit(firstRoom, 0);
+		
+		secondRoom.setExit(thirdRoom, 1);
+		thirdRoom.setExit(secondRoom, 3);
+		
+		thirdRoom.setExit(fourthRoom, 2);
+		fourthRoom.setExit(thirdRoom, 0);
+			
+		//Add items and entities
+		secondRoom.addItem(new Item("IRON_SHOVEL", "Shovel", "A shovel to dig with.", new Rectangle(200, 200, 100, 100), new Point(0, 0), new Point(0, 0), "res\\images\\Items\\Shovel.png"));
+		
+		firstRoom.addEntity(new Entity(new Rectangle(350, 500, 100, 100), "res\\images\\Items\\GrassPatch.png", false));
+		firstRoom.addEntity(new Entity(new Rectangle(950, 550, 95, 75), "res\\images\\Items\\Rock.png", true));
+		firstRoom.addEntity(new Entity(new Rectangle(750, 70, 95, 75), "res\\images\\Items\\Rock.png", true));
+		
+		thirdRoom.addEntity(new Entity(new Rectangle(650, 470, 95, 75), "res\\images\\Items\\GrassPatch.png", false));
+		
+		fourthRoom.addItem(new Item("GOLD_KEY", "Golden Key", "A shiny golden key.", new Rectangle(625, 450, 30, 65), new Point(0, 0), new Point(0, 0), "res\\images\\Items\\Key.png"));
 	}
 }

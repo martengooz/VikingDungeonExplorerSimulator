@@ -8,7 +8,7 @@ public class MapManager {
 	private static Room secondRoom;
 	
 	/**
-	 * Get the starting room in the game
+	 * Get the starting room in the game.
 	 * @return The room the game starts in.
 	 */
 	public static Room getFirstRoom() {return firstRoom;}

@@ -13,6 +13,7 @@ public class Player extends Entity {
 	private Map<String, Item> items = new HashMap<>();
 	
 	private boolean[] directionsToMove = new boolean[4];
+	
 	/**
 	 * Create a new Player.
 	 * @param name The name of the player. Also used to identify players.
@@ -161,14 +162,16 @@ public class Player extends Entity {
 	}
 		
 	/**
-	 * @return the Room Player is currently in.
+	 * Return the room the Player currently is in.
+	 * @return The Room this Player is currently in.
 	 */
 	public Room getCurrentRoom() {
 		return currentRoom;
 	}
 
 	/**
-	 * @param currentRoom the new Room Player should be in. 
+	 * Set the current room the Player is in.
+	 * @param currentRoom The new Room Player should be in. 
 	 */
 	public void setCurrentRoom(Room currentRoom) {
 		this.currentRoom = currentRoom;

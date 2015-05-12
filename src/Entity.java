@@ -1,7 +1,6 @@
 
 import java.util.Iterator;
 
-import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Point;
@@ -159,7 +158,7 @@ public class Entity implements Drawable {
 	public void setAcceleration(Point acceleration) {this.acceleration = acceleration;}
 	
 	/**
-	 * Set the direction of this entity
+	 * Set the direction of this entity.
 	 * @param direction An integer in the range 0-3 specifying which direction (up, right, down, left).
 	 */
 	public void setDirection(int direction) {
@@ -178,7 +177,8 @@ public class Entity implements Drawable {
 	}
 	
 	/**
-	 * @return the image
+	 * Return the image of this entity.
+	 * @return The image.
 	 */
 	public Image getImage() {return image;	}
 

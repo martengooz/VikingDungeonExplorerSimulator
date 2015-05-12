@@ -1,8 +1,5 @@
-import java.util.Iterator;
-
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -15,16 +12,18 @@ public class DungeonGame extends BasicGame {
 	
 	// Application Properties
 	public static final String VERSION = "Alpha";
-	public static final int WIDTH   = 1280;
-	public static final int HEIGHT  = 720;
+	public static final int WIDTH = 1280;
+	public static final int HEIGHT = 720;
+	private static int DOORWIDTH = 180;
+	private static int DOORHEIGHT = 20;
     public static final int[] WALLWIDTH = {40, 40, 60, 40}; //How close the player can be to the walls in following order: up, right, down, left.
     public static final Rectangle[] DOORAREA = { //The area the player can stand in to trigger going through a door
-    	new Rectangle(565, WALLWIDTH[0], 150, 20), //Up
-    	new Rectangle(WIDTH - WALLWIDTH[1] - 20, 285, 20, 150), //Right
-    	new Rectangle(565, HEIGHT - WALLWIDTH[2] - 20, 150, 20), //Down
-    	new Rectangle(WALLWIDTH[3], 285, 20, 150)}; //Left
+    	new Rectangle((WIDTH - DOORWIDTH)/2, WALLWIDTH[0], DOORWIDTH, DOORHEIGHT), //Up
+    	new Rectangle(WIDTH - WALLWIDTH[1] - DOORHEIGHT, (HEIGHT - DOORWIDTH)/2, DOORHEIGHT, DOORWIDTH), //Right
+    	new Rectangle((WIDTH - DOORWIDTH)/2, HEIGHT - WALLWIDTH[2] - DOORHEIGHT, DOORWIDTH, DOORHEIGHT), //Down
+    	new Rectangle(WALLWIDTH[3], (HEIGHT - DOORWIDTH)/2, DOORHEIGHT, DOORWIDTH)}; //Left
     
-    //Input handling
+    // Input handling
     Input input = new Input(HEIGHT);
     public final int keyMoveUp = Input.KEY_W;
     public final int keyMoveDown = Input.KEY_S;
@@ -36,21 +35,14 @@ public class DungeonGame extends BasicGame {
     // Players
     private static Player redbeard; 
     private static String redbeardImageLocation = "res\\images\\player1.png";
-    	
-    private Room currentRoom;
-    
+        
 	public DungeonGame(String game) {
 		super(game);
-	   
-
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void render(GameContainer gameContainer, Graphics g) throws SlickException {
-		// TODO Auto-generated method stub
-		//redbeardImage.draw();
-		currentRoom.draw();
+		redbeard.getCurrentRoom().draw();
 		redbeard.draw();
 	}
 
@@ -59,10 +51,10 @@ public class DungeonGame extends BasicGame {
 		MapManager.generateMap();
 		
 		redbeard = new Player("Redbeard", redbeardImageLocation, new Rectangle(100, 100, 128, 128), new Point(0, 0), new Point(0, 0));
-		currentRoom = redbeard.getCurrentRoom();
+		redbeard.setCurrentRoom(MapManager.getFirstRoom());
 		
 		redbeard.loadImage(); //Load player texture
-		currentRoom.loadImage(); // Load first room 
+		redbeard.getCurrentRoom().loadImage(); // Load first room 
 
 	}
 
@@ -77,10 +69,7 @@ public class DungeonGame extends BasicGame {
 		if(input.isKeyDown(keyAct)) {redbeard.act();}
 		if(input.isKeyDown(keyExit)) {System.exit(1);}
 		
-		if (!redbeard.getCurrentRoom().equals(currentRoom)) {currentRoom = redbeard.getCurrentRoom();}// Update room changes
-			
-		
-		redbeard.update(delta, currentRoom);
+		redbeard.update(delta, redbeard.getCurrentRoom());
 	}
 
 	public static void main(String[] args) throws SlickException {

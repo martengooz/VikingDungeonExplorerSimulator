@@ -50,7 +50,7 @@ public class DungeonGame extends BasicGame {
 	public void init(GameContainer gameContainer) throws SlickException {
 		MapManager.generateMap();
 		
-		redbeard = new Player("Redbeard", redbeardImageLocation, new Rectangle(100, 100, 128, 128), new Point(0, 0), new Point(0, 0));
+		redbeard = new Player("Redbeard", redbeardImageLocation, new Rectangle((WIDTH - 128)/2, (HEIGHT - 128)/2, 128, 128), new Point(0, 0), new Point(0, 0));
 		redbeard.setCurrentRoom(MapManager.getFirstRoom());
 		
 		redbeard.loadImage(); //Load player texture

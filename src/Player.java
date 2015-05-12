@@ -15,11 +15,12 @@ public class Player extends Entity {
 	private boolean[] directionsToMove = new boolean[4];
 	
 	/**
-	 * Create a new Player.
+	 * Create a new player.
 	 * @param name The name of the player. Also used to identify players.
+	 * @param imageLocation The location of the image of this player.
 	 * @param position The starting position and size of the Player. 
-	 * @param description A description of this item.
-	 * @param image A image of this item.
+	 * @param velocity The velocity of this player.
+	 * @param acceleration The acceleration of this player.
 	 */
 	public Player(String name, String imageLocation, Rectangle position, Point velocity, Point acceleration) {
 		super(position, velocity, acceleration, imageLocation);

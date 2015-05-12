@@ -18,11 +18,33 @@ public class Entity implements Drawable {
 	private boolean checkCollision;
 	private boolean doesCollide;
 	
+	/**
+	 * Create a new Entity.
+	 * @param position The position of this entity.
+	 * @param velocity The velocity of this entity.
+	 * @param acceleration The acceleration of this entity.
+	 * @param imageLocation The location of the image of this entity.
+	 */
 	public Entity(Rectangle position, Point velocity, Point acceleration, String imageLocation) {
 		this.position = position;
 		this.velocity = velocity;
 		this.acceleration = acceleration;
 		this.imageLocation = imageLocation;
+	}
+	
+	/**
+	 * Create a new Entity.
+	 * @param position The position of this entity.
+	 * @param imageLocation
+	 * @param doesCollide
+	 */
+	public Entity(Rectangle position, String imageLocation, boolean doesCollide) {
+		this.position = position;
+		this.imageLocation = imageLocation;
+		this.doesCollide = doesCollide;
+		
+		this.velocity = new Point(0, 0);
+		this.acceleration = new Point(0, 0);
 	}
 	
 	/**

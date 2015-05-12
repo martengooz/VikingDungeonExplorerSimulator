@@ -34,7 +34,10 @@ public class DungeonGame extends BasicGame {
     
     // Players
     private static Player redbeard; 
-    private static String redbeardImageLocation = "res\\images\\player1.png";
+    private static String[] redbeardImageLocation = {"res\\images\\Player\\playerUp.png",
+    	"res\\images\\Player\\playerRight.png",
+    	"res\\images\\Player\\playerDown.png", 
+    	"res\\images\\Player\\playerLeft.png"};
         
 	public DungeonGame(String game) {
 		super(game);

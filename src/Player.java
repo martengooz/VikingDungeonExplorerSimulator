@@ -22,7 +22,7 @@ public class Player extends Entity {
 	 * @param velocity The velocity of this player.
 	 * @param acceleration The acceleration of this player.
 	 */
-	public Player(String name, String imageLocation, Rectangle position, Point velocity, Point acceleration) {
+	public Player(String name, String[] imageLocation, Rectangle position, Point velocity, Point acceleration) {
 		super(position, velocity, acceleration, imageLocation);
 		this.name = name;
 		this.setCurrentRoom(MapManager.getFirstRoom()); // Player is starting in the first room. 
@@ -175,6 +175,10 @@ public class Player extends Entity {
 	 * @param currentRoom The new Room Player should be in. 
 	 */
 	public void setCurrentRoom(Room currentRoom) {
+		this.currentRoom = currentRoom;
+	}
+	
+	public void setImageLocations(String up, String right, String down, String left) {
 		this.currentRoom = currentRoom;
 	}
 }

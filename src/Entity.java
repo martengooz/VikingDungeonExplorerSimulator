@@ -11,12 +11,32 @@ public class Entity implements Drawable {
 	private Rectangle position;
 	private Point velocity;
 	private Point acceleration;
-	private String imageLocation;
-	private Image image;
-	private int direction;
+	private Image[] image =  new Image[4];
+	private String[] imageLocation = new String[4];
+	private int direction = 2;
 	
 	private boolean checkCollision;
 	private boolean doesCollide;
+	
+	/**
+	 * Create a new Entity.
+	 * @param position The position of this entity.
+	 * @param velocity The velocity of this entity.
+	 * @param acceleration The acceleration of this entity.
+	 * @param imageLocation An array of 4 strings with the location of the images of this entity looking in different directions (up, right, down, left).
+	 */
+	public Entity(Rectangle position, Point velocity, Point acceleration, String[] imageLocation) {
+		if (imageLocation.length != 4) {throw new IllegalArgumentException("imageLocation must have 4 strings");}
+		
+		this.position = position;
+		this.velocity = velocity;
+		this.acceleration = acceleration;
+		
+		this.imageLocation[0] = imageLocation[0];
+		this.imageLocation[1] = imageLocation[1];
+		this.imageLocation[2] = imageLocation[2];
+		this.imageLocation[3] = imageLocation[3];
+	}
 	
 	/**
 	 * Create a new Entity.
@@ -29,7 +49,11 @@ public class Entity implements Drawable {
 		this.position = position;
 		this.velocity = velocity;
 		this.acceleration = acceleration;
-		this.imageLocation = imageLocation;
+		
+		this.imageLocation[0] = imageLocation;
+		this.imageLocation[1] = imageLocation;
+		this.imageLocation[2] = imageLocation;
+		this.imageLocation[3] = imageLocation;
 	}
 	
 	/**
@@ -40,8 +64,12 @@ public class Entity implements Drawable {
 	 */
 	public Entity(Rectangle position, String imageLocation, boolean doesCollide) {
 		this.position = position;
-		this.imageLocation = imageLocation;
 		this.doesCollide = doesCollide;
+		
+		this.imageLocation[0] = imageLocation;
+		this.imageLocation[1] = imageLocation;
+		this.imageLocation[2] = imageLocation;
+		this.imageLocation[3] = imageLocation;
 		
 		this.velocity = new Point(0, 0);
 		this.acceleration = new Point(0, 0);
@@ -52,7 +80,7 @@ public class Entity implements Drawable {
 	 */
 	@Override
 	public void draw() {
-		getImage().draw(getPosition().getX(), getPosition().getY());
+		getImage(direction).draw(getPosition().getX(), getPosition().getY());
 	}
 	
 	/**
@@ -202,14 +230,29 @@ public class Entity implements Drawable {
 	 * Return the image of this entity.
 	 * @return The image.
 	 */
-	public Image getImage() {return image;	}
+	public Image getImage(int direction) {
+		if (direction > 3 || direction < 0) {throw new IllegalArgumentException("Direction must be between 0 and 3");}
+		return image[direction];
+	}
 
 	/**
 	 * {@inheritDoc Drawable}
 	 */
 	public void loadImage() {
 		try {
-			this.image = new Image(imageLocation);
+			//Check if all directions have the same texture and save some memory by using the same image.
+			if (imageLocation[0].equals(imageLocation[1]) && imageLocation[0].equals(imageLocation[2]) && imageLocation[0].equals(imageLocation[3])) {
+				this.image[0] = new Image(imageLocation[0]);
+				this.image[1] = this.image[0];
+				this.image[2] = this.image[0];
+				this.image[3] = this.image[0];
+			}
+			else {
+				this.image[0] = new Image(imageLocation[0]);
+				this.image[1] = new Image(imageLocation[1]);
+				this.image[2] = new Image(imageLocation[2]);
+				this.image[3] = new Image(imageLocation[3]);
+			}
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}

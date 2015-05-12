@@ -25,11 +25,12 @@ public class DungeonGame extends BasicGame {
     
     // Input handling
     Input input = new Input(HEIGHT);
-    public final int keyMoveUp = Input.KEY_W;
-    public final int keyMoveDown = Input.KEY_S;
-    public final int keyMoveLeft = Input.KEY_A;
-    public final int keyMoveRight = Input.KEY_D;
+    public final int[] keyMoveUp = {Input.KEY_W, Input.KEY_UP};
+    public final int[] keyMoveDown = {Input.KEY_S, Input.KEY_DOWN} ;
+    public final int[] keyMoveLeft = {Input.KEY_A, Input.KEY_LEFT};
+    public final int[] keyMoveRight = {Input.KEY_D, Input.KEY_RIGHT};
     public final int keyAct = Input.KEY_E;
+    public final int keyInventory = Input.KEY_I;
     public final int keyExit = Input.KEY_ESCAPE;
     
     // Players
@@ -47,10 +48,15 @@ public class DungeonGame extends BasicGame {
 	public void render(GameContainer gameContainer, Graphics g) throws SlickException {
 		redbeard.getCurrentRoom().draw();
 		redbeard.draw();
+		
+		if (redbeard.isInInventory()){
+			redbeard.drawInventory(g);
+		}
 	}
 
 	@Override
 	public void init(GameContainer gameContainer) throws SlickException {
+	    
 		MapManager.generateMap();
 		
 		redbeard = new Player("Redbeard", redbeardImageLocation, new Rectangle((WIDTH - 128)/2, (HEIGHT - 128)/2, 128, 128), new Point(0, 0), new Point(0, 0));
@@ -64,13 +70,34 @@ public class DungeonGame extends BasicGame {
 	@Override
 	public void update(GameContainer gameContainer, int delta) throws SlickException {
 		//Update input
-		if(input.isKeyDown(keyMoveUp)) {redbeard.move(0);}
-		if(input.isKeyDown(keyMoveDown)) {redbeard.move(2);}
-		if(input.isKeyDown(keyMoveLeft)) {redbeard.move(3);}
-		if(input.isKeyDown(keyMoveRight)) {redbeard.move(1);}
+		Input input = gameContainer.getInput();
 		
-		if(input.isKeyDown(keyAct)) {redbeard.act();}
-		if(input.isKeyDown(keyExit)) {System.exit(1);}
+		// While in inventory
+		if (redbeard.isInInventory()){
+			//Closes inventory
+			if(input.isKeyPressed(keyInventory)) {redbeard.inventory();} 
+			if(input.isKeyPressed(keyExit)) {redbeard.inventory();}
+			
+			// Navigating in inventory
+			for(int key : keyMoveUp){if(input.isKeyPressed(key)) {redbeard.navigateInventory(0);}} // Up
+			for(int key : keyMoveDown){if(input.isKeyPressed(key)) {redbeard.navigateInventory(1);}} // Down
+			if(input.isKeyPressed(keyAct)) {redbeard.lookAtItem();} // Look at item
+		} 
+		
+		// While in game
+		else {  
+			// Player movement
+			for(int key : keyMoveUp){if(input.isKeyDown(key)) {redbeard.move(0);}}
+			for(int key : keyMoveDown){if(input.isKeyDown(key)) {redbeard.move(2);}}
+			for(int key : keyMoveLeft){if(input.isKeyDown(key)) {redbeard.move(3);}}
+			for(int key : keyMoveRight){if(input.isKeyDown(key)) {redbeard.move(1);}}
+					
+			//Others
+			if(input.isKeyPressed(keyAct)) {redbeard.act();}
+			if(input.isKeyPressed(keyInventory)) {redbeard.inventory();}
+			if(input.isKeyPressed(keyExit)) {System.exit(1);}
+		}
+		
 		
 		redbeard.update(delta, redbeard.getCurrentRoom());
 	}

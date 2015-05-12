@@ -84,6 +84,15 @@ public class Entity implements Drawable {
 	}
 	
 	/**
+	 * Draw this entity at specified position.
+	 * @param position The position to draw the entity
+	 */
+	public void draw(Rectangle position) {
+		this.position = position;
+		getImage(direction).draw(getPosition().getX(), getPosition().getY(), getPosition().getWidth(), getPosition().getHeight());
+	}
+	
+	/**
 	 * Update the position of this entity by moving it according to set velocity and acceleration.
 	 * @param delta The number of milliseconds since last update.
 	 * @param currentRoom The currentRoom of the game, used to detect collision with other entities in this room.

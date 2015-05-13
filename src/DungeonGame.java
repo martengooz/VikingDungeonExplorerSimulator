@@ -99,7 +99,8 @@ public class DungeonGame extends BasicGame {
 		}
 		
 		
-		redbeard.update(delta, redbeard.getCurrentRoom());
+		redbeard.update(delta, redbeard.getCurrentRoom()); //Update player
+		redbeard.getCurrentRoom().removeMarked(); //Update room
 	}
 
 	public static void main(String[] args) throws SlickException {

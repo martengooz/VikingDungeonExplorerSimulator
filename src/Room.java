@@ -11,6 +11,8 @@ public class Room implements Drawable {
 	private Set<Item> items = new HashSet<>();
 	private Set<Entity> entities = new HashSet<>();
 	
+	private Set<Entity> markedForRemoval = new HashSet<>();
+	
 	private String imageLocation;
 	private String doorImageLocation;
 	private Image image;
@@ -80,6 +82,25 @@ public class Room implements Drawable {
 	public void setExit(Room room, int direction) {
 		if (direction > 3 || direction < 0) {throw new IllegalArgumentException("Direction must be between 0 and 3");}
 		neighbors[direction] = room;
+	}
+	
+	/**
+	 * Mark this Entity, Item or NPC for removal from this room next update.
+	 * @param entity The Entity, Item or NPC to remove.
+	 */
+	public void markForRemoval(Entity entity) {
+		markedForRemoval.add(entity);
+	}
+	
+	/**
+	 * Remove all marked Entities, Items and NPCs
+	 */
+	public void removeMarked() {
+		for(Entity e: markedForRemoval) {
+			npcs.remove(e);
+			items.remove(e);
+			entities.remove(e);
+		}
 	}
 	
 	/**

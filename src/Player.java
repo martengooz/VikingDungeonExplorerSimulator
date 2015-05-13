@@ -232,7 +232,8 @@ public class Player extends Entity {
 		while (itNpcs.hasNext()) { //Check against NPCs
 			NPC npc = itNpcs.next();
 			if (npc.getPosition().intersects(area)) {
-				npc.interact();
+				Item reward = npc.interact(this);
+				if (reward != null) {pickUpItem(reward);}
 			}
 		}
 		
@@ -240,20 +241,40 @@ public class Player extends Entity {
 			Item item = itItems.next();
 			
 			if (item.getPosition().intersects(area)) {
-				currentRoom.removeItem(item);
-				items.put(item.getID(), item);
+				currentRoom.markForRemoval(item);
+				pickUpItem(item);
 			}
 		}
 		
 		while (itEntities.hasNext()) { //Check against entities
 			Entity entity = itEntities.next();
 			if (entity.getPosition().intersects(area)) {
-				entity.interact();
+				Item reward = entity.interact(this);
+				if (reward != null) {pickUpItem(reward);}
 			}
 		}
 		
 	}
-		
+	
+	/**
+	 * Add Item to the inventory.
+	 * @param item The Item to add.
+	 */
+	public void pickUpItem(Item item) {
+		item.loadImage(); // Load image
+		items.put(item.getID(), item); // Put item in inventory
+		UserInterfaceManager.showMessage("You found one " + item.getName().toLowerCase() + ".", item.getDescription());
+	}
+	
+	/**
+	 * Returns a boolean signaling if this Player has an Item with the specified id.
+	 * @param id The id of the Item to check for.
+	 * @return True if the player has the specified Item.
+	 */
+	public boolean hasItem(String id) {
+		return items.containsKey(id);
+	}
+	
 	/**
 	 * Return the room the Player currently is in.
 	 * @return The Room this Player is currently in.

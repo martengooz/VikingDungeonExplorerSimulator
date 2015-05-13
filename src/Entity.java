@@ -1,5 +1,7 @@
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -14,6 +16,7 @@ public class Entity implements Drawable {
 	private Image[] image =  new Image[4];
 	private String[] imageLocation = new String[4];
 	private int direction = 2;
+	private List<Interaction> interactions = new ArrayList<Interaction>();
 	
 	private boolean checkCollision;
 	private boolean doesCollide;
@@ -170,11 +173,95 @@ public class Entity implements Drawable {
 	}
 
 	/**
-	 * Interact with this Entity.
+	 * Let a Player interact with this Entity.
+	 * @param player The player that interacts with this Entity.
 	 * @return The item returned in the interaction.
 	 */
-	public Item interact() {
-		return null;
+	public Item interact(Player player) {
+		Interaction interaction = null;
+		Iterator<Interaction> it = interactions.iterator();
+		
+		while (it.hasNext() && interaction == null) { // Loop until we find an applicable interaction.
+			Interaction interactionTemp = it.next();
+			if (interactionTemp.getRequiredItemId() == null || player.hasItem(interactionTemp.getRequiredItemId())) {
+				interaction = interactionTemp;
+			}
+		}
+		if (interaction == null) {return null;} // No interaction was found.
+		
+		UserInterfaceManager.showMessage(interaction.getTitle(), interaction.getMessage());
+		if (!interaction.getPersistient()) {interactions.remove(interaction);}
+		if (interaction.getRemoveEntity()) {player.getCurrentRoom().markForRemoval(this);}
+		return interaction.getReward();
+	}
+	
+	/**
+	 * A private class used to represent interactions.
+	 */
+	private class Interaction {
+		private String title;
+		private String message;
+		private String requiredItemId;
+		private Item reward;
+		private boolean persistent;
+		private boolean removeEntity;
+		
+		public Interaction(String title, String message, String requiredItemId, Item reward, boolean persistent, boolean removeEntity) {
+			this.title = title;
+			this.message = message;
+			this.requiredItemId = requiredItemId;
+			this.reward = reward;
+			this.persistent = persistent;
+			this.removeEntity = removeEntity;
+		}
+
+		/**
+		 * Returns the title of this interaction.
+		 * @return The title of this interaction.
+		 */
+		public String getTitle() {return title;}
+
+		/**
+		 * Returns the message of this interaction.
+		 * @return The message of this interaction.
+		 */
+		public String getMessage() {return message;}
+
+		/**
+		 * Returns the id of the required item of this interaction.
+		 * @return The id of the required item of this interaction.
+		 */
+		public String getRequiredItemId() {return requiredItemId;}
+
+		/**
+		 * Returns the reward of this interaction.
+		 * @return An item as an reward of this interaction.
+		 */
+		public Item getReward() {return reward;}
+		
+		/**
+		 * Returns a boolean signaling of this interaction should stay after being completed.
+		 * @return True if this interaction should stay after being completed.
+		 */
+		public boolean getPersistient() {return persistent;}
+		
+		/**
+		 * Returns a boolean signaling of this interaction should remove the entity after completion.
+		 * @return True if this interaction should remove this Entity after completion.
+		 */
+		public boolean getRemoveEntity() {return removeEntity;}
+	}
+	
+	/**
+	 * Add an interaction to this Entity.
+	 * @param title The title of the interaction.
+	 * @param message The message to display.
+	 * @param requiredItemId The id of the Item required to display this interaction, or null if no item is required.
+	 * @param reward The reward for this interaction.
+	 * @param persistent A boolean signaling of this interaction should stay after being completed.
+	 */
+	public void addInteraction(String title, String message, String requiredItemId, Item reward, boolean persistent, boolean removeEntity) {
+		interactions.add(new Interaction(title, message, requiredItemId, reward, persistent, removeEntity));
 	}
 	
 	/**

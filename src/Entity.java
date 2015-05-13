@@ -93,6 +93,16 @@ public class Entity implements Drawable {
 	}
 	
 	/**
+	 * Draw this entity at specified position and scale.
+	 * @param x The X coordinate to draw the entity.
+	 * @param y The Y coordinate to draw the entity.
+	 * @param scale The scale the of the image.
+	 */
+	public void draw(float x, float y, float scale) {
+		getImage(direction).draw(x, y, scale);
+	}
+	
+	/**
 	 * Update the position of this entity by moving it according to set velocity and acceleration.
 	 * @param delta The number of milliseconds since last update.
 	 * @param currentRoom The currentRoom of the game, used to detect collision with other entities in this room.

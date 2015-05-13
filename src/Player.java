@@ -169,7 +169,7 @@ public class Player extends Entity {
 	public void drawInventory(Graphics g) {
 		// Inventory properties
 		int inventoryWidth = 300; // Pixles from right corner that inventory should take up
-		float inventoryItemSize = 40; // Pixels each item takes up in the list
+		float inventoryItemHeight = 40; // Pixels each item takes up in the list
 		int offset = 80; // Start drawing items i px from top 
 		int padding = 10;
 		Font awtFont = new Font(Font.SANS_SERIF, Font.BOLD, 24);
@@ -181,21 +181,21 @@ public class Player extends Entity {
 		
 		// Draw inventory title
 		g.setColor(Color.white); // Text color
-		font.drawString((DungeonGame.WIDTH - inventoryWidth) + (inventoryItemSize + padding), 30, "Inventory"); // Draw the name
+		font.drawString((DungeonGame.WIDTH - inventoryWidth) + (inventoryItemHeight + padding), 30, "Inventory"); // Draw the name
 				
 		// Draw current Item background
 		if (!items.isEmpty()) {
 			g.setColor(Color.gray); 
-			g.fillRect(DungeonGame.WIDTH - (inventoryWidth), (currentItemIndex * (inventoryItemSize + padding/2) + offset), (inventoryWidth + padding), inventoryItemSize);
+			g.fillRect(DungeonGame.WIDTH - (inventoryWidth), (currentItemIndex * (inventoryItemHeight + padding/2) + offset), (inventoryWidth + padding), inventoryItemHeight);
 		}
 		
 		// Draw items in inventory
 		for (Item item : items.values()) {
-			item.draw(new Rectangle(DungeonGame.WIDTH - inventoryWidth + padding, offset, inventoryItemSize, inventoryItemSize)); // Draw the item
+			item.draw(DungeonGame.WIDTH - inventoryWidth + padding, offset, inventoryItemHeight/item.getPosition().getHeight()); // Draw the item
 			
 			g.setColor(Color.white); // Text color
-			font.drawString((DungeonGame.WIDTH - inventoryWidth) + (inventoryItemSize + padding), (offset + inventoryItemSize/2) - (font.getHeight()/2), item.getName()); // Draw the name
-			offset += inventoryItemSize + padding/2;
+			font.drawString((DungeonGame.WIDTH - inventoryWidth) + (inventoryItemHeight + padding), (offset + inventoryItemHeight/2) - (font.getHeight()/2), item.getName()); // Draw the name
+			offset += inventoryItemHeight + padding/2;
 		}
 	}
 	

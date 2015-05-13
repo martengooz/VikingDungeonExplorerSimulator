@@ -1,11 +1,7 @@
-import java.awt.Font;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
 
@@ -15,8 +11,6 @@ public class Player extends Entity {
 	private float speed = 0.4f;
 	private Room currentRoom;
 	private Map<String, Item> items = new HashMap<>();
-	private boolean inInventory = false;
-
 	private int currentItemIndex = 0;
 
 	
@@ -117,87 +111,6 @@ public class Player extends Entity {
 		return false;
 	}
 	
-	/**
-	 * Navigate in the inventory.
-	 * @param direction The direction to navigate. 0 = up, 1 = down.
-	 */
-	public void navigateInventory(int direction) throws IllegalArgumentException {
-		if (direction > 1 || direction < 0) {throw new IllegalArgumentException("Direction must be 0 or 1");}
-		
-		if (!items.isEmpty()) {
-			if (currentItemIndex == 0 && direction == 0) {return;} // If at top and pressing up, do nothing
-			if (currentItemIndex == items.size() -1  && direction == 1) {return;} // If at bottom and pressing down, do nothing
-			
-			if (direction == 0) {currentItemIndex--;} // Up
-			else if (direction == 1) {currentItemIndex++;} // Down
-		}
-	}
-	
-	/**
-	 * Look at current item in inventory.
-	 */
-	public void lookAtItem() {
-		if (items.isEmpty()) {return;} // Return if empty
-		
-		Item currentItem;
-		Iterator<Item> it = items.values().iterator();
-		for (int i = 0; i < currentItemIndex && it.hasNext(); i++) {
-			it.next();
-		}
-		currentItem = it.next();
-		
-		System.out.println(currentItem.getDescription()); // REMOVE
-	}
-	
-	/**
-	 * Toggles inventory. 
-	 */
-	public void inventory() {
-		if (!inInventory){ // Display inventory
-			inInventory = true;
-			currentItemIndex = 0;
-		}
-		else { // Closes inventory
-			inInventory = false; 
-		}
-	}
-	
-	/**
-	 * Handles drawing of inventory on screen.
-	 * @param g The Graphics context used by the container.
-	 */
-	public void drawInventory(Graphics g) {
-		// Inventory properties
-		int inventoryWidth = 300; // Pixles from right corner that inventory should take up
-		float inventoryItemHeight = 40; // Pixels each item takes up in the list
-		int offset = 80; // Start drawing items i px from top 
-		int padding = 10;
-		Font awtFont = new Font(Font.SANS_SERIF, Font.BOLD, 24);
-		TrueTypeFont font = new TrueTypeFont(awtFont, false);
-		
-		// Draw inventory background
-		g.setColor(Color.lightGray); 
-		g.fillRect(DungeonGame.WIDTH - (inventoryWidth), 0, (inventoryWidth + padding), DungeonGame.HEIGHT); 
-		
-		// Draw inventory title
-		g.setColor(Color.white); // Text color
-		font.drawString((DungeonGame.WIDTH - inventoryWidth) + (inventoryItemHeight + padding), 30, "Inventory"); // Draw the name
-				
-		// Draw current Item background
-		if (!items.isEmpty()) {
-			g.setColor(Color.gray); 
-			g.fillRect(DungeonGame.WIDTH - (inventoryWidth), (currentItemIndex * (inventoryItemHeight + padding/2) + offset), (inventoryWidth + padding), inventoryItemHeight);
-		}
-		
-		// Draw items in inventory
-		for (Item item : items.values()) {
-			item.draw(DungeonGame.WIDTH - inventoryWidth + padding, offset, inventoryItemHeight/item.getPosition().getHeight()); // Draw the item
-			
-			g.setColor(Color.white); // Text color
-			font.drawString((DungeonGame.WIDTH - inventoryWidth) + (inventoryItemHeight + padding), (offset + inventoryItemHeight/2) - (font.getHeight()/2), item.getName()); // Draw the name
-			offset += inventoryItemHeight + padding/2;
-		}
-	}
 	
 	/**
 	 * Interact with the object in front of the player.
@@ -290,20 +203,13 @@ public class Player extends Entity {
 	public void setCurrentRoom(Room currentRoom) {
 		this.currentRoom = currentRoom;
 	}
-
+	 
 	/**
-	 * Return a boolean describing if player is in inventory or not
-	 * @return the inInventory. True if player is in Inventory, false otherwises.
+	 * Return the players items. 
+	 * @return The players items
 	 */
-	public boolean isInInventory() {
-		return inInventory;
+	public Map<String, Item> getItems() {
+		return items;
 	}
 
-	/** 
-	 * Set the boolean describing if player is in inventory or not
-	 * @param inInventory Set to true if player is in invetory, false otherwise.
-	 */
-	public void setInInventory(boolean inInventory) {
-		this.inInventory = inInventory;
-	}
 }

@@ -49,8 +49,11 @@ public class DungeonGame extends BasicGame {
 		redbeard.getCurrentRoom().draw();
 		redbeard.draw();
 		
-		if (redbeard.isInInventory()){
-			redbeard.drawInventory(g);
+		if (UserInterfaceManager.hasMessage()) { 
+			UserInterfaceManager.drawMessage(g);
+		}
+		if (UserInterfaceManager.isInInventory()){
+			UserInterfaceManager.drawInventory(g);
 		}
 	}
 
@@ -73,15 +76,14 @@ public class DungeonGame extends BasicGame {
 		Input input = gameContainer.getInput();
 		
 		// While in inventory
-		if (redbeard.isInInventory()){
+		if (UserInterfaceManager.isInInventory()){
 			//Closes inventory
-			if(input.isKeyPressed(keyInventory)) {redbeard.inventory();} 
-			if(input.isKeyPressed(keyExit)) {redbeard.inventory();}
+			if(input.isKeyPressed(keyInventory)) {UserInterfaceManager.showInventory(redbeard.getItems());} 
+			if(input.isKeyPressed(keyExit)) {UserInterfaceManager.showInventory(redbeard.getItems());}
 			
 			// Navigating in inventory
-			for(int key : keyMoveUp){if(input.isKeyPressed(key)) {redbeard.navigateInventory(0);}} // Up
-			for(int key : keyMoveDown){if(input.isKeyPressed(key)) {redbeard.navigateInventory(1);}} // Down
-			if(input.isKeyPressed(keyAct)) {redbeard.lookAtItem();} // Look at item
+			for(int key : keyMoveUp){if(input.isKeyPressed(key)) {UserInterfaceManager.navigateInventory(0);}} // Up
+			for(int key : keyMoveDown){if(input.isKeyPressed(key)) {UserInterfaceManager.navigateInventory(1);}} // Down
 		} 
 		
 		// While in game
@@ -94,7 +96,8 @@ public class DungeonGame extends BasicGame {
 					
 			//Others
 			if(input.isKeyPressed(keyAct)) {redbeard.act();}
-			if(input.isKeyPressed(keyInventory)) {redbeard.inventory();}
+			if(input.isKeyPressed(keyAct) && UserInterfaceManager.hasMessage()) {UserInterfaceManager.nextMessage();} // Display next message
+			if(input.isKeyPressed(keyInventory)) {UserInterfaceManager.showInventory(redbeard.getItems());}
 			if(input.isKeyPressed(keyExit)) {System.exit(1);}
 		}
 		

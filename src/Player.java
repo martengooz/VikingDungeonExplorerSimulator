@@ -42,7 +42,7 @@ public class Player extends Entity {
 	 * Specify that the player should move in this direction on the next update.
 	 * @param direction An integer in the range 0-3 specifying which direction (up, right, down, left).
 	 */
-	public void move(int direction) {
+	public void move(int direction) throws IllegalArgumentException {
 		if (direction > 3 || direction < 0) {throw new IllegalArgumentException("Direction must be between 0 and 3");}
 		directionsToMove[direction] = true;
 		setDirection(direction);

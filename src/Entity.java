@@ -28,7 +28,7 @@ public class Entity implements Drawable {
 	 * @param acceleration The acceleration of this entity.
 	 * @param imageLocation An array of 4 strings with the location of the images of this entity looking in different directions (up, right, down, left).
 	 */
-	public Entity(Rectangle position, Point velocity, Point acceleration, String[] imageLocation) {
+	public Entity(Rectangle position, Point velocity, Point acceleration, String[] imageLocation) throws IllegalArgumentException{
 		if (imageLocation.length != 4) {throw new IllegalArgumentException("imageLocation must have 4 strings");}
 		
 		this.position = position;
@@ -317,7 +317,7 @@ public class Entity implements Drawable {
 	 * Set the direction of this entity.
 	 * @param direction An integer in the range 0-3 specifying which direction (up, right, down, left).
 	 */
-	public void setDirection(int direction) {
+	public void setDirection(int direction) throws IllegalArgumentException {
 		if (direction > 3 || direction < 0) {throw new IllegalArgumentException("Direction must be between 0 and 3");}
 		this.direction = direction;
 	}
@@ -336,7 +336,7 @@ public class Entity implements Drawable {
 	 * Return the image of this entity.
 	 * @return The image.
 	 */
-	public Image getImage(int direction) {
+	public Image getImage(int direction) throws IllegalArgumentException {
 		if (direction > 3 || direction < 0) {throw new IllegalArgumentException("Direction must be between 0 and 3");}
 		return image[direction];
 	}

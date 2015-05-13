@@ -51,7 +51,7 @@ public class Room implements Drawable {
 	 * @param direction An integer in the range 0-3 specifying which direction (up, right, down, left).
 	 * @return
 	 */
-	public Room getNeighbor(int direction) {
+	public Room getNeighbor(int direction) throws IllegalArgumentException{
 		if (direction > 3 || direction < 0) {throw new IllegalArgumentException("Direction must be between 0 and 3");}
 		return neighbors[direction];
 	}
@@ -79,7 +79,7 @@ public class Room implements Drawable {
 	 * @param room The neighboring room.
 	 * @param direction An integer in the range 0-3 specifying which direction (up, right, down, left).
 	 */
-	public void setExit(Room room, int direction) {
+	public void setExit(Room room, int direction) throws IllegalArgumentException {
 		if (direction > 3 || direction < 0) {throw new IllegalArgumentException("Direction must be between 0 and 3");}
 		neighbors[direction] = room;
 	}

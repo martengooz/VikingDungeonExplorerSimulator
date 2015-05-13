@@ -78,99 +78,7 @@ public class Entity implements Drawable {
 		this.acceleration = new Point(0, 0);
 	}
 	
-	/**
-	 * Draw this entity.
-	 */
-	@Override
-	public void draw() {
-		getImage(direction).draw(getPosition().getX(), getPosition().getY());
-	}
 	
-	/**
-	 * Draw this entity at specified position.
-	 * @param position The position to draw the entity
-	 */
-	public void draw(Rectangle position) {
-		this.position = position;
-		getImage(direction).draw(getPosition().getX(), getPosition().getY(), getPosition().getWidth(), getPosition().getHeight());
-	}
-	
-	/**
-	 * Draw this entity at specified position and scale.
-	 * @param x The X coordinate to draw the entity.
-	 * @param y The Y coordinate to draw the entity.
-	 * @param scale The scale the of the image.
-	 */
-	public void draw(float x, float y, float scale) {
-		getImage(direction).draw(x, y, scale);
-	}
-	
-	/**
-	 * Update the position of this entity by moving it according to set velocity and acceleration.
-	 * @param delta The number of milliseconds since last update.
-	 * @param currentRoom The currentRoom of the game, used to detect collision with other entities in this room.
-	 */
-	public void update(int delta, Room currentRoom) {	
-		//Update velocity
-		velocity.setX(velocity.getX() + acceleration.getX() * delta);
-		velocity.setY(velocity.getY() + acceleration.getY() * delta);
-		
-		//Update position X
-		Rectangle newPosition = new Rectangle(position.getX() + velocity.getX() * delta, position.getY(), position.getWidth(), position.getHeight()); //Calculate new new position to compare collisions
-		if (newPosition.getX() > 0 + DungeonGame.WALLWIDTH[1] && newPosition.getX() < DungeonGame.WIDTH - position.getWidth() - DungeonGame.WALLWIDTH[3]) { //Check that we are within bounds
-			boolean willCollide = false;			
-			if (checkCollision) {
-				Iterator<NPC> itNpcs = currentRoom.getNPCs().iterator();
-				Iterator<Item> itItems = currentRoom.getItems().iterator();
-				Iterator<Entity> itEntities = currentRoom.getEntities().iterator();
-				
-				while (itNpcs.hasNext()) { //Check against NPCs
-					NPC npc = itNpcs.next();
-					if (npc.getDoesCollide() && npc.getPosition().intersects(newPosition)) {willCollide = true;}
-				}
-				
-				while (itItems.hasNext()) { //Check against items 
-					Item item = itItems.next();
-					if (item.getDoesCollide() && item.getPosition().intersects(newPosition)) {willCollide = true;}
-				}
-				
-				while (itEntities.hasNext()) { //Check against entities
-					Entity entity = itEntities.next();
-					if (entity.getDoesCollide() && entity.getPosition().intersects(newPosition)) {willCollide = true;}
-				}
-			}
-			
-			if (!willCollide) {position = newPosition;}
-		}
-		
-		//Update position Y
-		newPosition = new Rectangle(position.getX(), position.getY() + velocity.getY() * delta, position.getWidth(), position.getHeight()); //Calculate new new position to compare collisions
-		if (newPosition.getY() > 0 + DungeonGame.WALLWIDTH[0] && newPosition.getY() < DungeonGame.HEIGHT - position.getHeight() - DungeonGame.WALLWIDTH[2]) { //Check that we are within bounds
-			boolean willCollide = false;
-			if (checkCollision) {
-				Iterator<NPC> itNpcs = currentRoom.getNPCs().iterator();
-				Iterator<Item> itItems = currentRoom.getItems().iterator();
-				Iterator<Entity> itEntities = currentRoom.getEntities().iterator();
-				
-				while (itNpcs.hasNext()) { //Check against NPCs
-					NPC npc = itNpcs.next();
-					if (npc.getDoesCollide() && npc.getPosition().intersects(newPosition)) {willCollide = true;}
-				}
-				
-				while (itItems.hasNext()) { //Check against items 
-					Item item = itItems.next();
-					if (item.getDoesCollide() && item.getPosition().intersects(newPosition)) {willCollide = true;}
-				}
-				
-				while (itEntities.hasNext()) { //Check against entities
-					Entity entity = itEntities.next();
-					if (entity.getDoesCollide() && entity.getPosition().intersects(newPosition)) {willCollide = true;}
-				}
-			}
-		
-			if (!willCollide) {position = newPosition;}
-		}		
-	}
 
 	/**
 	 * Let a Player interact with this Entity.
@@ -190,8 +98,14 @@ public class Entity implements Drawable {
 		if (interaction == null) {return null;} // No interaction was found.
 		
 		UserInterfaceManager.addMessage(image[2], interaction.getTitle(), interaction.getMessage());
-		if (!interaction.getPersistient()) {interactions.remove(interaction);}
-		if (interaction.getRemoveEntity()) {player.getCurrentRoom().markForRemoval(this);}
+		
+		if (!interaction.getPersistient()) {
+			interactions.remove(interaction);
+		}
+		
+		if (interaction.getRemoveEntity()) {
+			player.getCurrentRoom().markForRemoval(this);
+		}
 		return interaction.getReward();
 	}
 	
@@ -260,8 +174,118 @@ public class Entity implements Drawable {
 	 * @param reward The reward for this interaction.
 	 * @param persistent A boolean signaling of this interaction should stay after being completed.
 	 */
-	public void addInteraction(String title, String message, String requiredItemId, Item reward, boolean persistent, boolean removeEntity) {
+	public void addInteraction(String title, String message, String requiredItemId, 
+			Item reward, boolean persistent, boolean removeEntity) {
 		interactions.add(new Interaction(title, message, requiredItemId, reward, persistent, removeEntity));
+	}
+	
+	/**
+	 * Draw this entity.
+	 */
+	@Override
+	public void draw() {
+		getImage(direction).draw(getPosition().getX(), getPosition().getY());
+	}
+	
+	/**
+	 * Draw this entity at specified position.
+	 * @param position The position to draw the entity
+	 */
+	public void draw(Rectangle position) {
+		getImage(direction).draw(position.getX(), position.getY(), position.getWidth(), position.getHeight());
+	}
+	
+	/**
+	 * Draw this entity at specified position and scale.
+	 * @param x The X coordinate to draw the entity.
+	 * @param y The Y coordinate to draw the entity.
+	 * @param scale The scale the of the image.
+	 */
+	public void draw(float x, float y, float scale) {
+		getImage(direction).draw(x, y, scale);
+	}
+	
+	/**
+	 * Update the position of this entity by moving it according to set velocity and acceleration.
+	 * @param delta The number of milliseconds since last update.
+	 * @param currentRoom The currentRoom of the game, used to detect collision with other entities in this room.
+	 */
+	public void update(int delta, Room currentRoom) {	
+		//Update velocity
+		velocity.setX(velocity.getX() + acceleration.getX() * delta);
+		velocity.setY(velocity.getY() + acceleration.getY() * delta);
+		
+		//Update position X
+		Rectangle newPosition = new Rectangle(position.getX() + velocity.getX() * delta, position.getY(), //Calculate new new position to compare collisions
+				position.getWidth(), position.getHeight()); 
+		
+		if (newPosition.getX() > 0 + DungeonGame.WALLWIDTH[1] && newPosition.getX() < DungeonGame.WIDTH - position.getWidth() - DungeonGame.WALLWIDTH[3]) { //Check that we are within bounds
+			boolean willCollide = false;			
+			if (checkCollision) {
+				Iterator<NPC> itNpcs = currentRoom.getNPCs().iterator();
+				Iterator<Item> itItems = currentRoom.getItems().iterator();
+				Iterator<Entity> itEntities = currentRoom.getEntities().iterator();
+				
+				while (itNpcs.hasNext()) { //Check against NPCs
+					NPC npc = itNpcs.next();
+					if (npc.getDoesCollide() && npc.getPosition().intersects(newPosition)) {
+						willCollide = true;
+					}
+				}
+				
+				while (itItems.hasNext()) { //Check against items 
+					Item item = itItems.next();
+					if (item.getDoesCollide() && item.getPosition().intersects(newPosition)) {
+						willCollide = true;
+					}
+				}
+				
+				while (itEntities.hasNext()) { //Check against entities
+					Entity entity = itEntities.next();
+					if (entity.getDoesCollide() && entity.getPosition().intersects(newPosition)) {
+						willCollide = true;
+					}
+				}
+			}
+			
+			if (!willCollide) {position = newPosition;}
+		}
+		
+		//Update position Y
+		newPosition = new Rectangle(position.getX(), position.getY() + velocity.getY() * delta, //Calculate new new position to compare collisions
+				position.getWidth(), position.getHeight()); 
+		
+		if (newPosition.getY() > 0 + DungeonGame.WALLWIDTH[0] && newPosition.getY() < DungeonGame.HEIGHT - position.getHeight() - DungeonGame.WALLWIDTH[2]) { //Check that we are within bounds
+			boolean willCollide = false;
+			if (checkCollision) {
+				Iterator<NPC> itNpcs = currentRoom.getNPCs().iterator();
+				Iterator<Item> itItems = currentRoom.getItems().iterator();
+				Iterator<Entity> itEntities = currentRoom.getEntities().iterator();
+				
+				while (itNpcs.hasNext()) { //Check against NPCs
+					NPC npc = itNpcs.next();
+					if (npc.getDoesCollide() && npc.getPosition().intersects(newPosition)) {
+						willCollide = true;
+					}
+				}
+				
+				while (itItems.hasNext()) { //Check against items 
+					Item item = itItems.next();
+					if (item.getDoesCollide() && item.getPosition().intersects(newPosition)) {
+						willCollide = true;
+					}
+				}
+				
+				while (itEntities.hasNext()) { //Check against entities
+					Entity entity = itEntities.next();
+					if (entity.getDoesCollide() && entity.getPosition().intersects(newPosition)) {
+						willCollide = true;
+					}
+				}
+			}
+		
+			if (!willCollide) {position = newPosition;}
+		}		
 	}
 	
 	/**
@@ -347,7 +371,10 @@ public class Entity implements Drawable {
 	public void loadImage() {
 		try {
 			//Check if all directions have the same texture and save some memory by using the same image.
-			if (imageLocation[0].equals(imageLocation[1]) && imageLocation[0].equals(imageLocation[2]) && imageLocation[0].equals(imageLocation[3])) {
+			if (imageLocation[0].equals(imageLocation[1]) && 
+					imageLocation[0].equals(imageLocation[2]) && 
+					imageLocation[0].equals(imageLocation[3])) {
+				
 				this.image[0] = new Image(imageLocation[0]);
 				this.image[1] = this.image[0];
 				this.image[2] = this.image[0];

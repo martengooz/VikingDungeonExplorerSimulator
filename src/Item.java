@@ -9,13 +9,31 @@ public class Item extends Entity {
 	
 	/**
 	 * Create a new item.
-	 * @param id A unique identifier for this item.
+	 * @param id A unique identifier for this Item.
 	 * @param name The name that should be displayed to the user.
-	 * @param description A description of this item.
-	 * @param texture A texture of this item.
+	 * @param description A description of this Item.
+	 * @param velocity The velocity of this Item.
+	 * @param acceleration The acceleration of this Item.
+	 * @param imageLocation The location of the image of this Item.
 	 */
-	public Item(String id, String name, String description, Rectangle position, Point velocity, Point acceleration, String imageLocation) {
+	public Item(String id, String name, String description, Rectangle position,
+			Point velocity, Point acceleration, String imageLocation) {
 		super(position, velocity, acceleration, imageLocation);
+		
+		this.id = id;
+		this.name = name;
+		this.description = description;
+	}
+	
+	/**
+	 * Create a new item with no velocity or acceleration.
+	 * @param id A unique identifier for this Item.
+	 * @param name The name that should be displayed to the user.
+	 * @param description A description of this Item.
+	 * @param imageLocation The location of the image of this Item.
+	 */
+	public Item(String id, String name, String description, Rectangle position, String imageLocation) {
+		super(position, new Point(0, 0), new Point(0, 0), imageLocation);
 		
 		this.id = id;
 		this.name = name;

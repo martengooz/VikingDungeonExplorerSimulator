@@ -47,7 +47,9 @@ public class UserInterfaceManager {
 	 * @param message The message to print. 
 	 */
 	public static void addMessage(Image image, String title, String message) throws IllegalArgumentException {
-		if (image == null || title == null || message == null) { throw new IllegalArgumentException("Must provide an image, title and description."); }
+		if (image == null || title == null || message == null) { 
+			throw new IllegalArgumentException("Must provide an image, title and description."); 
+		}
 		messages.add(new Message(image, title, message));
 	}
 	
@@ -90,13 +92,13 @@ public class UserInterfaceManager {
 			title = currentItem.getName();
 			description = currentItem.getDescription();
 			image = currentItem.getImage(2);
-			g.fillRect(messageBoxPadding, DungeonGame.HEIGHT - messageBoxHeight, messageBoxWidth - inventoryWidth - 2*messageBoxPadding, messageBoxHeight - messageBoxPadding); 
-			
-			
+			g.fillRect(messageBoxPadding, DungeonGame.HEIGHT - messageBoxHeight, messageBoxWidth - inventoryWidth - 2*messageBoxPadding,
+					messageBoxHeight - messageBoxPadding); 
 		}
 		else {
 			boxWidth = messageBoxWidth - 2*messageBoxPadding;
-			g.fillRect(messageBoxPadding, DungeonGame.HEIGHT - messageBoxHeight, messageBoxWidth - 2*messageBoxPadding, messageBoxHeight - messageBoxPadding); 
+			g.fillRect(messageBoxPadding, DungeonGame.HEIGHT - messageBoxHeight,
+					messageBoxWidth - 2*messageBoxPadding, messageBoxHeight - messageBoxPadding); 
 			title = messages.peek().getTitle();
 			description = messages.peek().getDescription();
 			image = messages.peek().getImage();
@@ -151,20 +153,23 @@ public class UserInterfaceManager {
 		
 		// Draw inventory title
 		g.setColor(textColor); 
-		titleFont.drawString((DungeonGame.WIDTH - inventoryWidth) + (inventoryItemHeight + itemPadding), 30, "Inventory"); // Draw the name
+		titleFont.drawString((DungeonGame.WIDTH - inventoryWidth) + (inventoryItemHeight + itemPadding), offset/3, "Inventory"); // Draw the name
 				
 		// Draw current Item background
 		if (!items.isEmpty()) {
 			g.setColor(currentItemBgColor); 
-			g.fillRect(DungeonGame.WIDTH - (inventoryWidth), (currentItemIndex * (inventoryItemHeight + itemPadding/2) + localOffset), (inventoryWidth + itemPadding), inventoryItemHeight);
+			g.fillRect(DungeonGame.WIDTH - (inventoryWidth), (currentItemIndex * (inventoryItemHeight + itemPadding/2) + localOffset),
+					(inventoryWidth + itemPadding), inventoryItemHeight);
 		}
 		
 		// Draw items in inventory
 		for (Item item : items.values()) {
 			item.draw(DungeonGame.WIDTH - inventoryWidth + itemPadding, localOffset, inventoryItemHeight/item.getPosition().getHeight()); // Draw the item
 			
+			// Draw the name
 			g.setColor(textColor); 
-			titleFont.drawString((DungeonGame.WIDTH - inventoryWidth) + (inventoryItemHeight + itemPadding), (localOffset + inventoryItemHeight/2) - (titleFont.getHeight()/2), item.getName()); // Draw the name
+			titleFont.drawString((DungeonGame.WIDTH - inventoryWidth) + (inventoryItemHeight + itemPadding), 
+					(localOffset + inventoryItemHeight/2) - (titleFont.getHeight()/2), item.getName()); 
 			localOffset += inventoryItemHeight + itemPadding/2;
 		}
 		
@@ -178,7 +183,9 @@ public class UserInterfaceManager {
 	 * @param direction The direction to navigate. 0 = up, 1 = down.
 	 */
 	public static void navigateInventory(int direction) throws IllegalArgumentException {
-		if (direction > 1 || direction < 0) {throw new IllegalArgumentException("Direction must be 0 or 1");}
+		if (direction > 1 || direction < 0) {
+			throw new IllegalArgumentException("Direction must be 0 or 1");
+		}
 		
 		if (!items.isEmpty()) {
 			if (currentItemIndex == 0 && direction == 0) {return;} // If at top and pressing up, do nothing

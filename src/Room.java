@@ -52,7 +52,9 @@ public class Room implements Drawable {
 	 * @return
 	 */
 	public Room getNeighbor(int direction) throws IllegalArgumentException{
-		if (direction > 3 || direction < 0) {throw new IllegalArgumentException("Direction must be between 0 and 3");}
+		if (direction > 3 || direction < 0) {
+			throw new IllegalArgumentException("Direction must be between 0 and 3");
+		}
 		return neighbors[direction];
 	}
 	
@@ -80,7 +82,9 @@ public class Room implements Drawable {
 	 * @param direction An integer in the range 0-3 specifying which direction (up, right, down, left).
 	 */
 	public void setExit(Room room, int direction) throws IllegalArgumentException {
-		if (direction > 3 || direction < 0) {throw new IllegalArgumentException("Direction must be between 0 and 3");}
+		if (direction > 3 || direction < 0) {
+			throw new IllegalArgumentException("Direction must be between 0 and 3");
+		}
 		neighbors[direction] = room;
 	}
 	
@@ -120,10 +124,22 @@ public class Room implements Drawable {
 		doorImage.setCenterOfRotation(doorImage.getWidth()/2, doorImage.getHeight()/2);
 		
 		//Draw the doors
-		if (neighbors[0] != null) {doorImage.setRotation(0); doorImage.draw((DungeonGame.WIDTH - doorImage.getWidth())/2,0);}
-		if (neighbors[2] != null) {doorImage.setRotation(180); doorImage.draw((DungeonGame.WIDTH - doorImage.getWidth())/2, DungeonGame.HEIGHT - doorImage.getHeight());}		
-		if (neighbors[1] != null) {doorImage.setRotation(90); doorImage.draw(DungeonGame.WIDTH - 2*doorImage.getHeight() + 8, (DungeonGame.HEIGHT - doorImage.getHeight())/2);}
-		if (neighbors[3] != null) {doorImage.setRotation(270); doorImage.draw(8-doorImage.getHeight(), (DungeonGame.HEIGHT - doorImage.getHeight())/2);}
+		if (neighbors[0] != null) {
+			doorImage.setRotation(0); 
+			doorImage.draw((DungeonGame.WIDTH - doorImage.getWidth())/2,0);
+		}
+		if (neighbors[2] != null) {
+			doorImage.setRotation(180);
+			doorImage.draw((DungeonGame.WIDTH - doorImage.getWidth())/2, DungeonGame.HEIGHT - doorImage.getHeight());
+		}		
+		if (neighbors[1] != null) {
+			doorImage.setRotation(90); 
+			doorImage.draw(DungeonGame.WIDTH - 2*doorImage.getHeight() + 8, (DungeonGame.HEIGHT - doorImage.getHeight())/2);
+		}
+		if (neighbors[3] != null) {
+			doorImage.setRotation(270); 
+			doorImage.draw(8-doorImage.getHeight(), (DungeonGame.HEIGHT - doorImage.getHeight())/2);
+		}
 		
 		Iterator<NPC> itNpcs = npcs.iterator();
 		Iterator<Item> itItems = items.iterator();

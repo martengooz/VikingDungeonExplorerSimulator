@@ -64,10 +64,26 @@ public class Player extends Entity {
 		
 		
 		// Check if going through door by check that the two corners of the player are in the door area
-		if (directionsToMove[0] && !directionsToMove[2] && DungeonGame.DOORAREA[0].contains(getPosition().getX(), getPosition().getY()) && DungeonGame.DOORAREA[0].contains(getPosition().getX() + getPosition().getWidth(), getPosition().getY())) {changeRoom(0);} // Up
-		if (directionsToMove[2] && !directionsToMove[0] && DungeonGame.DOORAREA[2].contains(getPosition().getX(), getPosition().getY() + getPosition().getHeight()) && DungeonGame.DOORAREA[2].contains(getPosition().getX() + getPosition().getWidth(), getPosition().getY() + getPosition().getHeight())) {changeRoom(2);} // Down
-		if (directionsToMove[3] && !directionsToMove[1] && DungeonGame.DOORAREA[3].contains(getPosition().getX(), getPosition().getY()) && DungeonGame.DOORAREA[3].contains(getPosition().getX(), getPosition().getY() + getPosition().getHeight())) {changeRoom(3);} // Left
-		if (directionsToMove[1] && !directionsToMove[3] && DungeonGame.DOORAREA[1].contains(getPosition().getX() + getPosition().getWidth(), getPosition().getY()) && DungeonGame.DOORAREA[1].contains(getPosition().getX() + getPosition().getWidth(), getPosition().getY() + getPosition().getHeight())) {changeRoom(1);} // Right
+		if (directionsToMove[0] && !directionsToMove[2] && // Up
+				DungeonGame.DOORAREA[0].contains(getPosition().getX(), getPosition().getY()) && 
+				DungeonGame.DOORAREA[0].contains(getPosition().getX() + getPosition().getWidth(), getPosition().getY())) {
+			changeRoom(0);
+		} 
+		if (directionsToMove[2] && !directionsToMove[0] && // Down
+				DungeonGame.DOORAREA[2].contains(getPosition().getX(), getPosition().getY() + getPosition().getHeight()) && 
+				DungeonGame.DOORAREA[2].contains(getPosition().getX() + getPosition().getWidth(), getPosition().getY() + getPosition().getHeight())) {
+			changeRoom(2);
+		} 
+		if (directionsToMove[3] && !directionsToMove[1] && // Left
+				DungeonGame.DOORAREA[3].contains(getPosition().getX(), getPosition().getY()) && 
+				DungeonGame.DOORAREA[3].contains(getPosition().getX(), getPosition().getY() + getPosition().getHeight())) {
+			changeRoom(3);
+		} 
+		if (directionsToMove[1] && !directionsToMove[3] && // Right
+				DungeonGame.DOORAREA[1].contains(getPosition().getX() + getPosition().getWidth(), getPosition().getY()) && 
+				DungeonGame.DOORAREA[1].contains(getPosition().getX() + getPosition().getWidth(), getPosition().getY() + getPosition().getHeight())) {
+			changeRoom(1);
+		} 
 		
 		super.update(delta, currentRoom);
 		
@@ -89,19 +105,27 @@ public class Player extends Entity {
 			
 			switch (direction) {
 			case 0: 
-				setPosition(new Rectangle((DungeonGame.WIDTH - getPosition().getWidth())/2, DungeonGame.HEIGHT - DungeonGame.WALLWIDTH[2] - getPosition().getHeight(),getPosition().getWidth(), getPosition().getHeight()));
+				setPosition(new Rectangle((DungeonGame.WIDTH - getPosition().getWidth())/2, 
+						DungeonGame.HEIGHT - DungeonGame.WALLWIDTH[2] - getPosition().getHeight(), 
+						getPosition().getWidth(), getPosition().getHeight()));
 				break;
 				
 			case 1: 
-				setPosition(new Rectangle(DungeonGame.WALLWIDTH[3], (DungeonGame.HEIGHT - getPosition().getHeight())/2,getPosition().getWidth(), getPosition().getHeight()));
+				setPosition(new Rectangle(DungeonGame.WALLWIDTH[3], 
+						(DungeonGame.HEIGHT - getPosition().getHeight())/2,
+						getPosition().getWidth(), getPosition().getHeight()));
 				break;
 				
 			case 2: 
-				setPosition(new Rectangle((DungeonGame.WIDTH - getPosition().getWidth())/2, DungeonGame.WALLWIDTH[0],getPosition().getWidth(), getPosition().getHeight()));
+				setPosition(new Rectangle((DungeonGame.WIDTH - getPosition().getWidth())/2,
+						DungeonGame.WALLWIDTH[0],
+						getPosition().getWidth(), getPosition().getHeight()));
 				break;
 				
 			case 3: 
-				setPosition(new Rectangle(DungeonGame.WIDTH - DungeonGame.WALLWIDTH[1] - getPosition().getWidth(), (DungeonGame.HEIGHT - getPosition().getHeight())/2, getPosition().getWidth(), getPosition().getHeight()));
+				setPosition(new Rectangle(DungeonGame.WIDTH - DungeonGame.WALLWIDTH[1] - getPosition().getWidth(),
+						(DungeonGame.HEIGHT - getPosition().getHeight())/2,
+						getPosition().getWidth(), getPosition().getHeight()));
 				break;
 			}
 			
@@ -122,19 +146,23 @@ public class Player extends Entity {
 		// Create the area where player can interact with an Entity wherein.
 		switch (getDirection()) {
 		case 0: 
-			area = new Rectangle(getPosition().getX(), getPosition().getY() - actAreaSize, getPosition().getWidth(), actAreaSize*2);
+			area = new Rectangle(getPosition().getX(), getPosition().getY() - actAreaSize,
+					getPosition().getWidth(), actAreaSize*2);
 			break;
 			
 		case 1:
-			area = new Rectangle(getPosition().getX() + getPosition().getWidth() - actAreaSize, getPosition().getY(), actAreaSize*2, getPosition().getHeight());
+			area = new Rectangle(getPosition().getX() + getPosition().getWidth() - actAreaSize, getPosition().getY(),
+					actAreaSize*2, getPosition().getHeight());
 			break;
 			
 		case 2: 
-			area = new Rectangle(getPosition().getX(), getPosition().getY() + getPosition().getHeight() - actAreaSize, getPosition().getWidth(), actAreaSize*2);
+			area = new Rectangle(getPosition().getX(), getPosition().getY() + getPosition().getHeight() - actAreaSize,
+					getPosition().getWidth(), actAreaSize*2);
 			break;
 			
 		case 3: 
-			area = new Rectangle(getPosition().getX() - actAreaSize, getPosition().getY(), actAreaSize*2, getPosition().getHeight());
+			area = new Rectangle(getPosition().getX() - actAreaSize, getPosition().getY(),
+					actAreaSize*2, getPosition().getHeight());
 			break;
 		}
 		

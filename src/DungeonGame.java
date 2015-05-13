@@ -75,6 +75,7 @@ public class DungeonGame extends BasicGame {
 		//Update input
 		Input input = gameContainer.getInput();
 		
+		
 		// While in inventory
 		if (UserInterfaceManager.isInInventory()){
 			//Closes inventory
@@ -89,16 +90,38 @@ public class DungeonGame extends BasicGame {
 		// While in game
 		else {  
 			// Player movement
-			for(int key : keyMoveUp){if(input.isKeyDown(key)) {redbeard.move(0);}}
-			for(int key : keyMoveDown){if(input.isKeyDown(key)) {redbeard.move(2);}}
-			for(int key : keyMoveLeft){if(input.isKeyDown(key)) {redbeard.move(3);}}
-			for(int key : keyMoveRight){if(input.isKeyDown(key)) {redbeard.move(1);}}
+			for(int key : keyMoveUp) {
+				if(input.isKeyDown(key)) {
+					redbeard.move(0);
+				}
+			}
+			for(int key : keyMoveDown) {
+				if(input.isKeyDown(key)) {
+					redbeard.move(2);
+				}
+			}
+			for(int key : keyMoveLeft) {
+				if(input.isKeyDown(key)) {
+					redbeard.move(3);
+				}
+			}
+			for(int key : keyMoveRight) {
+				if(input.isKeyDown(key)) {
+					redbeard.move(1);
+				}
+			}
 					
 			//Others
-			if(input.isKeyPressed(keyAct)) {redbeard.act();}
-			if(input.isKeyPressed(keyAct) && UserInterfaceManager.hasMessage()) {UserInterfaceManager.nextMessage();} // Display next message
+			if(input.isKeyPressed(keyAct)) {
+				if(UserInterfaceManager.hasMessage()) {
+					UserInterfaceManager.nextMessage();
+				}
+				else {
+					redbeard.act();
+				}
+			}
 			if(input.isKeyPressed(keyInventory)) {UserInterfaceManager.showInventory(redbeard.getItems());}
-			if(input.isKeyPressed(keyExit)) {System.exit(1);}
+			if(input.isKeyPressed(keyExit)) {System.exit(0);}
 		}
 		
 		

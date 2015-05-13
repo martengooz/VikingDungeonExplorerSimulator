@@ -11,8 +11,6 @@ public class Player extends Entity {
 	private float speed = 0.4f;
 	private Room currentRoom;
 	private Map<String, Item> items = new HashMap<>();
-	private int currentItemIndex = 0;
-
 	
 	private boolean[] directionsToMove = new boolean[4];
 	
@@ -106,6 +104,8 @@ public class Player extends Entity {
 				setPosition(new Rectangle(DungeonGame.WIDTH - DungeonGame.WALLWIDTH[1] - getPosition().getWidth(), (DungeonGame.HEIGHT - getPosition().getHeight())/2, getPosition().getWidth(), getPosition().getHeight()));
 				break;
 			}
+			
+			UserInterfaceManager.removeAllMessages();
 			return true;
 		}
 		return false;
@@ -176,7 +176,7 @@ public class Player extends Entity {
 	public void pickUpItem(Item item) {
 		item.loadImage(); // Load image
 		items.put(item.getID(), item); // Put item in inventory
-		UserInterfaceManager.showMessage("You found one " + item.getName().toLowerCase() + ".", item.getDescription());
+		UserInterfaceManager.addMessage(item.getImage(2),"You found one " + item.getName().toLowerCase() + ".", item.getDescription());
 	}
 	
 	/**
@@ -210,6 +210,14 @@ public class Player extends Entity {
 	 */
 	public Map<String, Item> getItems() {
 		return items;
+	}
+	
+	/**
+	 * Return a boolean signifying of player is moving.
+	 * @return True if moving, false otherwidse.
+	 */
+	public boolean isMoving() {
+		return (getVelocity().getX() != 0 || getVelocity().getY() != 0);
 	}
 
 }

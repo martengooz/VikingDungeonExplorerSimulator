@@ -1,5 +1,6 @@
 import java.awt.Font;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 
@@ -37,7 +38,7 @@ public class UserInterfaceManager {
 	private static TrueTypeFont descriptionFont = new TrueTypeFont(awtDescriptionFont, false);
 	
 	private static Map<String, Item> items;
-	private static Queue<Message> messages;
+	private static Queue<Message> messages = new LinkedList<Message>();
 	
 	/**
 	 * Add a message to the message queue. 
@@ -45,17 +46,30 @@ public class UserInterfaceManager {
 	 * @param title The title of the message.
 	 * @param message The message to print. 
 	 */
-	public static void addMessage(Image image, String title, String message) throws IllegalArgumentException{
+	public static void addMessage(Image image, String title, String message) throws IllegalArgumentException {
 		if (image == null || title == null || message == null) { throw new IllegalArgumentException("Must provide an image, title and description."); }
 		messages.add(new Message(image, title, message));
 	}
 	
-	public static void nextMessage(){
-		messages.remove();
+	/**
+	 * Displays next message.
+	 */
+	public static void nextMessage() {
+		if (hasMessage()) {messages.remove();}
 	}
 	
+	/**
+	 * Removes all messages.
+	 */
+	public static void removeAllMessages() {
+		if (hasMessage()) {messages.clear();}
+	}
+	
+	/**
+	 * Returns boolean signifying if theres a message to show.
+	 * @return True if there is at least one message to show, false otherwise. 
+	 */
 	public static boolean hasMessage() {
-		if (messages == null) {return false;}
 		return !messages.isEmpty();
 	}
 	
@@ -75,7 +89,7 @@ public class UserInterfaceManager {
 			boxWidth = messageBoxWidth - inventoryWidth - 2*messageBoxPadding;
 			title = currentItem.getName();
 			description = currentItem.getDescription();
-			image = currentItem.getImage(0);
+			image = currentItem.getImage(2);
 			g.fillRect(messageBoxPadding, DungeonGame.HEIGHT - messageBoxHeight, messageBoxWidth - inventoryWidth - 2*messageBoxPadding, messageBoxHeight - messageBoxPadding); 
 			
 			
@@ -100,7 +114,7 @@ public class UserInterfaceManager {
 		descriptionFont.drawString(8*messageBoxPadding, DungeonGame.HEIGHT - messageBoxHeight + 3*messageBoxPadding, description);
 		
 		//Image
-		image.draw(messageBoxPadding, DungeonGame.HEIGHT - messageBoxHeight);
+		image.draw(2*messageBoxPadding, DungeonGame.HEIGHT - messageBoxHeight + messageBoxPadding);
 		
 	}
 	

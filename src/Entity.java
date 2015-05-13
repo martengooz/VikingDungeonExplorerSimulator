@@ -189,7 +189,7 @@ public class Entity implements Drawable {
 		}
 		if (interaction == null) {return null;} // No interaction was found.
 		
-		UserInterfaceManager.showMessage(interaction.getTitle(), interaction.getMessage());
+		UserInterfaceManager.addMessage(image[2], interaction.getTitle(), interaction.getMessage());
 		if (!interaction.getPersistient()) {interactions.remove(interaction);}
 		if (interaction.getRemoveEntity()) {player.getCurrentRoom().markForRemoval(this);}
 		return interaction.getReward();

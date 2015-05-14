@@ -1,4 +1,4 @@
-# VikingDungeonExplorerSimulator
+# Viking Dungeon Explorer Simulator
 A 2D dungeon crawler game for the course INDA14.
 
 ###Uses: 
@@ -8,18 +8,19 @@ A 2D dungeon crawler game for the course INDA14.
 
 ###Installation
 1. Install Slick2D with LWJGL
-2. Build JAR file (not runnable).
+2. Build JAR file (not runnable)
   1. In Eclipse, File > Export
   2. Choose Java > JAR file, click Next
   3. Select "VikingDungeonExplorer"
   4. Select "Export generated class files and resources"
   5. Select "Compress the contents of the JAR file"
   6. Click Finish
-3. Download Jarsplice and open it.
-  1. Add .jar file from 2)
-  2. Add slick.jar & lwjgl.jar from Slick2D libs.
-  3. Add OS natives from lwjgl > native > [OS] 
-  4. Create Fat Jar
+3. Build runnable JAR file 
+  1. Download Jarsplice and open it (http://ninjacave.com/jarsplice).
+  2. Add .jar file from 2)
+  3. Add slick.jar & lwjgl.jar from Slick2D libs.
+  4. Add OS natives from lwjgl > native > [OS] 
+  5. Create Fat Jar
 4. Done 
 
 ### Troubleshooting

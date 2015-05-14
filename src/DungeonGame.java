@@ -156,6 +156,15 @@ public class DungeonGame extends BasicGame {
 
 		redbeard.update(delta, redbeard.getCurrentRoom()); // Update player
 		redbeard.getCurrentRoom().removeMarked(); // Update room
+		
+		// Check if player has won the game
+		if (redbeard.getCurrentRoom() == MapManager.getLastRoom()) {
+			if (!UserInterfaceManager.hasMessage()) {
+				UserInterfaceManager.addMessage(redbeard.getImage(2), "\"I am free, finally free!\"", "Congratulations, you have completed the game! Press ESC to exit.");
+			}
+			redbeard.setVelocity(new Point(0f, 1.4f)); // Automatically move redbeard to bottom of screen
+			redbeard.setAcceleration(new Point(0f, 0.03f)); // Automatically move redbeard to bottom of screen
+		}
 	}
 
 	public static void main(String[] args) throws SlickException {

@@ -3,13 +3,20 @@ import org.newdawn.slick.geom.Rectangle;
 
 public class MapManager {
 
-	private static Room firstRoom;
+	private static Room firstRoom; // The room the player starts in. 
+	private static Room lastRoom; // The room the player needs to reach to win the game. 
 	
 	/**
 	 * Get the starting room in the game.
 	 * @return The room the game starts in.
 	 */
 	public static Room getFirstRoom() {return firstRoom;}
+	
+	/**
+	 * Get the last room of the game. The player needs to reach this room to win.
+	 * @return the last room of the game.
+	 */
+	public static Room getLastRoom() {return lastRoom;}
 	
 	/**
 	 * Generate the map of the game.
@@ -20,6 +27,7 @@ public class MapManager {
 		Room secondRoom = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Door.png");
 		Room thirdRoom = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Door.png");
 		Room fourthRoom = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Door.png");
+		lastRoom = new Room("res\\images\\Rooms\\Outside.png", "res\\images\\Door.png");
 		
 		// Configure rooms
 		firstRoom.setExit(secondRoom, 2);
@@ -46,7 +54,10 @@ public class MapManager {
 		
 		
 		fourthRoom.setExit(thirdRoom, 0);
+		fourthRoom.setExit(lastRoom, 2);
 		fourthRoom.addItem(new Item("GOLD_KEY", "Golden Key", "A shiny golden key.", new Rectangle(625, 450, 30, 65), "res\\images\\Items\\Key.png"));
+		
+		lastRoom.setExit(fourthRoom, 0);
 
 	}
 }

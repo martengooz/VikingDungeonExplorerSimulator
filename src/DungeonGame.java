@@ -155,7 +155,7 @@ public class DungeonGame extends BasicGame {
 		}
 
 		redbeard.update(delta, redbeard.getCurrentRoom()); // Update player
-		redbeard.getCurrentRoom().removeMarked(); // Update room
+		redbeard.getCurrentRoom().update(delta); // Update room
 		
 		// Check if player has won the game
 		if (redbeard.getCurrentRoom() == MapManager.getLastRoom()) {

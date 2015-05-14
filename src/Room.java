@@ -28,6 +28,26 @@ public class Room implements Drawable {
 		this.doorImageLocation = doorImageLocation;
 	}
 	
+	public void update(int delta) {
+		removeMarked();
+		
+		Iterator<NPC> itNpcs = getNPCs().iterator();
+		Iterator<Item> itItems = getItems().iterator();
+		Iterator<Entity> itEntities = getEntities().iterator();
+		
+		while (itNpcs.hasNext()) { // Update NPCs
+			itNpcs.next().update(delta, this);
+		}
+		
+		while (itItems.hasNext()) { // Update items 
+			itItems.next().update(delta, this);
+		}
+		
+		while (itEntities.hasNext()) { // Update entities
+			itEntities.next().update(delta, this);
+		}
+	}
+	
 	/**
 	 * Get a set of the NPCs in this room.
 	 * @return A set of the NPCs in the room.
@@ -141,13 +161,13 @@ public class Room implements Drawable {
 			doorImage.draw(8-doorImage.getHeight(), (DungeonGame.HEIGHT - doorImage.getHeight())/2);
 		}
 		
-		Iterator<NPC> itNpcs = npcs.iterator();
 		Iterator<Item> itItems = items.iterator();
 		Iterator<Entity> itEntities = entities.iterator();
+		Iterator<NPC> itNpcs = npcs.iterator();
 		
-		while (itNpcs.hasNext()){itNpcs.next().draw();} // Draw npcs images
 		while (itItems.hasNext()){itItems.next().draw();} // Draw item images
 		while (itEntities.hasNext()){itEntities.next().draw();} // Draw entity images
+		while (itNpcs.hasNext()){itNpcs.next().draw();} // Draw npcs images
 	}
 	
 	

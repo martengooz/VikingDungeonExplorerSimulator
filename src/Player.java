@@ -208,6 +208,15 @@ public class Player extends Entity {
 	}
 	
 	/**
+	 * Remove an item from the inventory.
+	 * @param item The id of the item to remove.
+	 */
+	public void removeItem(String itemId) {
+		Item item = items.remove(itemId); // Put item in inventory
+		UserInterfaceManager.addMessage(item.getImage(2),"Removed one " + item.getName().toLowerCase() + " from inventory.", item.getDescription());
+	}
+	
+	/**
 	 * Returns a boolean signaling if this Player has an Item with the specified id.
 	 * @param id The id of the Item to check for.
 	 * @return True if the player has the specified Item.

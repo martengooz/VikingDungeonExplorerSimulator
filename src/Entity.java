@@ -106,6 +106,10 @@ public class Entity implements Drawable {
 		if (interaction.getRemoveEntity()) {
 			player.getCurrentRoom().markForRemoval(this);
 		}
+		
+		if (interaction.getRemoveRequiredItem()) {
+			player.removeItem(interaction.getRequiredItemId());
+		}
 		return interaction.getReward();
 	}
 	
@@ -119,14 +123,17 @@ public class Entity implements Drawable {
 		private Item reward;
 		private boolean persistent;
 		private boolean removeEntity;
+		private boolean removeRequireditem;
 		
-		public Interaction(String title, String message, String requiredItemId, Item reward, boolean persistent, boolean removeEntity) {
+		public Interaction(String title, String message, String requiredItemId, Item reward, 
+				boolean persistent, boolean removeEntity, boolean removeRequireditem) {
 			this.title = title;
 			this.message = message;
 			this.requiredItemId = requiredItemId;
 			this.reward = reward;
 			this.persistent = persistent;
 			this.removeEntity = removeEntity;
+			this.removeRequireditem = removeRequireditem;
 		}
 
 		/**
@@ -154,16 +161,22 @@ public class Entity implements Drawable {
 		public Item getReward() {return reward;}
 		
 		/**
-		 * Returns a boolean signaling of this interaction should stay after being completed.
+		 * Returns a boolean signaling if this interaction should stay after being completed.
 		 * @return True if this interaction should stay after being completed.
 		 */
 		public boolean getPersistient() {return persistent;}
 		
 		/**
-		 * Returns a boolean signaling of this interaction should remove the entity after completion.
+		 * Returns a boolean signaling if this interaction should remove the entity after completion.
 		 * @return True if this interaction should remove this Entity after completion.
 		 */
 		public boolean getRemoveEntity() {return removeEntity;}
+		
+		/**
+		 * Returns a boolean signaling if this interaction should remove the required item after completion.
+		 * @return True if this interaction should remove the required item after completion.
+		 */
+		public boolean getRemoveRequiredItem() {return removeRequireditem;}
 	}
 	
 	/**
@@ -172,11 +185,13 @@ public class Entity implements Drawable {
 	 * @param message The message to display.
 	 * @param requiredItemId The id of the Item required to display this interaction, or null if no item is required.
 	 * @param reward The reward for this interaction.
-	 * @param persistent A boolean signaling of this interaction should stay after being completed.
+	 * @param persistent A boolean signaling if this interaction should stay after being completed.
+	 * @param removeEntity A boolean signaling if boolean signaling of this interaction should remove the entity after completion.
+	 * @param removeRequireItem A boolean signaling of this interaction should remove the required Item after being completed.
 	 */
 	public void addInteraction(String title, String message, String requiredItemId, 
-			Item reward, boolean persistent, boolean removeEntity) {
-		interactions.add(new Interaction(title, message, requiredItemId, reward, persistent, removeEntity));
+			Item reward, boolean persistent, boolean removeEntity, boolean removeRequireItem) {
+		interactions.add(new Interaction(title, message, requiredItemId, reward, persistent, removeEntity, removeRequireItem));
 	}
 	
 	/**

@@ -23,7 +23,7 @@ public class MapManager {
 	 */
 	public static void generateMap() {
 		//Create rooms
-		firstRoom = new Room("res\\images\\Rooms\\Room2.png", "res\\images\\Door.png");
+		firstRoom = new Room("res\\images\\Rooms\\Room2_keys.png", "res\\images\\Door.png");
 		Room secondRoom = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Door.png");
 		Room thirdRoom = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Door.png");
 		Room fourthRoom = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Door.png");

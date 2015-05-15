@@ -15,24 +15,16 @@ public class DungeonGame extends BasicGame {
 	public static final int HEIGHT = 720;
 	private static int DOORWIDTH = 180;
 	private static int DOORHEIGHT = 20;
-	public static final int[] WALLWIDTH = { 40, 40, 60, 40 }; // How close the
-																// player can be
-																// to the walls
-																// in following
-																// order: up,
-																// right, down,
-																// left.
-	public static final Rectangle[] DOORAREA = { // The area the player can
-													// stand in to trigger going
-													// through a door
-			new Rectangle((WIDTH - DOORWIDTH) / 2, WALLWIDTH[0], DOORWIDTH,
-					DOORHEIGHT), // Up
-			new Rectangle(WIDTH - WALLWIDTH[1] - DOORHEIGHT,
-					(HEIGHT - DOORWIDTH) / 2, DOORHEIGHT, DOORWIDTH), // Right
+	public static final int[] WALLWIDTH = { 40, 40, 60, 40 }; // How close the player can be to the walls in following order: up, right, down, left.
+	public static final Rectangle[] DOORAREA = { // The area the player can stand in to trigger going through a door
+			new Rectangle((WIDTH - DOORWIDTH) / 2, WALLWIDTH[0], 
+					DOORWIDTH,	DOORHEIGHT), // Up
+			new Rectangle(WIDTH - WALLWIDTH[1] - DOORHEIGHT, (HEIGHT - DOORWIDTH) / 2,
+					DOORHEIGHT, DOORWIDTH), // Right
 			new Rectangle((WIDTH - DOORWIDTH) / 2, HEIGHT - WALLWIDTH[2]
 					- DOORHEIGHT, DOORWIDTH, DOORHEIGHT), // Down
-			new Rectangle(WALLWIDTH[3], (HEIGHT - DOORWIDTH) / 2, DOORHEIGHT,
-					DOORWIDTH) }; // Left
+			new Rectangle(WALLWIDTH[3], (HEIGHT - DOORWIDTH) / 2,
+					DOORHEIGHT,	DOORWIDTH) }; // Left
 
 	// Input handling
 	Input input = new Input(HEIGHT);
@@ -167,12 +159,10 @@ public class DungeonGame extends BasicGame {
 	}
 
 	public static void main(String[] args) throws SlickException {
-		DungeonGame game = new DungeonGame("Viking Dungeon Explorer Simulator "
-				+ VERSION);
+		DungeonGame game = new DungeonGame("Viking Dungeon Explorer Simulator "	+ VERSION);
 		try {
-			AppGameContainer container = new AppGameContainer(game, WIDTH,
-					HEIGHT, false);
-			// container.setShowFPS(false); // Removes FPS counter
+			AppGameContainer container = new AppGameContainer(game, WIDTH, HEIGHT, false);
+			container.setShowFPS(true); // Show FPS counter
 			container.setVSync(true);
 			container.start();
 		} catch (SlickException e) {

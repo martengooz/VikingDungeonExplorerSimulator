@@ -7,7 +7,7 @@ import org.newdawn.slick.geom.Rectangle;
 
 
 public class Player extends Entity {
-	private final String name;
+	private final String NAME;
 	private float speed = 0.4f;
 	private Room currentRoom;
 	private Map<String, Item> items = new HashMap<>();
@@ -24,7 +24,7 @@ public class Player extends Entity {
 	 */
 	public Player(String name, String[] imageLocation, Rectangle position, Point velocity, Point acceleration) {
 		super(position, velocity, acceleration, imageLocation);
-		this.name = name;
+		this.NAME = name;
 		this.setCurrentRoom(MapManager.getFirstRoom()); // Player is starting in the first room. 
 		
 		setCollide(true, true); //The player always has collision
@@ -34,7 +34,7 @@ public class Player extends Entity {
 	 * Returns the players name.
 	 * @return The players name. 
 	 */
-	public String getName() {return name;}
+	public String getName() {return NAME;}
 	
 	/**
 	 * Specify that the player should move in this direction on the next update.
@@ -235,6 +235,14 @@ public class Player extends Entity {
 	}
 	
 	/**
+	 * Return the players items. 
+	 * @return The players items
+	 */
+	public Map<String, Item> getItems() {
+		return items;
+	}
+
+	/**
 	 * Return the room the Player currently is in.
 	 * @return The Room this Player is currently in.
 	 */
@@ -251,16 +259,8 @@ public class Player extends Entity {
 	}
 	 
 	/**
-	 * Return the players items. 
-	 * @return The players items
-	 */
-	public Map<String, Item> getItems() {
-		return items;
-	}
-	
-	/**
 	 * Return a boolean signifying of player is moving.
-	 * @return True if moving, false otherwidse.
+	 * @return True if moving, false otherwise.
 	 */
 	public boolean isMoving() {
 		return (getVelocity().getX() != 0 || getVelocity().getY() != 0);

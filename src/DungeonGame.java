@@ -36,13 +36,13 @@ public class DungeonGame extends BasicGame {
 
 	// Input handling
 	Input input = new Input(HEIGHT);
-	public final int[] keyMoveUp = { Input.KEY_W, Input.KEY_UP };
-	public final int[] keyMoveDown = { Input.KEY_S, Input.KEY_DOWN };
-	public final int[] keyMoveLeft = { Input.KEY_A, Input.KEY_LEFT };
-	public final int[] keyMoveRight = { Input.KEY_D, Input.KEY_RIGHT };
-	public final int keyAct = Input.KEY_E;
-	public final int keyInventory = Input.KEY_I;
-	public final int keyExit = Input.KEY_ESCAPE;
+	public final int[] KEY_MOVE_UP = { Input.KEY_W, Input.KEY_UP };
+	public final int[] KEY_MOVE_DOWN = { Input.KEY_S, Input.KEY_DOWN };
+	public final int[] KEY_MOVE_LEFT = { Input.KEY_A, Input.KEY_LEFT };
+	public final int[] KEY_MOVE_RIGHT = { Input.KEY_D, Input.KEY_RIGHT };
+	public final int KEY_ACT = Input.KEY_E;
+	public final int KEY_INVENTORY = Input.KEY_I;
+	public final int KEY_EXIT = Input.KEY_ESCAPE;
 
 	// Players
 	private static Player redbeard;
@@ -76,8 +76,7 @@ public class DungeonGame extends BasicGame {
 		MapManager.generateMap();
 
 		redbeard = new Player("Redbeard", redbeardImageLocation, new Rectangle(
-				(WIDTH - 128) / 2, (HEIGHT - 128) / 2, 128, 128), new Point(0,
-				0), new Point(0, 0));
+				(WIDTH - 128) / 2, (HEIGHT - 128) / 2, 128, 128), new Point(0, 0), new Point(0, 0));
 		redbeard.setCurrentRoom(MapManager.getFirstRoom());
 
 		redbeard.loadImage(); // Load player texture
@@ -94,20 +93,20 @@ public class DungeonGame extends BasicGame {
 		// While in inventory
 		if (UserInterfaceManager.isInInventory()) {
 			// Closes inventory
-			if (input.isKeyPressed(keyInventory)) {
+			if (input.isKeyPressed(KEY_INVENTORY)) {
 				UserInterfaceManager.showInventory(redbeard.getItems());
 			}
-			if (input.isKeyPressed(keyExit)) {
+			if (input.isKeyPressed(KEY_EXIT)) {
 				UserInterfaceManager.showInventory(redbeard.getItems());
 			}
 
 			// Navigating in inventory
-			for (int key : keyMoveUp) { // Up
+			for (int key : KEY_MOVE_UP) { // Up
 				if (input.isKeyPressed(key)) {
 					UserInterfaceManager.navigateInventory(0);
 				}
 			}
-			for (int key : keyMoveDown) { // Down
+			for (int key : KEY_MOVE_DOWN) { // Down
 				if (input.isKeyPressed(key)) {
 					UserInterfaceManager.navigateInventory(1);
 				}
@@ -117,39 +116,39 @@ public class DungeonGame extends BasicGame {
 		// While in game
 		else {
 			// Player movement
-			for (int key : keyMoveUp) {
+			for (int key : KEY_MOVE_UP) {
 				if (input.isKeyDown(key)) {
 					redbeard.move(0);
 				}
 			}
-			for (int key : keyMoveDown) {
+			for (int key : KEY_MOVE_DOWN) {
 				if (input.isKeyDown(key)) {
 					redbeard.move(2);
 				}
 			}
-			for (int key : keyMoveLeft) {
+			for (int key : KEY_MOVE_LEFT) {
 				if (input.isKeyDown(key)) {
 					redbeard.move(3);
 				}
 			}
-			for (int key : keyMoveRight) {
+			for (int key : KEY_MOVE_RIGHT) {
 				if (input.isKeyDown(key)) {
 					redbeard.move(1);
 				}
 			}
 
 			// Others
-			if (input.isKeyPressed(keyAct)) {
+			if (input.isKeyPressed(KEY_ACT)) {
 				if (UserInterfaceManager.hasMessage()) {
 					UserInterfaceManager.nextMessage();
 				} else {
 					redbeard.act();
 				}
 			}
-			if (input.isKeyPressed(keyInventory)) {
+			if (input.isKeyPressed(KEY_INVENTORY)) {
 				UserInterfaceManager.showInventory(redbeard.getItems());
 			}
-			if (input.isKeyPressed(keyExit)) {
+			if (input.isKeyPressed(KEY_EXIT)) {
 				System.exit(0);
 			}
 		}

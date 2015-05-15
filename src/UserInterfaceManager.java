@@ -11,34 +11,36 @@ import org.newdawn.slick.TrueTypeFont;
 
 
 public class UserInterfaceManager {	
-	// Inventory properties
-	private static boolean inInventory;
+	
+	private static boolean inInventort;
 	
 	private static Item currentItem; 
 	private static int currentItemIndex = 0;
 	
-	private static int inventoryWidth = 300; // Pixles from right corner that inventory should take up
-	private static float inventoryItemHeight = 40; // Pixels each item takes up in the list
-	private final static int offset = 80; // Start drawing items i px from top 
-	private static int itemPadding = 10;
-	
-	// Message properties
-	private static int messageBoxPadding = 20;
-	private static int messageBoxWidth = DungeonGame.WIDTH;
-	private static int messageBoxHeight = 200; 
-
-	// Other
-	private static Color textColor = Color.white;
-	private static Color bgColor = Color.lightGray;
-	private static Color currentItemBgColor = Color.gray;
-	
-	private static Font awtTitleFont = new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 24);
-	private static TrueTypeFont titleFont = new TrueTypeFont(awtTitleFont, false);
-	private static Font awtDescriptionFont = new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 14);
-	private static TrueTypeFont descriptionFont = new TrueTypeFont(awtDescriptionFont, false);
-	
 	private static Map<String, Item> items;
 	private static Queue<Message> messages = new LinkedList<Message>();
+	
+	// Inventory properties
+	private static final int INVENTORY_WIDTH = 300; // Pixels from right corner that inventory should take up
+	private static final float INVENTORY_ITEM_HEIGHT = 40; // Pixels each item takes up in the list
+	private static final int OFFSET = 80; // Start drawing items i px from top 
+	private static final int ITEM_PADDING = 10;
+	
+	// Message properties
+	private static final int MESSAGEBOK_PADDING = 20;
+	private static final int MESSAGEBOX_WIDTH = DungeonGame.WIDTH;
+	private static final int MESSAGEBOX_HEIGHT = 200; 
+
+	// Color
+	private static final Color TEXT_COLOR = Color.white;
+	private static final Color BG_COLOR = Color.lightGray;
+	private static final Color CURRENT_ITEM_BG_COLOR = Color.gray;
+	
+	// Fonts
+	private static final Font AWT_TITLE_FONT = new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 24);
+	private static final TrueTypeFont TITLE_FONT = new TrueTypeFont(AWT_TITLE_FONT, false);
+	private static final Font AWR_DESCRIPTION_FONT = new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 14);
+	private static final TrueTypeFont DESCRIPTION_FONT = new TrueTypeFont(AWR_DESCRIPTION_FONT, false);
 	
 	/**
 	 * Add a message to the message queue. 
@@ -87,36 +89,36 @@ public class UserInterfaceManager {
 		String description;
 		Image image;
 		
-		if (inInventory) {
-			boxWidth = messageBoxWidth - inventoryWidth - 2*messageBoxPadding;
+		if (inInventort) {
+			boxWidth = MESSAGEBOX_WIDTH - INVENTORY_WIDTH - 2*MESSAGEBOK_PADDING;
 			title = currentItem.getName();
 			description = currentItem.getDescription();
 			image = currentItem.getImage(2);
-			g.fillRect(messageBoxPadding, DungeonGame.HEIGHT - messageBoxHeight, messageBoxWidth - inventoryWidth - 2*messageBoxPadding,
-					messageBoxHeight - messageBoxPadding); 
+			g.fillRect(MESSAGEBOK_PADDING, DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT, MESSAGEBOX_WIDTH - INVENTORY_WIDTH - 2*MESSAGEBOK_PADDING,
+					MESSAGEBOX_HEIGHT - MESSAGEBOK_PADDING); 
 		}
 		else {
-			boxWidth = messageBoxWidth - 2*messageBoxPadding;
-			g.fillRect(messageBoxPadding, DungeonGame.HEIGHT - messageBoxHeight,
-					messageBoxWidth - 2*messageBoxPadding, messageBoxHeight - messageBoxPadding); 
+			boxWidth = MESSAGEBOX_WIDTH - 2*MESSAGEBOK_PADDING;
+			g.fillRect(MESSAGEBOK_PADDING, DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT,
+					MESSAGEBOX_WIDTH - 2*MESSAGEBOK_PADDING, MESSAGEBOX_HEIGHT - MESSAGEBOK_PADDING); 
 			title = messages.peek().getTitle();
 			description = messages.peek().getDescription();
 			image = messages.peek().getImage();
 		}
 		
 		// Background
-		g.setColor(bgColor);
-		g.fillRect(messageBoxPadding, DungeonGame.HEIGHT - messageBoxHeight, boxWidth, messageBoxHeight - messageBoxPadding); 
+		g.setColor(BG_COLOR);
+		g.fillRect(MESSAGEBOK_PADDING, DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT, boxWidth, MESSAGEBOX_HEIGHT - MESSAGEBOK_PADDING); 
 		
 		// Title
-		g.setColor(textColor); 
-		titleFont.drawString(8*messageBoxPadding, DungeonGame.HEIGHT - messageBoxHeight + messageBoxPadding, title);
+		g.setColor(TEXT_COLOR); 
+		TITLE_FONT.drawString(8*MESSAGEBOK_PADDING, DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT + MESSAGEBOK_PADDING, title);
 					
 		// Description
-		descriptionFont.drawString(8*messageBoxPadding, DungeonGame.HEIGHT - messageBoxHeight + 3*messageBoxPadding, description);
+		DESCRIPTION_FONT.drawString(8*MESSAGEBOK_PADDING, DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT + 3*MESSAGEBOK_PADDING, description);
 		
 		//Image
-		image.draw(2*messageBoxPadding, DungeonGame.HEIGHT - messageBoxHeight + messageBoxPadding);
+		image.draw(2*MESSAGEBOK_PADDING, DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT + MESSAGEBOK_PADDING);
 		
 	}
 	
@@ -127,14 +129,14 @@ public class UserInterfaceManager {
 	 */
 	public static void showInventory(Map<String, Item> i) {
 		
-		if (!inInventory){ // Display inventory
-			inInventory = true;
+		if (!inInventort){ // Display inventory
+			inInventort = true;
 			items = i;
 			currentItemIndex = 0;
 			lookAtItem();
 		}
 		else { // Closes inventory
-			inInventory = false; 
+			inInventort = false; 
 			currentItem = null;
 		}
 	}
@@ -145,32 +147,32 @@ public class UserInterfaceManager {
 	 */
 	public static void drawInventory(Graphics g) {
 		// Inventory properties
-		int localOffset = offset;
+		int localOffset = OFFSET;
 		
 		// Draw inventory background
-		g.setColor(bgColor); 
-		g.fillRect(DungeonGame.WIDTH - (inventoryWidth), 0, (inventoryWidth + itemPadding), DungeonGame.HEIGHT); 
+		g.setColor(BG_COLOR); 
+		g.fillRect(DungeonGame.WIDTH - (INVENTORY_WIDTH), 0, (INVENTORY_WIDTH + ITEM_PADDING), DungeonGame.HEIGHT); 
 		
 		// Draw inventory title
-		g.setColor(textColor); 
-		titleFont.drawString((DungeonGame.WIDTH - inventoryWidth) + (inventoryItemHeight + itemPadding), offset/3, "Inventory"); // Draw the name
+		g.setColor(TEXT_COLOR); 
+		TITLE_FONT.drawString((DungeonGame.WIDTH - INVENTORY_WIDTH) + (INVENTORY_ITEM_HEIGHT + ITEM_PADDING), OFFSET/3, "Inventory"); // Draw the name
 				
 		// Draw current Item background
 		if (!items.isEmpty()) {
-			g.setColor(currentItemBgColor); 
-			g.fillRect(DungeonGame.WIDTH - (inventoryWidth), (currentItemIndex * (inventoryItemHeight + itemPadding/2) + localOffset),
-					(inventoryWidth + itemPadding), inventoryItemHeight);
+			g.setColor(CURRENT_ITEM_BG_COLOR); 
+			g.fillRect(DungeonGame.WIDTH - (INVENTORY_WIDTH), (currentItemIndex * (INVENTORY_ITEM_HEIGHT + ITEM_PADDING/2) + localOffset),
+					(INVENTORY_WIDTH + ITEM_PADDING), INVENTORY_ITEM_HEIGHT);
 		}
 		
 		// Draw items in inventory
 		for (Item item : items.values()) {
-			item.draw(DungeonGame.WIDTH - inventoryWidth + itemPadding, localOffset, inventoryItemHeight/item.getPosition().getHeight()); // Draw the item
+			item.draw(DungeonGame.WIDTH - INVENTORY_WIDTH + ITEM_PADDING, localOffset, INVENTORY_ITEM_HEIGHT/item.getPosition().getHeight()); // Draw the item
 			
 			// Draw the name
-			g.setColor(textColor); 
-			titleFont.drawString((DungeonGame.WIDTH - inventoryWidth) + (inventoryItemHeight + itemPadding), 
-					(localOffset + inventoryItemHeight/2) - (titleFont.getHeight()/2), item.getName()); 
-			localOffset += inventoryItemHeight + itemPadding/2;
+			g.setColor(TEXT_COLOR); 
+			TITLE_FONT.drawString((DungeonGame.WIDTH - INVENTORY_WIDTH) + (INVENTORY_ITEM_HEIGHT + ITEM_PADDING), 
+					(localOffset + INVENTORY_ITEM_HEIGHT/2) - (TITLE_FONT.getHeight()/2), item.getName()); 
+			localOffset += INVENTORY_ITEM_HEIGHT + ITEM_PADDING/2;
 		}
 		
 		if (currentItem != null) {
@@ -216,7 +218,7 @@ public class UserInterfaceManager {
 	 * @return the inInventory. True if player is in Inventory, false otherwises.
 	 */
 	public static boolean isInInventory() {
-		return inInventory;
+		return inInventort;
 	}
 
 	/** 
@@ -224,6 +226,6 @@ public class UserInterfaceManager {
 	 * @param inInv Set to true if player is in invetory, false otherwise.
 	 */
 	public static void setInInventory(boolean inInv) {
-		inInventory = inInv;
+		inInventort = inInv;
 	}
 }

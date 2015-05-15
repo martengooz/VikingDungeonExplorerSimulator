@@ -32,6 +32,58 @@ public class Room implements Drawable {
 		this.lockedDoorImageLocation = lockedDoorImageLocation;
 	}
 	
+	/**
+	 * {@inheritDoc Drawable}
+	 */
+	public void draw() {
+		image.draw(0, 0);
+		doorImage.setCenterOfRotation(doorImage.getWidth()/2, doorImage.getHeight()/2);
+		
+		//Draw the doors
+		if (neighbors[0] != null && !isDoorLocked(0)) {
+			doorImage.setRotation(0); 
+			doorImage.draw((DungeonGame.WIDTH - doorImage.getWidth())/2,0);
+		}
+		if (neighbors[2] != null && !isDoorLocked(2)) {
+			doorImage.setRotation(180);
+			doorImage.draw((DungeonGame.WIDTH - doorImage.getWidth())/2, DungeonGame.HEIGHT - doorImage.getHeight());
+		}		
+		if (neighbors[1] != null && !isDoorLocked(1)) {
+			doorImage.setRotation(90); 
+			doorImage.draw(DungeonGame.WIDTH - 2*doorImage.getHeight() + 8, (DungeonGame.HEIGHT - doorImage.getHeight())/2);
+		}
+		if (neighbors[3] != null && !isDoorLocked(3)) {
+			doorImage.setRotation(270); 
+			doorImage.draw(8-doorImage.getHeight(), (DungeonGame.HEIGHT - doorImage.getHeight())/2);
+		}
+		
+		//Draw the locked doors
+		if (neighbors[0] != null && isDoorLocked(0)) {
+			lockedDoorImage.setRotation(0); 
+			lockedDoorImage.draw((DungeonGame.WIDTH - lockedDoorImage.getWidth())/2,0);
+		}
+		if (neighbors[2] != null && isDoorLocked(2)) {
+			lockedDoorImage.setRotation(180);
+			lockedDoorImage.draw((DungeonGame.WIDTH - lockedDoorImage.getWidth())/2, DungeonGame.HEIGHT - lockedDoorImage.getHeight());
+		}		
+		if (neighbors[1] != null && isDoorLocked(1)) {
+			lockedDoorImage.setRotation(90); 
+			lockedDoorImage.draw(DungeonGame.WIDTH - 2*lockedDoorImage.getHeight() + 8, (DungeonGame.HEIGHT - lockedDoorImage.getHeight())/2);
+		}
+		if (neighbors[3] != null && isDoorLocked(3)) {
+			lockedDoorImage.setRotation(270); 
+			lockedDoorImage.draw(8-lockedDoorImage.getHeight(), (DungeonGame.HEIGHT - lockedDoorImage.getHeight())/2);
+		}
+		
+		Iterator<Item> itItems = items.iterator();
+		Iterator<Entity> itEntities = entities.iterator();
+		Iterator<NPC> itNpcs = npcs.iterator();
+		
+		while (itItems.hasNext()){itItems.next().draw();} // Draw item images
+		while (itEntities.hasNext()){itEntities.next().draw();} // Draw entity images
+		while (itNpcs.hasNext()){itNpcs.next().draw();} // Draw npcs images
+	}
+
 	public void update(int delta) {
 		removeMarked();
 		
@@ -50,36 +102,6 @@ public class Room implements Drawable {
 		while (itEntities.hasNext()) { // Update entities
 			itEntities.next().update(delta, this);
 		}
-	}
-	
-	/**
-	 * Get a set of the NPCs in this room.
-	 * @return A set of the NPCs in the room.
-	 */
-	public Set<NPC> getNPCs() {return npcs;}
-	
-	/**
-	 * Get a set of the items in this room.
-	 * @return A set of the items in the room.
-	 */
-	public Set<Item> getItems() {return items;}
-	
-	/**
-	 * Get a set of the entities in this room.
-	 * @return A set of the entities in the room.
-	 */
-	public Set<Entity> getEntities() {return entities;}
-	
-	/**
-	 * Get the neighbor in the specified direction.
-	 * @param direction An integer in the range 0-3 specifying which direction (up, right, down, left).
-	 * @return
-	 */
-	public Room getNeighbor(int direction) throws IllegalArgumentException{
-		if (direction > 3 || direction < 0) {
-			throw new IllegalArgumentException("Direction must be between 0 and 3");
-		}
-		return neighbors[direction];
 	}
 	
 	/**
@@ -176,68 +198,6 @@ public class Room implements Drawable {
 	}
 	
 	/**
-	 * Remove an item room the current room.
-	 * @param item The item to remove.
-	 * @return true if this room contained the specified item.
-	 */
-	public boolean removeItem(Item item) {
-		return items.remove(item);
-	}
-	
-	/**
-	 * {@inheritDoc Drawable}
-	 */
-	public void draw() {
-		image.draw(0, 0);
-		doorImage.setCenterOfRotation(doorImage.getWidth()/2, doorImage.getHeight()/2);
-		
-		//Draw the doors
-		if (neighbors[0] != null && !isDoorLocked(0)) {
-			doorImage.setRotation(0); 
-			doorImage.draw((DungeonGame.WIDTH - doorImage.getWidth())/2,0);
-		}
-		if (neighbors[2] != null && !isDoorLocked(2)) {
-			doorImage.setRotation(180);
-			doorImage.draw((DungeonGame.WIDTH - doorImage.getWidth())/2, DungeonGame.HEIGHT - doorImage.getHeight());
-		}		
-		if (neighbors[1] != null && !isDoorLocked(1)) {
-			doorImage.setRotation(90); 
-			doorImage.draw(DungeonGame.WIDTH - 2*doorImage.getHeight() + 8, (DungeonGame.HEIGHT - doorImage.getHeight())/2);
-		}
-		if (neighbors[3] != null && !isDoorLocked(3)) {
-			doorImage.setRotation(270); 
-			doorImage.draw(8-doorImage.getHeight(), (DungeonGame.HEIGHT - doorImage.getHeight())/2);
-		}
-		
-		//Draw the locked doors
-		if (neighbors[0] != null && isDoorLocked(0)) {
-			lockedDoorImage.setRotation(0); 
-			lockedDoorImage.draw((DungeonGame.WIDTH - lockedDoorImage.getWidth())/2,0);
-		}
-		if (neighbors[2] != null && isDoorLocked(2)) {
-			lockedDoorImage.setRotation(180);
-			lockedDoorImage.draw((DungeonGame.WIDTH - lockedDoorImage.getWidth())/2, DungeonGame.HEIGHT - lockedDoorImage.getHeight());
-		}		
-		if (neighbors[1] != null && isDoorLocked(1)) {
-			lockedDoorImage.setRotation(90); 
-			lockedDoorImage.draw(DungeonGame.WIDTH - 2*lockedDoorImage.getHeight() + 8, (DungeonGame.HEIGHT - lockedDoorImage.getHeight())/2);
-		}
-		if (neighbors[3] != null && isDoorLocked(3)) {
-			lockedDoorImage.setRotation(270); 
-			lockedDoorImage.draw(8-lockedDoorImage.getHeight(), (DungeonGame.HEIGHT - lockedDoorImage.getHeight())/2);
-		}
-		
-		Iterator<Item> itItems = items.iterator();
-		Iterator<Entity> itEntities = entities.iterator();
-		Iterator<NPC> itNpcs = npcs.iterator();
-		
-		while (itItems.hasNext()){itItems.next().draw();} // Draw item images
-		while (itEntities.hasNext()){itEntities.next().draw();} // Draw entity images
-		while (itNpcs.hasNext()){itNpcs.next().draw();} // Draw npcs images
-	}
-	
-	
-	/**
 	 * {@inheritDoc Drawable}
 	 */
 	public void loadImage() {
@@ -257,5 +217,35 @@ public class Room implements Drawable {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Get a set of the NPCs in this room.
+	 * @return A set of the NPCs in the room.
+	 */
+	public Set<NPC> getNPCs() {return npcs;}
+
+	/**
+	 * Get a set of the items in this room.
+	 * @return A set of the items in the room.
+	 */
+	public Set<Item> getItems() {return items;}
+
+	/**
+	 * Get a set of the entities in this room.
+	 * @return A set of the entities in the room.
+	 */
+	public Set<Entity> getEntities() {return entities;}
+
+	/**
+	 * Get the neighbor in the specified direction.
+	 * @param direction An integer in the range 0-3 specifying which direction (up, right, down, left).
+	 * @return
+	 */
+	public Room getNeighbor(int direction) throws IllegalArgumentException{
+		if (direction > 3 || direction < 0) {
+			throw new IllegalArgumentException("Direction must be between 0 and 3");
+		}
+		return neighbors[direction];
 	}
 }

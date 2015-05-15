@@ -3,9 +3,9 @@ import org.newdawn.slick.geom.Rectangle;
 
 public class Item extends Entity {
 	
-	private final String id;
-	private final String name;
-	private final String description;
+	private final String ID;
+	private final String NAME;
+	private final String DESCRIPTION;
 	
 	/**
 	 * Create a new item.
@@ -20,9 +20,9 @@ public class Item extends Entity {
 			Point velocity, Point acceleration, String imageLocation) {
 		super(position, velocity, acceleration, imageLocation);
 		
-		this.id = id;
-		this.name = name;
-		this.description = description;
+		this.ID = id;
+		this.NAME = name;
+		this.DESCRIPTION = description;
 	}
 	
 	/**
@@ -35,28 +35,28 @@ public class Item extends Entity {
 	public Item(String id, String name, String description, Rectangle position, String imageLocation) {
 		super(position, new Point(0, 0), new Point(0, 0), imageLocation);
 		
-		this.id = id;
-		this.name = name;
-		this.description = description;
+		this.ID = id;
+		this.NAME = name;
+		this.DESCRIPTION = description;
 	}
 	
 	/**
 	 * Get a unique identifier of this item.
 	 * @return The id of this item.
 	 */
-	public String getID() {return id;}
+	public String getID() {return ID;}
 	
 	/**
 	 * Return the name of this item.
 	 * @return The name of this item.
 	 */
-	public String getName() {return name;}
+	public String getName() {return NAME;}
 	
 	/**
 	 * Returns a description of this item.
 	 * @return The description of this item.
 	 */
-	public String getDescription() {return description;}
+	public String getDescription() {return DESCRIPTION;}
 	
 	/**
 	 * Return the name of this item.

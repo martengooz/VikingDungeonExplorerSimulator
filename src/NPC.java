@@ -7,7 +7,7 @@ import org.newdawn.slick.geom.Rectangle;
 public class NPC extends Entity {
 
 	private Random random =  new Random();
-	private static final int NEWDIRECTIONDICESIZE = 1200; // The size of the "dice" that determines which direction the NPC will move.
+	private static final int NEW_DIRECTION_DICE_SIZE = 1200; // The size of the "dice" that determines which direction the NPC will move.
 	private static final float SPEED = 0.1f; //The speed NPCs move at
 	
 	/**
@@ -40,7 +40,7 @@ public class NPC extends Entity {
 	 */
 	@Override
 	public void update(int delta, Room currentRoom) {
-		int randomNumber = random.nextInt(NEWDIRECTIONDICESIZE);
+		int randomNumber = random.nextInt(NEW_DIRECTION_DICE_SIZE);
 		
 		switch (randomNumber) { // Determine which direction to move.
 		case 0:

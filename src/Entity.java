@@ -304,6 +304,32 @@ public class Entity implements Drawable {
 	}
 	
 	/**
+	 * {@inheritDoc Drawable}
+	 */
+	public void loadImage() {
+		try {
+			//Check if all directions have the same texture and save some memory by using the same image.
+			if (imageLocation[0].equals(imageLocation[1]) && 
+					imageLocation[0].equals(imageLocation[2]) && 
+					imageLocation[0].equals(imageLocation[3])) {
+				
+				this.image[0] = new Image(imageLocation[0]);
+				this.image[1] = this.image[0];
+				this.image[2] = this.image[0];
+				this.image[3] = this.image[0];
+			}
+			else {
+				this.image[0] = new Image(imageLocation[0]);
+				this.image[1] = new Image(imageLocation[1]);
+				this.image[2] = new Image(imageLocation[2]);
+				this.image[3] = new Image(imageLocation[3]);
+			}
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
 	 * Returns the position of this entity.
 	 * @return The position of this entity.
 	 */
@@ -378,31 +404,5 @@ public class Entity implements Drawable {
 	public Image getImage(int direction) throws IllegalArgumentException {
 		if (direction > 3 || direction < 0) {throw new IllegalArgumentException("Direction must be between 0 and 3");}
 		return image[direction];
-	}
-
-	/**
-	 * {@inheritDoc Drawable}
-	 */
-	public void loadImage() {
-		try {
-			//Check if all directions have the same texture and save some memory by using the same image.
-			if (imageLocation[0].equals(imageLocation[1]) && 
-					imageLocation[0].equals(imageLocation[2]) && 
-					imageLocation[0].equals(imageLocation[3])) {
-				
-				this.image[0] = new Image(imageLocation[0]);
-				this.image[1] = this.image[0];
-				this.image[2] = this.image[0];
-				this.image[3] = this.image[0];
-			}
-			else {
-				this.image[0] = new Image(imageLocation[0]);
-				this.image[1] = new Image(imageLocation[1]);
-				this.image[2] = new Image(imageLocation[2]);
-				this.image[3] = new Image(imageLocation[3]);
-			}
-		} catch (SlickException e) {
-			e.printStackTrace();
-		}
 	}
 }

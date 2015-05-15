@@ -4,9 +4,9 @@ import org.newdawn.slick.Image;
  * Creates a message object to be used in UserInterfaceManager.
  */
 public class Message {
-	private final Image image;
-	private final String title;
-	private final String description;
+	private final Image IMAGE;
+	private final String TITLE;
+	private final String DESCRIPTION;
 	
 	/**
 	 * Create a new message.
@@ -15,9 +15,9 @@ public class Message {
 	 * @param description The content in this message. 
 	 */
 	public Message(Image image, String title, String description) {
-		this.image = image;
-		this.title = title;
-		this.description = description;
+		this.IMAGE = image;
+		this.TITLE = title;
+		this.DESCRIPTION = description;
 	}
 	
 	/**
@@ -25,7 +25,7 @@ public class Message {
 	 * @return the title
 	 */
 	public Image getImage() {
-		return image;
+		return IMAGE;
 	}
 
 	/**
@@ -33,7 +33,7 @@ public class Message {
 	 * @return the title
 	 */
 	public String getTitle() {
-		return title;
+		return TITLE;
 	}
 
 	/**
@@ -41,6 +41,6 @@ public class Message {
 	 * @return the content.
 	 */
 	public String getDescription() {
-		return description;
+		return DESCRIPTION;
 	}
 }

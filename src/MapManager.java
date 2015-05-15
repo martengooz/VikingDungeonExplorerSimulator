@@ -22,12 +22,13 @@ public class MapManager {
 	 * Generate the map of the game.
 	 */
 	public static void generateMap() {
-		//Create rooms
-		firstRoom = new Room("res\\images\\Rooms\\Room2_keys.png", "res\\images\\Door.png");
-		Room secondRoom = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Door.png");
-		Room thirdRoom = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Door.png");
-		Room fourthRoom = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Door.png");
-		lastRoom = new Room("res\\images\\Rooms\\Outside.png", "res\\images\\Door.png");
+		// Create rooms
+		firstRoom = new Room("res\\images\\Rooms\\Room2_keys.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
+		Room secondRoom = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
+		Room thirdRoom = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
+		Room fourthRoom = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
+		Room fifthRoom = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
+		lastRoom = new Room("res\\images\\Rooms\\Outside.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
 		
 		// Configure rooms
 		firstRoom.setExit(secondRoom, 2);
@@ -42,11 +43,14 @@ public class MapManager {
 		
 		secondRoom.setExit(firstRoom, 0);
 		secondRoom.setExit(thirdRoom, 1);
+		secondRoom.setExit(fifthRoom, 3, "BRASS_KEY");
 		Entity pileOfDirt = new Entity(new Rectangle(1100, 310, 100, 100), "res\\images\\Items\\PileOfDirt.png", true);
 		pileOfDirt.addInteraction("Pile of dirt", "You removed the dirt with your mighty shovel.", "IRON_SHOVEL", null, false, true, false);
 		pileOfDirt.addInteraction("Pile fo dirt", "There is a big pile of dirt in the way. If only I had a shovel..", null, null, true, false, false);
 		secondRoom.addEntity(pileOfDirt);
-		
+		Entity runestone = new Entity(new Rectangle(100, 150, 102, 133), "res\\images\\Items\\Runestone.png", true);
+		runestone.addInteraction("Runestone", "\"Greybeards treasurechamber\"", null, null, true, false, false);
+		secondRoom.addEntity(runestone);
 		
 		thirdRoom.setExit(secondRoom, 3);
 		thirdRoom.setExit(fourthRoom, 2);
@@ -63,11 +67,18 @@ public class MapManager {
 		greybeard.addInteraction("Greybeard", "I seem to have missplaced my golden key! How can I pillage without it?", null, null, true, false, false);
 		thirdRoom.addNPC(greybeard);
 		
+		
 		fourthRoom.setExit(thirdRoom, 0);
-		fourthRoom.setExit(lastRoom, 2);
 		fourthRoom.addItem(new Item("GOLD_KEY", "Golden Key", "A shiny golden key.", new Rectangle(625, 450, 30, 65), "res\\images\\Items\\Key.png"));
 		
-		lastRoom.setExit(fourthRoom, 0);
+		
+		fifthRoom.setExit(secondRoom, 1);
+		fifthRoom.setExit(lastRoom, 2);
+		fifthRoom.addItem(new Item("COINS_1", "A pile of coins", "A shiny pile of coins.", new Rectangle(125, 450, 100, 100), "res\\images\\Items\\Coins.png"));
+		fifthRoom.addItem(new Item("COINS_2", "A pile of coins", "A shiny pile of coins.", new Rectangle(525, 100, 100, 100), "res\\images\\Items\\Coins.png"));
+		fifthRoom.addItem(new Item("COINS_3", "A pile of coins", "A shiny pile of coins.", new Rectangle(825, 450, 100, 100), "res\\images\\Items\\Coins.png"));
 
+		
+		lastRoom.setExit(fifthRoom, 0);
 	}
 }

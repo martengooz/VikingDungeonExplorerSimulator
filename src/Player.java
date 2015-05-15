@@ -99,7 +99,7 @@ public class Player extends Entity {
 	 * @return true if the room was changed. 
 	 */
 	private boolean changeRoom(int direction) throws IllegalArgumentException {
-		if (currentRoom.getNeighbor(direction) != null) {
+		if (currentRoom.getNeighbor(direction) != null && !currentRoom.isDoorLocked(direction)) {
 			currentRoom.getNeighbor(direction).loadImage(); 
 			setCurrentRoom(currentRoom.getNeighbor(direction));
 			
@@ -195,6 +195,15 @@ public class Player extends Entity {
 			}
 		}
 		
+		//Check against locked doors
+		for (int i = 0; i < 4; i++) {
+			if (DungeonGame.DOORAREA[i].intersects(area) && currentRoom.isDoorLocked(i)) {
+				Item item = currentRoom.unlockDoor(i, this);
+				if (item != null) {
+					UserInterfaceManager.addMessage(item.getImage(2), "You unlocked the door.", "Your " + item.getName().toLowerCase() + " unlocked the door.");
+				}
+			}
+		}
 	}
 	
 	/**

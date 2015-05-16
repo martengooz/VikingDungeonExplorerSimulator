@@ -106,19 +106,25 @@ public class UserInterfaceManager {
 			image = messages.peek().getImage();
 		}
 		
-		// Background
+		// Image Background
 		g.setColor(BG_COLOR);
-		g.fillRect(MESSAGEBOK_PADDING, DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT, boxWidth, MESSAGEBOX_HEIGHT - MESSAGEBOK_PADDING); 
-		
-		// Title
-		g.setColor(TEXT_COLOR); 
-		TITLE_FONT.drawString(8*MESSAGEBOK_PADDING, DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT + MESSAGEBOK_PADDING, title);
-					
-		// Description
-		DESCRIPTION_FONT.drawString(8*MESSAGEBOK_PADDING, DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT + 3*MESSAGEBOK_PADDING, description);
+		g.fillRect(MESSAGEBOK_PADDING, DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT, MESSAGEBOK_PADDING*7, MESSAGEBOX_HEIGHT - MESSAGEBOK_PADDING); 
 		
 		//Image
 		image.draw(2*MESSAGEBOK_PADDING, DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT + MESSAGEBOK_PADDING);
+		
+		// Text Background
+		g.setColor(BG_COLOR);
+		g.fillRect(8*MESSAGEBOK_PADDING, DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT, boxWidth - 7*MESSAGEBOK_PADDING, MESSAGEBOX_HEIGHT - MESSAGEBOK_PADDING); 
+				
+		// Title
+		g.setColor(TEXT_COLOR); 
+		TITLE_FONT.drawString(9*MESSAGEBOK_PADDING, DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT + MESSAGEBOK_PADDING, title);
+					
+		// Description
+		DESCRIPTION_FONT.drawString(9*MESSAGEBOK_PADDING, DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT + 3*MESSAGEBOK_PADDING, description);
+		
+		
 		
 	}
 	

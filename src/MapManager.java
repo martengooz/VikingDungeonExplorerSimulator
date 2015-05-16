@@ -5,7 +5,6 @@ public class MapManager {
 
 	private static Room firstRoom; // The room the player starts in. 
 	private static Room lastRoom; // The room the player needs to reach to win the game. 
-	
 	/**
 	 * Get the starting room in the game.
 	 * @return The room the game starts in.
@@ -37,6 +36,13 @@ public class MapManager {
 		level2[2] = new Room("res\\images\\Rooms\\Room3.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
 		level2[3] = new Room("res\\images\\Rooms\\Room3.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
 		
+		Room[] level3 = new Room[5];
+		level3[0] = new Room("res\\images\\Rooms\\Room2.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
+		level3[1] = new Room("res\\images\\Rooms\\Room2.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
+		level3[2] = new Room("res\\images\\Rooms\\Room2.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
+		level3[3] = new Room("res\\images\\Rooms\\Room2.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
+		level3[4] = new Room("res\\images\\Rooms\\Room2.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
+		
 		lastRoom = new Room("res\\images\\Rooms\\Outside.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
 		
 		// Configure rooms
@@ -45,7 +51,6 @@ public class MapManager {
 		firstRoom.addEntity(new Entity(new Rectangle(350, 500, 100, 100), "res\\images\\Items\\GrassPatch.png", false));
 		firstRoom.addEntity(new Entity(new Rectangle(750, 70, 95, 75), "res\\images\\Items\\Rock.png", true));
 		firstRoom.addItem(new Item("IRON_SHOVEL", "Shovel", "A shovel to dig with.", new Rectangle(800, 400, 100, 100), "res\\images\\Items\\Shovel.png"));
-		
 		
 		level1[0].setExit(firstRoom, 0);
 		level1[0].setExit(level1[1], 1);
@@ -73,7 +78,6 @@ public class MapManager {
 		greybeard.addInteraction("Greybeard", "I seem to have missplaced my golden key! How can I pillage without it?", null, null, true, false, false);
 		level1[1].addNPC(greybeard);
 		
-		
 		level1[2].setExit(level1[1], 0);
 		level1[2].addItem(new Item("GOLD_KEY", "Golden Key", "A shiny golden key.", new Rectangle(625, 450, 30, 65), "res\\images\\Items\\Key.png"));
 		
@@ -85,7 +89,6 @@ public class MapManager {
 		level2[0].addItem(new Item("COINS_1", "A pile of coins", "A shiny pile of coins.", new Rectangle(125, 450, 100, 100), "res\\images\\Items\\Coins.png"));
 		level2[0].addItem(new Item("COINS_2", "A pile of coins", "A shiny pile of coins.", new Rectangle(525, 100, 100, 100), "res\\images\\Items\\Coins.png"));
 		level2[0].addItem(new Item("COINS_3", "A pile of coins", "A shiny pile of coins.", new Rectangle(825, 450, 100, 100), "res\\images\\Items\\Coins.png"));
-
 		
 		level2[1].setExit(level2[0], 0);
 		level2[1].setExit(level2[2], 3);
@@ -102,7 +105,7 @@ public class MapManager {
 		
 		level2[2].setExit(level2[3], 0);
 		level2[2].setExit(level2[1], 1);
-		level2[2].setExit(lastRoom, 2);
+		level2[2].setExit(level3[0], 2, "BRASS_KEY");
 		level2[2].addEntity(new Entity(new Rectangle(470, 350, 95, 75), "res\\images\\Items\\GrassPatch.png", false));
 		level2[2].addEntity(new Entity(new Rectangle(570, 390, 95, 75), "res\\images\\Items\\GrassPatch.png", false));
 		
@@ -120,6 +123,43 @@ public class MapManager {
 		oldbeard.addInteraction("Oldbeard", "There should be some mushrooms growing among the rocks nearby. Bring them to me.", null, null, true, false, false);
 		level2[3].addNPC(oldbeard);
 		
-		lastRoom.setExit(level2[2], 0);
+		
+		// Level 3
+		level3[0].setExit(level2[2], 0);
+		level3[0].setExit(level3[2], 1);
+		level3[0].setExit(level3[1], 2);
+		level3[0].addEntity(new Entity(new Rectangle(180, 490, 95, 75), "res\\images\\Items\\Grasspatch.png", true));
+		level3[0].addEntity(new Entity(new Rectangle(100, 280, 95, 75), "res\\images\\Items\\Rock.png", true));
+		Entity pileOfLogs = new Entity(new Rectangle(800, 520, 300, 100), "res\\images\\Items\\PileOfLogs.png", true);
+		pileOfLogs.addInteraction("You smashed the logs into pieces", "Your axe swiftly turnes the logs into dust.", "IRON_AXE", null, false, true, false);
+		level3[0].addEntity(pileOfLogs);
+		
+		level3[1].setExit(level3[0], 0);
+		level3[1].addEntity(new Entity(new Rectangle(100, 80, 95, 75), "res\\images\\Items\\Rock.png", true));
+		level3[1].addEntity(new Entity(new Rectangle(360, 500, 80, 90), "res\\images\\Items\\Log2.png", true));
+		Entity pileOfLogs1 = new Entity(new Rectangle(890, 420, 300, 100), "res\\images\\Items\\PileOfLogs.png", true);
+		pileOfLogs1.addInteraction("You smashed the logs into pieces", "Your axe swiftly turnes the logs into dust.", "IRON_AXE", null, false, true, false);
+		Entity pileOfLogs2 = new Entity(new Rectangle(860, 520, 300, 100), "res\\images\\Items\\PileOfLogs.png", true);
+		pileOfLogs2.addInteraction("You smashed the logs into pieces", "Your axe swiftly turnes the logs into dust.", "IRON_AXE", null, false, true, false);
+		level3[1].addEntity(pileOfLogs1);
+		level3[1].addEntity(pileOfLogs2);
+		level3[1].addItem(new Item("IRON_AXE", "Axe", "An iron axe used to make firewood.", new Rectangle(325, 400, 30, 65), "res\\images\\Items\\Axe.png"));
+		
+		level3[2].setExit(level3[3], 0);
+		level3[2].setExit(level3[4], 1);
+		level3[2].setExit(level3[0], 3);
+		Entity log = new Entity(new Rectangle(540, 100, 280, 50), "res\\images\\Items\\Log.png", true);
+		log.addInteraction("You smashed the log into pieces", "Your axe swiftly turnes the log into dust.", "IRON_AXE", null, false, true, false);
+		level3[2].addEntity(log);
+		
+		level3[3].setExit(level3[2], 2);
+		level3[3].addItem(new Item("EXIT_KEY", "Exit Key", "The key to exit the dungeons.", new Rectangle(625, 150, 30, 65), "res\\images\\Items\\Key.png"));
+		level3[3].addEntity(new Entity(new Rectangle(500, 130, 95, 75), "res\\images\\Items\\Rock.png", true));
+		level3[3].addEntity(new Entity(new Rectangle(690, 130, 95, 75), "res\\images\\Items\\Rock.png", true));
+		
+		level3[4].setExit(level3[2], 3);
+		level3[4].setExit(lastRoom, 2, "EXIT_KEY");
+		
+		lastRoom.setExit(level3[4], 0);
 	}
 }

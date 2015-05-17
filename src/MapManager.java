@@ -92,14 +92,14 @@ public class MapManager {
 		
 		level2[1].setExit(level2[0], 0);
 		level2[1].setExit(level2[2], 3);
-		Entity rock = new Entity(new Rectangle(1050, 550, 95, 75), "res\\images\\Items\\Rock.png", true);
+		Entity rock = new Entity(new Rectangle(1000, 550, 95, 75), "res\\images\\Items\\Rock.png", true);
 		rock.addInteraction("Rock", "There seems to be something hiding under the rock...", null, 
 				new Item("MUSHROOM", "Rare mushroom", "A rare mushroom.", new Rectangle(0, 0, 50, 50), "res\\images\\Items\\Mushroom.png"), false, false, false);
 		level2[1].addEntity(rock);
-		level2[1].addEntity(new Entity(new Rectangle(750, 470, 95, 75), "res\\images\\Items\\Rock.png", true));
+		level2[1].addEntity(new Entity(new Rectangle(800, 560, 95, 75), "res\\images\\Items\\Rock.png", true));
 		level2[1].addEntity(new Entity(new Rectangle(850, 390, 95, 75), "res\\images\\Items\\Rock.png", true));
 		level2[1].addEntity(new Entity(new Rectangle(930, 300, 95, 75), "res\\images\\Items\\Rock.png", true));
-		level2[1].addEntity(new Entity(new Rectangle(450, 500, 95, 75), "res\\images\\Items\\Rock.png", true));
+		level2[1].addEntity(new Entity(new Rectangle(450, 560, 95, 75), "res\\images\\Items\\Rock.png", true));
 		level2[1].addEntity(new Entity(new Rectangle(890, 480, 95, 75), "res\\images\\Items\\Rock.png", true));
 		
 		level2[2].setExit(level2[3], 0);
@@ -127,19 +127,22 @@ public class MapManager {
 		level3[0].setExit(level2[2], 0);
 		level3[0].setExit(level3[2], 1);
 		level3[0].setExit(level3[1], 2);
-		level3[0].addEntity(new Entity(new Rectangle(180, 490, 95, 75), "res\\images\\Items\\Grasspatch.png", true));
+		level3[0].addEntity(new Entity(new Rectangle(180, 490, 95, 75), "res\\images\\Items\\Grasspatch.png", false));
 		level3[0].addEntity(new Entity(new Rectangle(100, 280, 95, 75), "res\\images\\Items\\Rock.png", true));
 		Entity pileOfLogs = new Entity(new Rectangle(800, 520, 300, 100), "res\\images\\Items\\PileOfLogs.png", true);
-		pileOfLogs.addInteraction("You smashed the logs into pieces", "Your axe swiftly turnes the logs into dust.", "IRON_AXE", null, false, true, false);
+		pileOfLogs.addInteraction("You smashed the logs into pieces", "Your axe swiftly turnes the logs into dust.", "IRON_AXE", 
+				new Item("SAWDUST_1", "Sawdust", "A pile of sawdust.", new Rectangle(0, 0, 45, 45), "res\\images\\Items\\Sawdust.png"), false, true, false);
 		level3[0].addEntity(pileOfLogs);
 		
 		level3[1].setExit(level3[0], 0);
 		level3[1].addEntity(new Entity(new Rectangle(100, 80, 95, 75), "res\\images\\Items\\Rock.png", true));
 		level3[1].addEntity(new Entity(new Rectangle(360, 500, 80, 90), "res\\images\\Items\\Log2.png", true));
 		Entity pileOfLogs1 = new Entity(new Rectangle(890, 420, 300, 100), "res\\images\\Items\\PileOfLogs.png", true);
-		pileOfLogs1.addInteraction("You smashed the logs into pieces", "Your axe swiftly turnes the logs into dust.", "IRON_AXE", null, false, true, false);
+		pileOfLogs1.addInteraction("You smashed the logs into pieces", "Your axe swiftly turnes the logs into dust.", "IRON_AXE", 
+				new Item("SAWDUST_2", "Sawdust", "A pile of sawdust.", new Rectangle(0, 0, 45, 45), "res\\images\\Items\\Sawdust.png"), false, true, false);
 		Entity pileOfLogs2 = new Entity(new Rectangle(860, 520, 300, 100), "res\\images\\Items\\PileOfLogs.png", true);
-		pileOfLogs2.addInteraction("You smashed the logs into pieces", "Your axe swiftly turnes the logs into dust.", "IRON_AXE", null, false, true, false);
+		pileOfLogs2.addInteraction("You smashed the logs into pieces", "Your axe swiftly turnes the logs into dust.", "IRON_AXE", 
+				new Item("SAWDUST_3", "Sawdust", "A pile of sawdust.", new Rectangle(0, 0, 45, 45), "res\\images\\Items\\Sawdust.png"), false, true, false);
 		level3[1].addEntity(pileOfLogs1);
 		level3[1].addEntity(pileOfLogs2);
 		level3[1].addItem(new Item("IRON_AXE", "Axe", "An iron axe used to make firewood.", new Rectangle(325, 400, 30, 65), "res\\images\\Items\\Axe.png"));
@@ -148,7 +151,8 @@ public class MapManager {
 		level3[2].setExit(level3[4], 1);
 		level3[2].setExit(level3[0], 3);
 		Entity log = new Entity(new Rectangle(540, 100, 280, 50), "res\\images\\Items\\Log.png", true);
-		log.addInteraction("You smashed the log into pieces", "Your axe swiftly turnes the log into dust.", "IRON_AXE", null, false, true, false);
+		log.addInteraction("You smashed the log into pieces", "Your axe swiftly turnes the log into dust.", "IRON_AXE", 
+				new Item("SAWDUST_4", "Sawdust", "A pile of sawdust.", new Rectangle(0, 0, 45, 45), "res\\images\\Items\\Sawdust.png"), false, true, false);
 		level3[2].addEntity(log);
 		
 		level3[3].setExit(level3[2], 2);

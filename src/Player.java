@@ -141,7 +141,7 @@ public class Player extends Entity {
 	 */
 	public void act() {
 		Rectangle area = null;
-		int actAreaSize = 30;
+		int actAreaSize = 50;
 		
 		// Create the area where player can interact with an Entity wherein.
 		switch (getDirection()) {

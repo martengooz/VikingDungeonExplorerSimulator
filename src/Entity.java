@@ -234,44 +234,47 @@ public class Entity implements Drawable {
 		Rectangle newPosition = new Rectangle(position.getX() + velocity.getX() * delta, position.getY(), //Calculate new new position to compare collisions
 				position.getWidth(), position.getHeight()); 
 		
-		if (newPosition.getX() > 0 + DungeonGame.WALLWIDTH[1] && newPosition.getX() < DungeonGame.WIDTH - position.getWidth() - DungeonGame.WALLWIDTH[3]) { //Check that we are within bounds
-			boolean willCollide = false;			
-			if (checkCollision) {
-				Iterator<NPC> itNpcs = currentRoom.getNPCs().iterator();
-				Iterator<Item> itItems = currentRoom.getItems().iterator();
-				Iterator<Entity> itEntities = currentRoom.getEntities().iterator();
-				
-				while (itNpcs.hasNext()) { //Check against NPCs
-					NPC npc = itNpcs.next();
-					if (npc.getDoesCollide() && npc.getPosition().intersects(newPosition)) {
-						willCollide = true;
-					}
-				}
-				
-				while (itItems.hasNext()) { //Check against items 
-					Item item = itItems.next();
-					if (item.getDoesCollide() && item.getPosition().intersects(newPosition)) {
-						willCollide = true;
-					}
-				}
-				
-				while (itEntities.hasNext()) { //Check against entities
-					Entity entity = itEntities.next();
-					if (entity.getDoesCollide() && entity.getPosition().intersects(newPosition)) {
-						willCollide = true;
-					}
+		boolean willCollide = false;
+		if (checkCollision) {
+			if (newPosition.getX() < 0 + DungeonGame.WALLWIDTH[1] || newPosition.getX() > DungeonGame.WIDTH - position.getWidth() - DungeonGame.WALLWIDTH[3]) { // Check that we are within bounds
+				willCollide = true;
+			}
+			Iterator<NPC> itNpcs = currentRoom.getNPCs().iterator();
+			Iterator<Item> itItems = currentRoom.getItems().iterator();
+			Iterator<Entity> itEntities = currentRoom.getEntities().iterator();
+			
+			while (itNpcs.hasNext()) { //Check against NPCs
+				NPC npc = itNpcs.next();
+				if (npc.getDoesCollide() && npc.getPosition().intersects(newPosition)) {
+					willCollide = true;
 				}
 			}
 			
-			if (!willCollide) {position = newPosition;}
+			while (itItems.hasNext()) { //Check against items 
+				Item item = itItems.next();
+				if (item.getDoesCollide() && item.getPosition().intersects(newPosition)) {
+					willCollide = true;
+				}
+			}
+			
+			while (itEntities.hasNext()) { //Check against entities
+				Entity entity = itEntities.next();
+				if (entity.getDoesCollide() && entity.getPosition().intersects(newPosition)) {
+					willCollide = true;
+				}
+			}
 		}
+		if (!willCollide) {position = newPosition;}
 		
 		//Update position Y
 		newPosition = new Rectangle(position.getX(), position.getY() + velocity.getY() * delta, //Calculate new new position to compare collisions
 				position.getWidth(), position.getHeight()); 
 		
-		if (newPosition.getY() > 0 + DungeonGame.WALLWIDTH[0] && newPosition.getY() < DungeonGame.HEIGHT - position.getHeight() - DungeonGame.WALLWIDTH[2]) { //Check that we are within bounds
-			boolean willCollide = false;
+		willCollide = false;
+		if (checkCollision) {
+			if (newPosition.getY() < 0 + DungeonGame.WALLWIDTH[0] || newPosition.getY() > DungeonGame.HEIGHT - position.getHeight() - DungeonGame.WALLWIDTH[2]) { //Check that we are within bounds
+				willCollide = true;
+			}
 			if (checkCollision) {
 				Iterator<NPC> itNpcs = currentRoom.getNPCs().iterator();
 				Iterator<Item> itItems = currentRoom.getItems().iterator();
@@ -298,9 +301,8 @@ public class Entity implements Drawable {
 					}
 				}
 			}
-		
-			if (!willCollide) {position = newPosition;}
-		}		
+		}	
+		if (!willCollide) {position = newPosition;}
 	}
 	
 	/**

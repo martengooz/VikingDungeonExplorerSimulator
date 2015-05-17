@@ -79,82 +79,94 @@ public class DungeonGame extends BasicGame {
 	@Override
 	public void update(GameContainer gameContainer, int delta)
 			throws SlickException {
+	
 		// Update input
 		Input input = gameContainer.getInput();
-
-		// While in inventory
-		if (UserInterfaceManager.isInInventory()) {
-			// Closes inventory
-			if (input.isKeyPressed(KEY_INVENTORY)) {
-				UserInterfaceManager.showInventory(redbeard.getItems());
-			}
-			if (input.isKeyPressed(KEY_EXIT)) {
-				UserInterfaceManager.showInventory(redbeard.getItems());
-			}
-
-			// Navigating in inventory
-			for (int key : KEY_MOVE_UP) { // Up
-				if (input.isKeyPressed(key)) {
-					UserInterfaceManager.navigateInventory(0);
-				}
-			}
-			for (int key : KEY_MOVE_DOWN) { // Down
-				if (input.isKeyPressed(key)) {
-					UserInterfaceManager.navigateInventory(1);
-				}
-			}
-		}
-
-		// While in game
-		else {
-			// Player movement
-			for (int key : KEY_MOVE_UP) {
-				if (input.isKeyDown(key)) {
-					redbeard.move(0);
-				}
-			}
-			for (int key : KEY_MOVE_DOWN) {
-				if (input.isKeyDown(key)) {
-					redbeard.move(2);
-				}
-			}
-			for (int key : KEY_MOVE_LEFT) {
-				if (input.isKeyDown(key)) {
-					redbeard.move(3);
-				}
-			}
-			for (int key : KEY_MOVE_RIGHT) {
-				if (input.isKeyDown(key)) {
-					redbeard.move(1);
-				}
-			}
-
-			// Others
-			if (input.isKeyPressed(KEY_ACT)) {
-				if (UserInterfaceManager.hasMessage()) {
-					UserInterfaceManager.nextMessage();
-				} else {
-					redbeard.act();
-				}
-			}
-			if (input.isKeyPressed(KEY_INVENTORY)) {
-				UserInterfaceManager.showInventory(redbeard.getItems());
-			}
-			if (input.isKeyPressed(KEY_EXIT)) {
-				System.exit(0);
-			}
-		}
-
-		redbeard.update(delta, redbeard.getCurrentRoom()); // Update player
-		redbeard.getCurrentRoom().update(delta); // Update room
 		
 		// Check if player has won the game
 		if (redbeard.getCurrentRoom() == MapManager.getLastRoom()) {
 			if (!UserInterfaceManager.hasMessage()) {
 				UserInterfaceManager.addMessage(redbeard.getImage(2), "\"I am free, finally free!\"", "Congratulations, you have completed the game! Press ESC to exit.");
 			}
-			redbeard.setVelocity(new Point(0f, 1.4f)); // Automatically move redbeard to bottom of screen
+			redbeard.setCollide(false, false); //Disable Collision
 			redbeard.setAcceleration(new Point(0f, 0.03f)); // Automatically move redbeard to bottom of screen
+			redbeard.update(delta, redbeard.getCurrentRoom()); // Update player
+			
+			if (input.isKeyPressed(KEY_EXIT)) { // Close game of ESC is pressed
+				System.exit(0);
+			}
+		}
+		else {
+
+			// While in inventory
+			if (UserInterfaceManager.isInInventory()) {
+				// Closes inventory
+				if (input.isKeyPressed(KEY_INVENTORY)) {
+					UserInterfaceManager.showInventory(redbeard.getItems());
+				}
+				if (input.isKeyPressed(KEY_EXIT)) {
+					UserInterfaceManager.showInventory(redbeard.getItems());
+				}
+	
+				// Navigating in inventory
+				for (int key : KEY_MOVE_UP) { // Up
+					if (input.isKeyPressed(key)) {
+						UserInterfaceManager.navigateInventory(0);
+					}
+				}
+				for (int key : KEY_MOVE_DOWN) { // Down
+					if (input.isKeyPressed(key)) {
+						UserInterfaceManager.navigateInventory(1);
+					}
+				}
+			}
+	
+			// While in game
+			else {
+				// Player movement
+				for (int key : KEY_MOVE_UP) {
+					if (input.isKeyDown(key)) {
+						redbeard.move(0);
+					}
+				}
+				for (int key : KEY_MOVE_DOWN) {
+					if (input.isKeyDown(key)) {
+						redbeard.move(2);
+					}
+				}
+				for (int key : KEY_MOVE_LEFT) {
+					if (input.isKeyDown(key)) {
+						redbeard.move(3);
+					}
+				}
+				for (int key : KEY_MOVE_RIGHT) {
+					if (input.isKeyDown(key)) {
+						redbeard.move(1);
+					}
+				}
+	
+				// Others
+				if (input.isKeyPressed(KEY_ACT)) {
+					if (UserInterfaceManager.hasMessage()) {
+						UserInterfaceManager.nextMessage();
+					} else {
+						redbeard.act();
+					}
+				}
+				if (input.isKeyPressed(KEY_EXIT)) {
+					if (UserInterfaceManager.hasMessage()) {
+						UserInterfaceManager.nextMessage();
+					} else {
+						System.exit(0);
+					}
+				}
+				if (input.isKeyPressed(KEY_INVENTORY)) {
+					UserInterfaceManager.showInventory(redbeard.getItems());
+				}
+			}
+	
+			redbeard.update(delta, redbeard.getCurrentRoom()); // Update player
+			redbeard.getCurrentRoom().update(delta); // Update room
 		}
 	}
 

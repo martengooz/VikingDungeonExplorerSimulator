@@ -27,14 +27,17 @@ public class UserInterfaceManager {
 	private static final int ITEM_PADDING = 10;
 	
 	// Message properties
-	private static final int MESSAGEBOK_PADDING = 20;
+	private static final int MESSAGEBOX_PADDING = 20;
+	private static final int MESSAGEBOX_MARGIN_X = 220;
+	private static final int MESSAGEBOX_MARGIN_Y = 20;
+	private static final int MESSAGEBOX_IMAGE_WIDTH = 140;
 	private static final int MESSAGEBOX_WIDTH = DungeonGame.WIDTH;
-	private static final int MESSAGEBOX_HEIGHT = 200; 
+	private static final int MESSAGEBOX_HEIGHT = 160; 
 
 	// Color
 	private static final Color TEXT_COLOR = Color.white;
-	private static final Color BG_COLOR = Color.lightGray;
-	private static final Color CURRENT_ITEM_BG_COLOR = Color.gray;
+	private static final Color BG_COLOR = new Color(0.3f, 0.3f, 0.3f, 0.8f);
+	private static final Color CURRENT_ITEM_BG_COLOR = new Color(0.6f, 0.6f, 0.6f, 0.4f);;
 	
 	// Fonts
 	private static final Font AWT_TITLE_FONT = new Font(Font.SANS_SERIF, Font.TRUETYPE_FONT, 24);
@@ -44,7 +47,7 @@ public class UserInterfaceManager {
 	
 	/**
 	 * Add a message to the message queue. 
-	 * @param g The graphics context used by the container.
+	 * @param image The image of the message.
 	 * @param title The title of the message.
 	 * @param message The message to print. 
 	 */
@@ -78,10 +81,8 @@ public class UserInterfaceManager {
 	}
 	
 	/**
-	 * Add a message to the message queue. 
-	 * @param g The graphics context used by the container.
-	 * @param title The title of the message.
-	 * @param message The message to print. 
+	 * Draw the current message. 
+	 * @param g The graphics context used by the container. 
 	 */
 	public static void drawMessage(Graphics g) {	
 		int boxWidth;
@@ -90,41 +91,53 @@ public class UserInterfaceManager {
 		Image image;
 		
 		if (inInventort) {
-			boxWidth = MESSAGEBOX_WIDTH - INVENTORY_WIDTH - 2*MESSAGEBOK_PADDING;
+			boxWidth = MESSAGEBOX_WIDTH - INVENTORY_WIDTH - 2*MESSAGEBOX_MARGIN_X;
 			title = currentItem.getName();
 			description = currentItem.getDescription();
 			image = currentItem.getImage(2);
-			g.fillRect(MESSAGEBOK_PADDING, DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT, MESSAGEBOX_WIDTH - INVENTORY_WIDTH - 2*MESSAGEBOK_PADDING,
-					MESSAGEBOX_HEIGHT - MESSAGEBOK_PADDING); 
+			//g.fillRect(MESSAGEBOX_PADDING, DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT, MESSAGEBOX_WIDTH - INVENTORY_WIDTH - 2*MESSAGEBOX_PADDING,
+			//		MESSAGEBOX_HEIGHT - MESSAGEBOX_PADDING); 
 		}
 		else {
-			boxWidth = MESSAGEBOX_WIDTH - 2*MESSAGEBOK_PADDING;
-			g.fillRect(MESSAGEBOK_PADDING, DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT,
-					MESSAGEBOX_WIDTH - 2*MESSAGEBOK_PADDING, MESSAGEBOX_HEIGHT - MESSAGEBOK_PADDING); 
+			boxWidth = MESSAGEBOX_WIDTH - 2*MESSAGEBOX_MARGIN_X;
+			//g.fillRect(MESSAGEBOX_PADDING, DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT,
+			//		MESSAGEBOX_WIDTH - 2*MESSAGEBOX_PADDING, MESSAGEBOX_HEIGHT - MESSAGEBOX_PADDING); 
 			title = messages.peek().getTitle();
 			description = messages.peek().getDescription();
 			image = messages.peek().getImage();
 		}
 		
+		int messageBoxStartY = DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT - MESSAGEBOX_MARGIN_Y;
+		
 		// Image Background
 		g.setColor(BG_COLOR);
-		g.fillRect(MESSAGEBOK_PADDING, DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT, MESSAGEBOK_PADDING*7, MESSAGEBOX_HEIGHT - MESSAGEBOK_PADDING); 
+		g.fillRect(MESSAGEBOX_MARGIN_X, messageBoxStartY, MESSAGEBOX_IMAGE_WIDTH + MESSAGEBOX_PADDING, MESSAGEBOX_HEIGHT); 
 		
 		//Image
-		image.draw(2*MESSAGEBOK_PADDING, DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT + MESSAGEBOK_PADDING);
+		if (image.getHeight() > image.getWidth()) {
+			image.draw(MESSAGEBOX_MARGIN_X + MESSAGEBOX_PADDING, messageBoxStartY + MESSAGEBOX_PADDING, (float)(MESSAGEBOX_HEIGHT - 2*MESSAGEBOX_PADDING)/image.getHeight());
+		}
+		else {
+			image.draw(MESSAGEBOX_MARGIN_X + MESSAGEBOX_PADDING, messageBoxStartY + MESSAGEBOX_PADDING, (float)MESSAGEBOX_IMAGE_WIDTH/image.getWidth());
+		}
 		
 		// Text Background
 		g.setColor(BG_COLOR);
-		g.fillRect(8*MESSAGEBOK_PADDING, DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT, boxWidth - 7*MESSAGEBOK_PADDING, MESSAGEBOX_HEIGHT - MESSAGEBOK_PADDING); 
+		g.fillRect(MESSAGEBOX_MARGIN_X + MESSAGEBOX_PADDING + MESSAGEBOX_IMAGE_WIDTH, messageBoxStartY, 
+				boxWidth - MESSAGEBOX_IMAGE_WIDTH - MESSAGEBOX_PADDING, MESSAGEBOX_HEIGHT); 
 				
 		// Title
 		g.setColor(TEXT_COLOR); 
-		TITLE_FONT.drawString(9*MESSAGEBOK_PADDING, DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT + MESSAGEBOK_PADDING, title);
+		TITLE_FONT.drawString(MESSAGEBOX_MARGIN_X + 2*MESSAGEBOX_PADDING + MESSAGEBOX_IMAGE_WIDTH,
+				messageBoxStartY + MESSAGEBOX_PADDING, title);
 					
 		// Description
-		DESCRIPTION_FONT.drawString(9*MESSAGEBOK_PADDING, DungeonGame.HEIGHT - MESSAGEBOX_HEIGHT + 3*MESSAGEBOK_PADDING, description);
+		DESCRIPTION_FONT.drawString(MESSAGEBOX_MARGIN_X + 2*MESSAGEBOX_PADDING + MESSAGEBOX_IMAGE_WIDTH,
+				messageBoxStartY + 3*MESSAGEBOX_PADDING, description);
 		
-		
+		// Press ESC to close-text
+		g.setColor(TEXT_COLOR); 
+		DESCRIPTION_FONT.drawString(MESSAGEBOX_MARGIN_X + boxWidth - 120 - MESSAGEBOX_PADDING, messageBoxStartY + MESSAGEBOX_PADDING, "Press ESC to close");
 		
 	}
 	

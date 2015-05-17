@@ -127,7 +127,7 @@ public class MapManager {
 		oldbeard.addInteraction("Oldbeard - Guardian of the treasure", "Thank you for the mushrooms! Here is your key for your reward.", "MUSHROOM", 
 				new Item("BRASS_KEY", "Brass key", "A big shiny brass key.", new Rectangle(0, 0, 30, 65), "res\\images\\Items\\Key.png"), false, false, true);
 		oldbeard.addInteraction("Oldbeard - Guardian of the treasure", "I am in dept to you, son.", "BRASS_KEY", null, true, false, false);
-		oldbeard.addInteraction("Oldbeard - Guardian of the treasure", "I see you are seeking for a way out... I can help you if you bring me some mushrooms, I am too old to get them myself.", null, null, false, false, false);
+		oldbeard.addInteraction("Oldbeard - Guardian of the treasure", "I see you are seeking for a way out... I can help you if you bring me some mushrooms, \nI am too old to get them myself.", null, null, false, false, false);
 		oldbeard.addInteraction("Oldbeard - Guardian of the treasure", "There should be some mushrooms growing among the rocks nearby. Bring them to me.", null, null, true, false, false);
 		level2[3].addNPC(oldbeard);
 		

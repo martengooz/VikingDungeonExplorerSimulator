@@ -1,3 +1,5 @@
+package se.gabmartdev.dungeonexplorer;
+
 import java.util.Random;
 
 import org.newdawn.slick.geom.Point;

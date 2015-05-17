@@ -1,10 +1,11 @@
+package se.gabmartdev.dungeonexplorer;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
-
 
 public class Player extends Entity {
 	private final String NAME;

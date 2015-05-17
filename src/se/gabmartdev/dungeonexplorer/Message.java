@@ -1,3 +1,5 @@
+package se.gabmartdev.dungeonexplorer;
+
 import org.newdawn.slick.Image;
 
 /**

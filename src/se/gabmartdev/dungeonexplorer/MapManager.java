@@ -1,5 +1,6 @@
-import org.newdawn.slick.geom.Rectangle;
+package se.gabmartdev.dungeonexplorer;
 
+import org.newdawn.slick.geom.Rectangle;
 
 public class MapManager {
 

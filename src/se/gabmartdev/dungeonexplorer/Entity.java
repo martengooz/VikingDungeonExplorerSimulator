@@ -1,3 +1,4 @@
+package se.gabmartdev.dungeonexplorer;
 
 import java.util.ArrayList;
 import java.util.Iterator;

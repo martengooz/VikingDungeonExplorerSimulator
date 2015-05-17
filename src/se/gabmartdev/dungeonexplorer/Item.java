@@ -1,3 +1,5 @@
+package se.gabmartdev.dungeonexplorer;
+
 import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Rectangle;
 

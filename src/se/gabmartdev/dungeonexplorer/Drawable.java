@@ -1,3 +1,4 @@
+package se.gabmartdev.dungeonexplorer;
 
 public interface Drawable {
 	

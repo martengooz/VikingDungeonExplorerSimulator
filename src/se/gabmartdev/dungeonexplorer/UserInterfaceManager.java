@@ -1,3 +1,5 @@
+package se.gabmartdev.dungeonexplorer;
+
 import java.awt.Font;
 import java.util.Iterator;
 import java.util.LinkedList;

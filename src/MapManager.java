@@ -57,7 +57,7 @@ public class MapManager {
 		level1[0].setExit(level2[0], 3, "GREYBEARD_KEY");
 		Entity pileOfDirt = new Entity(new Rectangle(1100, 310, 100, 100), "res\\images\\Items\\PileOfDirt.png", true);
 		pileOfDirt.addInteraction("Pile of dirt", "You removed the dirt with your mighty shovel.", "IRON_SHOVEL", null, false, true, false);
-		pileOfDirt.addInteraction("Pile fo dirt", "There is a big pile of dirt in the way. If only I had a shovel..", null, null, true, false, false);
+		pileOfDirt.addInteraction("Pile of dirt", "There is a big pile of dirt in the way. If only I had a shovel..", null, null, true, false, false);
 		level1[0].addEntity(pileOfDirt);
 		Entity runestone = new Entity(new Rectangle(100, 150, 102, 133), "res\\images\\Items\\Runestone.png", true);
 		runestone.addInteraction("Runestone", "\"Greybeards treasurechamber\"", null, null, true, false, false);
@@ -71,9 +71,9 @@ public class MapManager {
 			"res\\images\\Entities\\greybeardRight.png",
 			"res\\images\\Entities\\greybeardRight.png",
 			"res\\images\\Entities\\greybeardLeft.png" });
-		greybeard.addInteraction("Greybeard", "You found my shiny key! Here have this key instead, it will aid you in your travels!", "GOLD_KEY", 
+		greybeard.addInteraction("Greybeard", "You found my golden key! Here have this key instead, it will aid you in your travels!", "GOLD_KEY", 
 				new Item("GREYBEARD_KEY", "Greybeard key", "A shiny key with the name \"Greybeard\" engraved.", new Rectangle(0, 0, 30, 65), "res\\images\\Items\\Key.png"), false, false, true);
-		greybeard.addInteraction("Greybeard", "Thank you, mighty hero Redbeard!", "BRASS_KEY", null, true, false, false);
+		greybeard.addInteraction("Greybeard", "Thank you, mighty hero Redbeard!", "GREYBEARD_KEY", null, true, false, false);
 		greybeard.addInteraction("Greybeard", "I am the mighty greybeard! Give me a gift and i will reward you greatly!", null, null, false, false, false);
 		greybeard.addInteraction("Greybeard", "I seem to have missplaced my golden key! How can I pillage without it?", null, null, true, false, false);
 		level1[1].addNPC(greybeard);
@@ -95,7 +95,6 @@ public class MapManager {
 		Entity rock = new Entity(new Rectangle(1050, 550, 95, 75), "res\\images\\Items\\Rock.png", true);
 		rock.addInteraction("Rock", "There seems to be something hiding under the rock...", null, 
 				new Item("MUSHROOM", "Rare mushroom", "A rare mushroom.", new Rectangle(0, 0, 50, 50), "res\\images\\Items\\Mushroom.png"), false, false, false);
-		rock.addInteraction("Rock", "There is nothing here.", null, null, true, false, false);
 		level2[1].addEntity(rock);
 		level2[1].addEntity(new Entity(new Rectangle(750, 470, 95, 75), "res\\images\\Items\\Rock.png", true));
 		level2[1].addEntity(new Entity(new Rectangle(850, 390, 95, 75), "res\\images\\Items\\Rock.png", true));

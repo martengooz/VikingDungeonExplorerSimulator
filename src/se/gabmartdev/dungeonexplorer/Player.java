@@ -142,28 +142,28 @@ public class Player extends Entity {
 	 */
 	public void act() {
 		Rectangle area = null;
-		int actAreaSize = 50;
+		int actAreaSize = 10;
 		
 		// Create the area where player can interact with an Entity wherein.
 		switch (getDirection()) {
 		case 0: 
 			area = new Rectangle(getPosition().getX(), getPosition().getY() - actAreaSize,
-					getPosition().getWidth(), actAreaSize*2);
+					getPosition().getWidth(), actAreaSize + getPosition().getHeight());
 			break;
 			
 		case 1:
-			area = new Rectangle(getPosition().getX() + getPosition().getWidth() - actAreaSize, getPosition().getY(),
-					actAreaSize*2, getPosition().getHeight());
+			area = new Rectangle(getPosition().getX(), getPosition().getY(),
+					actAreaSize + getPosition().getWidth(), getPosition().getHeight());
 			break;
 			
 		case 2: 
-			area = new Rectangle(getPosition().getX(), getPosition().getY() + getPosition().getHeight() - actAreaSize,
-					getPosition().getWidth(), actAreaSize*2);
+			area = new Rectangle(getPosition().getX(), getPosition().getY(),
+					getPosition().getWidth(), actAreaSize + getPosition().getHeight());
 			break;
 			
 		case 3: 
 			area = new Rectangle(getPosition().getX() - actAreaSize, getPosition().getY(),
-					actAreaSize*2, getPosition().getHeight());
+					actAreaSize + getPosition().getWidth(), getPosition().getHeight());
 			break;
 		}
 		
@@ -202,6 +202,9 @@ public class Player extends Entity {
 				Item item = currentRoom.unlockDoor(i, this);
 				if (item != null) {
 					UserInterfaceManager.addMessage(item.getImage(2), "You unlocked the door.", "Your " + item.getName().toLowerCase() + " unlocked the door.");
+				}
+				else {
+					UserInterfaceManager.addMessage(getImage(getDirection()), "The door is locked.", "You have no key that fit in this lock.");
 				}
 			}
 		}

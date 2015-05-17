@@ -56,7 +56,7 @@ public class DungeonGame extends BasicGame {
 		redbeard.getCurrentRoom().draw();
 		redbeard.draw();
 
-		if (UserInterfaceManager.hasMessage()) {
+		if (UserInterfaceManager.hasMessage() && !UserInterfaceManager.isInInventory()) {
 			UserInterfaceManager.drawMessage(g);
 		}
 		if (UserInterfaceManager.isInInventory()) {

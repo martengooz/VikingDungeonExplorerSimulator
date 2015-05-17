@@ -134,8 +134,11 @@ public class UserInterfaceManager {
 				messageBoxStartY + MESSAGEBOX_PADDING, title);
 					
 		// Description
-		DESCRIPTION_FONT.drawString(MESSAGEBOX_MARGIN_X + 2*MESSAGEBOX_PADDING + MESSAGEBOX_IMAGE_WIDTH,
-				messageBoxStartY + 3*MESSAGEBOX_PADDING, description);
+		int y = messageBoxStartY + 3*MESSAGEBOX_PADDING - DESCRIPTION_FONT.getHeight();
+		for (String line : description.split("\n")) {		
+			DESCRIPTION_FONT.drawString(MESSAGEBOX_MARGIN_X + 2*MESSAGEBOX_PADDING + MESSAGEBOX_IMAGE_WIDTH,
+				y += DESCRIPTION_FONT.getHeight(), line);
+		}
 		
 		// Press ESC to close-text
 		g.setColor(TEXT_COLOR); 

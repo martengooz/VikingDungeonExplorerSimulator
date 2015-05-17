@@ -41,10 +41,10 @@ public class DungeonGame extends BasicGame {
 	// Players
 	private static Player redbeard;
 	private static String[] redbeardImageLocation = {
-			"res\\images\\Player\\playerUp.png",
-			"res\\images\\Player\\playerRight.png",
-			"res\\images\\Player\\playerDown.png",
-			"res\\images\\Player\\playerLeft.png" };
+			"res/images/Player/playerUp.png",
+			"res/images/Player/playerRight.png",
+			"res/images/Player/playerDown.png",
+			"res/images/Player/playerLeft.png" };
 
 	public DungeonGame(String game) {
 		super(game);
@@ -176,7 +176,7 @@ public class DungeonGame extends BasicGame {
 			AppGameContainer container = new AppGameContainer(game, WIDTH, HEIGHT, false);
 			container.setShowFPS(true); // Show FPS counter
 			container.setVSync(true);
-			container.setIcons(new String[] {"res\\images\\Icons\\icon16.png", "res\\images\\Icons\\icon24.png", "res\\images\\Icons\\icon32.png"});
+			container.setIcons(new String[] {"res/images/Icons/icon16.png", "res/images/Icons/icon24.png", "res/images/Icons/icon32.png"});
 			container.start();
 		} catch (SlickException e) {
 			e.printStackTrace();

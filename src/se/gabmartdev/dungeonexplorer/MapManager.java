@@ -163,7 +163,7 @@ public class MapManager {
 		level3[2].setExit(level3[3], 0);
 		level3[2].setExit(level3[4], 1);
 		level3[2].setExit(level3[0], 3);
-		Item sawdust4 = new Item("SAWDUST", "Sawdust", "Pile of sawdust.", new Rectangle(0, 0, 45, 45), "res/images/Items/Sawdust.png");
+		Item sawdust4 = new Item("SAWDUST", "Pile of sawdust", "Pile of sawdust.", new Rectangle(0, 0, 45, 45), "res/images/Items/Sawdust.png");
 		Entity log = new Entity(new Rectangle(540, 100, 280, 50), "res/images/Items/Log.png", true);
 		log.addInteraction("You smashed the log into pieces", "Your axe swiftly turns the log into dust.", "IRON_AXE", 
 				sawdust4, false, true, false);
@@ -189,7 +189,7 @@ public class MapManager {
 		sawbeard.addInteraction("Sawbeard", "I lovey sawdust! Gimmey and I givey shiney key. But only special sawdusty!", null, null, false, false, false);
 		sawbeard.addInteraction("Sawbeard", "Yay, sawydusty! Dusty dusty dust...", "SAWDUST_SPECIAL", 
 				new Item("WOODEN_KEY", "Wooden Key", "A key made of wood.", new Rectangle(625, 150, 30, 65), "res/images/Items/KeyWood.png"), false, false, true);
-		sawbeard.addInteraction("Sawbeard", "Me wanty some special sawdusty, please gimmy!", null, null, true, false, false);
+		sawbeard.addInteraction("Sawbeard", "Me lovey some special sawdusty!", null, null, true, false, false);
 		level4[0].addNPC(sawbeard);
 		Entity pileOfLogs3 = new Entity(new Rectangle(790, 100, 300, 100), "res/images/Items/PileOfLogs.png", true);
 		pileOfLogs3.addInteraction("You smashed the logs into pieces", "Your axe swiftly turns the logs into dust.", "IRON_AXE", 

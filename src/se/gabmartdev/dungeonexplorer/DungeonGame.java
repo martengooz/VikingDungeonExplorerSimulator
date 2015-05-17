@@ -12,7 +12,7 @@ import org.newdawn.slick.geom.Rectangle;
 public class DungeonGame extends BasicGame {
 
 	// Application Properties
-	public static final String VERSION = "Alpha";
+	public static final String VERSION = "Beta";
 	public static final int WIDTH = 1280;
 	public static final int HEIGHT = 720;
 	private static int DOORWIDTH = 180;
@@ -158,8 +158,6 @@ public class DungeonGame extends BasicGame {
 				if (input.isKeyPressed(KEY_EXIT)) {
 					if (UserInterfaceManager.hasMessage()) {
 						UserInterfaceManager.nextMessage();
-					} else {
-						System.exit(0);
 					}
 				}
 				if (input.isKeyPressed(KEY_INVENTORY)) {
@@ -178,6 +176,7 @@ public class DungeonGame extends BasicGame {
 			AppGameContainer container = new AppGameContainer(game, WIDTH, HEIGHT, false);
 			container.setShowFPS(true); // Show FPS counter
 			container.setVSync(true);
+			container.setIcons(new String[] {"res\\images\\Icons\\icon16.png", "res\\images\\Icons\\icon24.png", "res\\images\\Icons\\icon32.png"});
 			container.start();
 		} catch (SlickException e) {
 			e.printStackTrace();

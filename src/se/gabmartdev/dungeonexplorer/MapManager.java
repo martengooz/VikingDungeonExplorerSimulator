@@ -23,28 +23,36 @@ public class MapManager {
 	 */
 	public static void generateMap() {
 		// Create rooms
-		firstRoom = new Room("res\\images\\Rooms\\Room2_keys.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
-		lastRoom = new Room("res\\images\\Rooms\\Outside.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
+		firstRoom = new Room("res\\images\\Rooms\\Room2_keys.png", "res\\images\\Doors\\Door.png", "res\\images\\Doors\\LockedDoor.png");
+		lastRoom = new Room("res\\images\\Rooms\\Outside.png", "res\\images\\Doors\\Door.png", "res\\images\\Doors\\LockedDoor.png");
 		
 		Room[] level1 = new Room[3];
-		level1[0] = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
-		level1[1] = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
-		level1[2] = (Room) new Room("res\\images\\Rooms\\Room.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
+		level1[0] = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Doors\\Door.png", "res\\images\\Doors\\LockedDoor.png");
+		level1[1] = new Room("res\\images\\Rooms\\Room.png", "res\\images\\Doors\\Door.png", "res\\images\\Doors\\LockedDoor.png");
+		level1[2] = (Room) new Room("res\\images\\Rooms\\Room.png", "res\\images\\Doors\\Door.png", "res\\images\\Doors\\LockedDoor.png");
 		
 		Room[] level2 = new Room[4];
-		level2[0] = new Room("res\\images\\Rooms\\Room3.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
-		level2[1] = new Room("res\\images\\Rooms\\Room3.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
-		level2[2] = new Room("res\\images\\Rooms\\Room3.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
-		level2[3] = new Room("res\\images\\Rooms\\Room3.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
+		level2[0] = new Room("res\\images\\Rooms\\Room3.png", "res\\images\\Doors\\Door.png", "res\\images\\Doors\\LockedDoor.png");
+		level2[1] = new Room("res\\images\\Rooms\\Room3.png", "res\\images\\Doors\\Door.png", "res\\images\\Doors\\LockedDoor.png");
+		level2[2] = new Room("res\\images\\Rooms\\Room3.png", "res\\images\\Doors\\Door.png", "res\\images\\Doors\\LockedDoor.png");
+		level2[3] = new Room("res\\images\\Rooms\\Room3.png", "res\\images\\Doors\\Door.png", "res\\images\\Doors\\LockedDoor.png");
 		
 		Room[] level3 = new Room[5];
-		level3[0] = new Room("res\\images\\Rooms\\Room2.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
-		level3[1] = new Room("res\\images\\Rooms\\Room2.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
-		level3[2] = new Room("res\\images\\Rooms\\Room2.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
-		level3[3] = new Room("res\\images\\Rooms\\Room2.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
-		level3[4] = new Room("res\\images\\Rooms\\Room2.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
+		level3[0] = new Room("res\\images\\Rooms\\Room2.png", "res\\images\\Doors\\Door.png", "res\\images\\Doors\\LockedDoor.png");
+		level3[1] = new Room("res\\images\\Rooms\\Room2.png", "res\\images\\Doors\\Door.png", "res\\images\\Doors\\LockedDoor.png");
+		level3[2] = new Room("res\\images\\Rooms\\Room2.png", "res\\images\\Doors\\Door.png", "res\\images\\Doors\\LockedDoor.png");
+		level3[3] = new Room("res\\images\\Rooms\\Room2.png", "res\\images\\Doors\\Door.png", "res\\images\\Doors\\LockedDoor.png");
+		level3[4] = new Room("res\\images\\Rooms\\Room2.png", "res\\images\\Doors\\Door.png", "res\\images\\Doors\\LockedDoor.png");
 		
-		lastRoom = new Room("res\\images\\Rooms\\Outside.png", "res\\images\\Door.png", "res\\images\\LockedDoor.png");
+		Room[] level4 = new Room[4];
+		level4[0] = new Room("res\\images\\Rooms\\Room4.png", "res\\images\\Doors\\Door.png", "res\\images\\Doors\\LockedDoor.png");
+		level4[1] = new Room("res\\images\\Rooms\\Room4.png", "res\\images\\Doors\\Door.png", "res\\images\\Doors\\LockedDoor.png");
+		level4[2] = new Room("res\\images\\Rooms\\Room4.png", "res\\images\\Doors\\Door.png", "res\\images\\Doors\\LockedDoor.png");
+		level4[3] = new Room("res\\images\\Rooms\\Room4.png", "res\\images\\Doors\\Door.png", "res\\images\\Doors\\LockedDoor.png");
+		
+		//firstRoom= level4[0];
+		
+		lastRoom = new Room("res\\images\\Rooms\\Outside.png", "res\\images\\Doors\\Door.png", "res\\images\\Doors\\LockedDoor.png");
 		
 		// Configure rooms
 		// Level 1 
@@ -61,7 +69,7 @@ public class MapManager {
 		pileOfDirt.addInteraction("Pile of dirt", "There is a big pile of dirt in the way. If only I had a shovel..", null, null, true, false, false);
 		level1[0].addEntity(pileOfDirt);
 		Entity runestone = new Entity(new Rectangle(100, 150, 102, 133), "res\\images\\Items\\Runestone.png", true);
-		runestone.addInteraction("Runestone", "\"Greybeards treasurechamber\"", null, null, true, false, false);
+		runestone.addInteraction("Runestone", "\"Greybeards treasure chamber\"", null, null, true, false, false);
 		level1[0].addEntity(runestone);
 		
 		level1[1].setExit(level1[0], 3);
@@ -87,9 +95,9 @@ public class MapManager {
 		level2[0].setExit(level2[1], 2);
 		level2[0].setExit(level2[3], 3);
 		level2[0].setExit(level1[0], 1);
-		level2[0].addItem(new Item("COINS_1", "A pile of coins", "A shiny pile of coins.", new Rectangle(125, 450, 100, 100), "res\\images\\Items\\Coins.png"));
-		level2[0].addItem(new Item("COINS_2", "A pile of coins", "A shiny pile of coins.", new Rectangle(525, 100, 100, 100), "res\\images\\Items\\Coins.png"));
-		level2[0].addItem(new Item("COINS_3", "A pile of coins", "A shiny pile of coins.", new Rectangle(825, 450, 100, 100), "res\\images\\Items\\Coins.png"));
+		level2[0].addItem(new Item("COINS", "Pile of coins", "A shiny pile of coins.", new Rectangle(125, 450, 100, 100), "res\\images\\Items\\Coins.png"));
+		level2[0].addItem(new Item("COINS", "Pile of coins", "A shiny pile of coins.", new Rectangle(525, 100, 100, 100), "res\\images\\Items\\Coins.png"));
+		level2[0].addItem(new Item("COINS", "Pile of coins", "A shiny pile of coins.", new Rectangle(825, 450, 100, 100), "res\\images\\Items\\Coins.png"));
 		
 		level2[1].setExit(level2[0], 0);
 		level2[1].setExit(level2[2], 3);
@@ -116,11 +124,11 @@ public class MapManager {
 			"res\\images\\Entities\\oldbeardRight.png",
 			"res\\images\\Entities\\oldbeardRight.png",
 			"res\\images\\Entities\\oldbeardLeft.png" });
-		oldbeard.addInteraction("Oldbeard", "Thank you for the mushrooms! Here is your key for your reward.", "MUSHROOM", 
+		oldbeard.addInteraction("Oldbeard - Guardian of the treasure", "Thank you for the mushrooms! Here is your key for your reward.", "MUSHROOM", 
 				new Item("BRASS_KEY", "Brass key", "A big shiny brass key.", new Rectangle(0, 0, 30, 65), "res\\images\\Items\\Key.png"), false, false, true);
-		oldbeard.addInteraction("Oldbeard", "I am in dept to you, son.", "BRASS_KEY", null, true, false, false);
-		oldbeard.addInteraction("Oldbeard", "I see you are seeking for a way out... I can help you if you bring me some mushrooms, I am to old to get them myself.", null, null, false, false, false);
-		oldbeard.addInteraction("Oldbeard", "There should be some mushrooms growing among the rocks nearby. Bring them to me.", null, null, true, false, false);
+		oldbeard.addInteraction("Oldbeard - Guardian of the treasure", "I am in dept to you, son.", "BRASS_KEY", null, true, false, false);
+		oldbeard.addInteraction("Oldbeard - Guardian of the treasure", "I see you are seeking for a way out... I can help you if you bring me some mushrooms, I am too old to get them myself.", null, null, false, false, false);
+		oldbeard.addInteraction("Oldbeard - Guardian of the treasure", "There should be some mushrooms growing among the rocks nearby. Bring them to me.", null, null, true, false, false);
 		level2[3].addNPC(oldbeard);
 		
 		
@@ -128,22 +136,26 @@ public class MapManager {
 		level3[0].setExit(level2[2], 0);
 		level3[0].setExit(level3[2], 1);
 		level3[0].setExit(level3[1], 2);
+		Item sawdust1 = new Item("SAWDUST_SPECIAL", "Special Sawdust", "A pile of special sawdust.", new Rectangle(0, 0, 45, 45), "res\\images\\Items\\Sawdust.png");
 		level3[0].addEntity(new Entity(new Rectangle(180, 490, 95, 75), "res\\images\\Items\\Grasspatch.png", false));
 		level3[0].addEntity(new Entity(new Rectangle(100, 280, 95, 75), "res\\images\\Items\\Rock.png", true));
 		Entity pileOfLogs = new Entity(new Rectangle(800, 520, 300, 100), "res\\images\\Items\\PileOfLogs.png", true);
-		pileOfLogs.addInteraction("You smashed the logs into pieces", "Your axe swiftly turnes the logs into dust.", "IRON_AXE", 
-				new Item("SAWDUST_1", "Sawdust", "A pile of sawdust.", new Rectangle(0, 0, 45, 45), "res\\images\\Items\\Sawdust.png"), false, true, false);
+		pileOfLogs.addInteraction("You smashed the logs into pieces", "Your axe swiftly turns the logs into dust.", "IRON_AXE", 
+				sawdust1, false, true, false);
 		level3[0].addEntity(pileOfLogs);
 		
 		level3[1].setExit(level3[0], 0);
+		Item sawdust2 = new Item("SAWDUST", "Pile of sawdust", "A pile of sawdust.", new Rectangle(0, 0, 45, 45), "res\\images\\Items\\Sawdust.png");
+		Item sawdust3 = new Item("SAWDUST", "Pile of sawdust", "A pile of sawdust.", new Rectangle(0, 0, 45, 45), "res\\images\\Items\\Sawdust.png");
+
 		level3[1].addEntity(new Entity(new Rectangle(100, 80, 95, 75), "res\\images\\Items\\Rock.png", true));
-		level3[1].addEntity(new Entity(new Rectangle(360, 500, 80, 90), "res\\images\\Items\\Log2.png", true));
+		level3[1].addEntity(new Entity(new Rectangle(360, 500, 80, 90), "res\\images\\Items\\Stump.png", true));
 		Entity pileOfLogs1 = new Entity(new Rectangle(890, 420, 300, 100), "res\\images\\Items\\PileOfLogs.png", true);
-		pileOfLogs1.addInteraction("You smashed the logs into pieces", "Your axe swiftly turnes the logs into dust.", "IRON_AXE", 
-				new Item("SAWDUST_2", "Sawdust", "A pile of sawdust.", new Rectangle(0, 0, 45, 45), "res\\images\\Items\\Sawdust.png"), false, true, false);
+		pileOfLogs1.addInteraction("You smashed the logs into pieces", "Your axe swiftly turns the logs into dust.", "IRON_AXE", 
+				sawdust2, false, true, false);
 		Entity pileOfLogs2 = new Entity(new Rectangle(860, 520, 300, 100), "res\\images\\Items\\PileOfLogs.png", true);
-		pileOfLogs2.addInteraction("You smashed the logs into pieces", "Your axe swiftly turnes the logs into dust.", "IRON_AXE", 
-				new Item("SAWDUST_3", "Sawdust", "A pile of sawdust.", new Rectangle(0, 0, 45, 45), "res\\images\\Items\\Sawdust.png"), false, true, false);
+		pileOfLogs2.addInteraction("You smashed the logs into pieces", "Your axe swiftly turns the logs into dust.", "IRON_AXE", 
+				sawdust3, false, true, false);
 		level3[1].addEntity(pileOfLogs1);
 		level3[1].addEntity(pileOfLogs2);
 		level3[1].addItem(new Item("IRON_AXE", "Axe", "An iron axe used to make firewood.", new Rectangle(325, 400, 30, 65), "res\\images\\Items\\Axe.png"));
@@ -151,19 +163,87 @@ public class MapManager {
 		level3[2].setExit(level3[3], 0);
 		level3[2].setExit(level3[4], 1);
 		level3[2].setExit(level3[0], 3);
+		Item sawdust4 = new Item("SAWDUST", "Sawdust", "Pile of sawdust.", new Rectangle(0, 0, 45, 45), "res\\images\\Items\\Sawdust.png");
 		Entity log = new Entity(new Rectangle(540, 100, 280, 50), "res\\images\\Items\\Log.png", true);
-		log.addInteraction("You smashed the log into pieces", "Your axe swiftly turnes the log into dust.", "IRON_AXE", 
-				new Item("SAWDUST_4", "Sawdust", "A pile of sawdust.", new Rectangle(0, 0, 45, 45), "res\\images\\Items\\Sawdust.png"), false, true, false);
+		log.addInteraction("You smashed the log into pieces", "Your axe swiftly turns the log into dust.", "IRON_AXE", 
+				sawdust4, false, true, false);
 		level3[2].addEntity(log);
 		
 		level3[3].setExit(level3[2], 2);
-		level3[3].addItem(new Item("EXIT_KEY", "Exit Key", "The key to exit the dungeons.", new Rectangle(625, 150, 30, 65), "res\\images\\Items\\Key.png"));
+		level3[3].addItem(new Item("STONE_KEY", "Stone Key", "A key made of stone.", new Rectangle(625, 150, 30, 65), "res\\images\\Items\\Key.png"));
 		level3[3].addEntity(new Entity(new Rectangle(500, 130, 95, 75), "res\\images\\Items\\Rock.png", true));
 		level3[3].addEntity(new Entity(new Rectangle(690, 130, 95, 75), "res\\images\\Items\\Rock.png", true));
 		
 		level3[4].setExit(level3[2], 3);
-		level3[4].setExit(lastRoom, 2, "EXIT_KEY");
+		level3[4].setExit(level4[0], 1, "STONE_KEY");
 		
-		lastRoom.setExit(level3[4], 0);
+		
+		// Level 4
+		level4[0].setExit(level3[4], 3);
+		level4[0].setExit(level4[1], 2);
+		NPC sawbeard = new NPC(new Rectangle(400, 400, 128, 128), new String[] {
+			"res\\images\\Entities\\sawbeardLeft.png",
+			"res\\images\\Entities\\sawbeardRight.png",
+			"res\\images\\Entities\\sawbeardRight.png",
+			"res\\images\\Entities\\sawbeardLeft.png" });
+		sawbeard.addInteraction("Sawbeard", "I lovey sawdust! Gimmey and I givey shiney key. But only special sawdusty!", null, null, false, false, false);
+		sawbeard.addInteraction("Sawbeard", "Yay, sawydusty! Dusty dusty dust...", "SAWDUST_SPECIAL", 
+				new Item("WOODEN_KEY", "Wooden Key", "A key made of wood.", new Rectangle(625, 150, 30, 65), "res\\images\\Items\\KeyWood.png"), false, false, true);
+		sawbeard.addInteraction("Sawbeard", "Me wanty some special sawdusty, please gimmy!", null, null, true, false, false);
+		level4[0].addNPC(sawbeard);
+		Entity pileOfLogs3 = new Entity(new Rectangle(790, 100, 300, 100), "res\\images\\Items\\PileOfLogs.png", true);
+		pileOfLogs3.addInteraction("You smashed the logs into pieces", "Your axe swiftly turns the logs into dust.", "IRON_AXE", 
+				sawdust2, false, true, false);
+		level4[0].addEntity(pileOfLogs3);
+		level4[0].addEntity(new Entity(new Rectangle(1100, 100, 50, 50), "res\\images\\Items\\sawdust.png", false));
+		level4[0].addEntity(new Entity(new Rectangle(1120, 120, 50, 50), "res\\images\\Items\\sawdust.png", false));
+		level4[0].addEntity(new Entity(new Rectangle(240, 520, 50, 50), "res\\images\\Items\\sawdust.png", false));
+		Entity runestoneSawbeard = new Entity(new Rectangle(100, 150, 102, 133), "res\\images\\Items\\Runestone.png", true);
+		runestoneSawbeard.addInteraction("Runestone", "\"Sawbeards' awesomey carpentery\"", null, null, true, false, false);
+		
+		level4[1].setExit(level4[0], 0);
+		level4[1].setExit(level4[2], 1, "WOODEN_KEY");
+		level4[1].setExit(level4[3], 3);
+		level4[1].addEntity(new Entity(new Rectangle(230, 180, 95, 75), "res\\images\\Items\\Rock.png", true));
+		NPC sawbeardKid1 = new NPC(new Rectangle(700, 500, 73, 80), new String[] {
+			"res\\images\\Entities\\kidbeardLeft.png",
+			"res\\images\\Entities\\kidbeardRight.png",
+			"res\\images\\Entities\\kidbeardRight.png",
+			"res\\images\\Entities\\kidbeardLeft.png" });
+		sawbeardKid1.addInteraction("Bobby", "When I growy up I wanny be dusty.", null, null, true, false, false);
+		level4[1].addNPC(sawbeardKid1);
+		NPC sawbeardKid2 = new NPC(new Rectangle(400, 400, 73, 80), new String[] {
+			"res\\images\\Entities\\kidbeardLeft.png",
+			"res\\images\\Entities\\kidbeardRight.png",
+			"res\\images\\Entities\\kidbeardRight.png",
+			"res\\images\\Entities\\kidbeardLeft.png" });
+		sawbeardKid2.addInteraction("Hobby", "Hehehe, dust...", null, null, true, false, false);
+		level4[1].addNPC(sawbeardKid2);
+		NPC sawbeardKid3 = new NPC(new Rectangle(940, 120, 73, 80), new String[] {
+			"res\\images\\Entities\\kidbeardLeft.png",
+			"res\\images\\Entities\\kidbeardRight.png",
+			"res\\images\\Entities\\kidbeardRight.png",
+			"res\\images\\Entities\\kidbeardLeft.png" });
+		sawbeardKid3.addInteraction("Robby", "Dusty is lovey, dusty is lifey.", null, null, true, false, false);
+		level4[1].addNPC(sawbeardKid3);
+
+		level4[2].setExit(level4[1], 3);
+		level4[2].addItem(new Item("EXIT_KEY", "Exit Key", "The key to exit the dungeons.", new Rectangle(990, 345, 30, 65), "res\\images\\Items\\Key.png"));
+		
+		level4[3].setExit(level4[1], 1);
+		level4[3].setExit(lastRoom, 2, "EXIT_KEY");
+		level4[3].addEntity(new Entity(new Rectangle(90, 289, 80, 90), "res\\images\\Items\\Stump.png", true));
+		level4[3].addEntity(new Entity(new Rectangle(730, 142, 80, 90), "res\\images\\Items\\Stump.png", true));
+		level4[3].addEntity(new Entity(new Rectangle(820, 180, 80, 90), "res\\images\\Items\\Stump.png", true));
+		level4[3].addEntity(new Entity(new Rectangle(90, 546, 80, 90), "res\\images\\Items\\Stump.png", true));
+		level4[3].addEntity(new Entity(new Rectangle(450, 546, 80, 90), "res\\images\\Items\\Stump.png", true));
+		level4[3].addEntity(new Entity(new Rectangle(1090, 200, 80, 90), "res\\images\\Items\\Stump.png", true));
+		level4[3].addEntity(new Entity(new Rectangle(1100, 100, 50, 50), "res\\images\\Items\\sawdust.png", false));
+		level4[3].addEntity(new Entity(new Rectangle(1120, 120, 50, 50), "res\\images\\Items\\sawdust.png", false));
+		level4[3].addEntity(new Entity(new Rectangle(240, 420, 50, 50), "res\\images\\Items\\sawdust.png", false));
+		level4[3].addEntity(new Entity(new Rectangle(256, 415, 50, 50), "res\\images\\Items\\sawdust.png", false));
+
+		
+		lastRoom.setExit(level4[3], 0);
 	}
 }

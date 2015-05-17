@@ -187,7 +187,7 @@ public class Entity implements Drawable {
 	 * @param requiredItemId The id of the Item required to display this interaction, or null if no item is required.
 	 * @param reward The reward for this interaction.
 	 * @param persistent A boolean signaling if this interaction should stay after being completed.
-	 * @param removeEntity A boolean signaling if boolean signaling of this interaction should remove the entity after completion.
+	 * @param removeEntity A boolean signaling if this interaction should remove the entity after completion.
 	 * @param removeRequireItem A boolean signaling of this interaction should remove the required Item after being completed.
 	 */
 	public void addInteraction(String title, String message, String requiredItemId, 

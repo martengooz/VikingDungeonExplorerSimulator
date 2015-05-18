@@ -68,7 +68,7 @@ public class MapManager {
 		pileOfDirt.addInteraction("Pile of dirt", "You removed the dirt with your mighty shovel.", "IRON_SHOVEL", null, false, true, false);
 		pileOfDirt.addInteraction("Pile of dirt", "There is a big pile of dirt in the way. If only I had a shovel..", null, null, true, false, false);
 		level1[0].addEntity(pileOfDirt);
-		Entity runestone = new Entity(new Rectangle(100, 150, 102, 133), "res/images/Items/Runestone.png", true);
+		Entity runestone = new Entity(new Rectangle(100, 150, 86, 133), "res/images/Items/Runestone.png", true);
 		runestone.addInteraction("Runestone", "\"Greybeards treasure chamber\"", null, null, true, false, false);
 		level1[0].addEntity(runestone);
 		
@@ -83,7 +83,7 @@ public class MapManager {
 		greybeard.addInteraction("Greybeard", "You found my golden key! Here have this key instead, it will aid you in your travels!", "GOLD_KEY", 
 				new Item("GREYBEARD_KEY", "Greybeard key", "A shiny key with the name \"Greybeard\" engraved.", new Rectangle(0, 0, 30, 65), "res/images/Items/Key.png"), false, false, true);
 		greybeard.addInteraction("Greybeard", "Thank you, mighty hero Redbeard!", "GREYBEARD_KEY", null, true, false, false);
-		greybeard.addInteraction("Greybeard", "I am the mighty greybeard! Give me a gift and i will reward you greatly!", null, null, false, false, false);
+		greybeard.addInteraction("Greybeard", "I am the mighty greybeard! Help me search and i will reward you greatly!", null, null, false, false, false);
 		greybeard.addInteraction("Greybeard", "I seem to have missplaced my golden key! How can I pillage without it?", null, null, true, false, false);
 		level1[1].addNPC(greybeard);
 		
@@ -124,10 +124,10 @@ public class MapManager {
 			"res/images/Entities/oldbeardRight.png",
 			"res/images/Entities/oldbeardRight.png",
 			"res/images/Entities/oldbeardLeft.png" });
-		oldbeard.addInteraction("Oldbeard - Guardian of the treasure", "Thank you for the mushrooms! Here is your key for your reward.", "MUSHROOM", 
+		oldbeard.addInteraction("Oldbeard - Guardian of the treasure", "Thank you for the mushroom! Here is your key for your reward.", "MUSHROOM", 
 				new Item("BRASS_KEY", "Brass key", "A big shiny brass key.", new Rectangle(0, 0, 30, 65), "res/images/Items/Key.png"), false, false, true);
 		oldbeard.addInteraction("Oldbeard - Guardian of the treasure", "I am in dept to you, son.", "BRASS_KEY", null, true, false, false);
-		oldbeard.addInteraction("Oldbeard - Guardian of the treasure", "I see you are seeking for a way out... I can help you if you bring me some mushrooms, \nI am too old to get them myself.", null, null, false, false, false);
+		oldbeard.addInteraction("Oldbeard - Guardian of the treasure", "I see you are seeking for a way out... I can help you if you bring me a mushroom, \nI am too old to get it myself.", null, null, false, false, false);
 		oldbeard.addInteraction("Oldbeard - Guardian of the treasure", "There should be some mushrooms growing among the rocks in the nearby room. Bring them to me.", null, null, true, false, false);
 		level2[3].addNPC(oldbeard);
 		
@@ -211,6 +211,7 @@ public class MapManager {
 			"res/images/Entities/kidbeardRight.png",
 			"res/images/Entities/kidbeardRight.png",
 			"res/images/Entities/kidbeardLeft.png" });
+		sawbeardKid1.addInteraction("Bobby", "Thank you for the sawdust, I love it!", "SAWDUST", null, true, false, true);
 		sawbeardKid1.addInteraction("Bobby", "When I growy up I wanny be dusty.", null, null, true, false, false);
 		level4[1].addNPC(sawbeardKid1);
 		NPC sawbeardKid2 = new NPC(new Rectangle(400, 400, 73, 80), new String[] {
@@ -219,6 +220,7 @@ public class MapManager {
 			"res/images/Entities/kidbeardRight.png",
 			"res/images/Entities/kidbeardLeft.png" });
 		sawbeardKid2.addInteraction("Hobby", "Hehehe, dust...", null, null, true, false, false);
+		sawbeardKid2.addInteraction("Hobby", "Thank you for the sawdust, I love it!", "SAWDUST", null, true, false, true);
 		level4[1].addNPC(sawbeardKid2);
 		NPC sawbeardKid3 = new NPC(new Rectangle(940, 120, 73, 80), new String[] {
 			"res/images/Entities/kidbeardLeft.png",
@@ -226,6 +228,7 @@ public class MapManager {
 			"res/images/Entities/kidbeardRight.png",
 			"res/images/Entities/kidbeardLeft.png" });
 		sawbeardKid3.addInteraction("Robby", "Dusty is lovey, dusty is lifey.", null, null, true, false, false);
+		sawbeardKid3.addInteraction("Robby", "Thank you for the sawdust, I love it!", "SAWDUST", null, true, false, true);
 		level4[1].addNPC(sawbeardKid3);
 
 		level4[2].setExit(level4[1], 3);

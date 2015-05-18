@@ -96,7 +96,11 @@ public class Entity implements Drawable {
 				interaction = interactionTemp;
 			}
 		}
-		if (interaction == null) {return null;} // No interaction was found.
+		if (interaction == null && doesCollide) { // No interaction was found, but this item has collition and should display a "Nothing here"-message.
+			UserInterfaceManager.addMessage(image[2], "Nothing here", "There is nothing here.");
+			return null;
+		} 
+		else if (interaction == null) {return null;} // No interaction was found.
 		
 		UserInterfaceManager.addMessage(image[2], interaction.getTitle(), interaction.getMessage());
 		

@@ -128,7 +128,7 @@ public class MapManager {
 				new Item("BRASS_KEY", "Brass key", "A big shiny brass key.", new Rectangle(0, 0, 30, 65), "res/images/Items/Key.png"), false, false, true);
 		oldbeard.addInteraction("Oldbeard - Guardian of the treasure", "I am in dept to you, son.", "BRASS_KEY", null, true, false, false);
 		oldbeard.addInteraction("Oldbeard - Guardian of the treasure", "I see you are seeking for a way out... I can help you if you bring me some mushrooms, \nI am too old to get them myself.", null, null, false, false, false);
-		oldbeard.addInteraction("Oldbeard - Guardian of the treasure", "There should be some mushrooms growing among the rocks nearby. Bring them to me.", null, null, true, false, false);
+		oldbeard.addInteraction("Oldbeard - Guardian of the treasure", "There should be some mushrooms growing among the rocks in the nearby room. Bring them to me.", null, null, true, false, false);
 		level2[3].addNPC(oldbeard);
 		
 		
@@ -167,6 +167,7 @@ public class MapManager {
 		Entity log = new Entity(new Rectangle(540, 100, 280, 50), "res/images/Items/Log.png", true);
 		log.addInteraction("You smashed the log into pieces", "Your axe swiftly turns the log into dust.", "IRON_AXE", 
 				sawdust4, false, true, false);
+		log.addInteraction("Log", "There is a big log in the way", null, null, true, false, false);
 		level3[2].addEntity(log);
 		
 		level3[3].setExit(level3[2], 2);
@@ -189,7 +190,7 @@ public class MapManager {
 		sawbeard.addInteraction("Sawbeard", "I lovey sawdust! Gimmey and I givey shiney key. But only special sawdusty!", null, null, false, false, false);
 		sawbeard.addInteraction("Sawbeard", "Yay, sawydusty! Dusty dusty dust...", "SAWDUST_SPECIAL", 
 				new Item("WOODEN_KEY", "Wooden Key", "A key made of wood.", new Rectangle(625, 150, 30, 65), "res/images/Items/KeyWood.png"), false, false, true);
-		sawbeard.addInteraction("Sawbeard", "Me lovey some special sawdusty!", null, null, true, false, false);
+		sawbeard.addInteraction("Sawbeard", "Me lovey some special sawdusty! Thank you!", null, null, true, false, false);
 		level4[0].addNPC(sawbeard);
 		Entity pileOfLogs3 = new Entity(new Rectangle(790, 100, 300, 100), "res/images/Items/PileOfLogs.png", true);
 		pileOfLogs3.addInteraction("You smashed the logs into pieces", "Your axe swiftly turns the logs into dust.", "IRON_AXE", 

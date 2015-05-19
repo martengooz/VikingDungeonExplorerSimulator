@@ -19,13 +19,13 @@ public class DungeonGame extends BasicGame {
 	private static int DOORHEIGHT = 20;
 	public static final int[] WALLWIDTH = { 40, 40, 60, 40 }; // How close the player can be to the walls in following order: up, right, down, left.
 	public static final Rectangle[] DOORAREA = { // The area the player can stand in to trigger going through a door
-			new Rectangle((WIDTH - DOORWIDTH) / 2, WALLWIDTH[0], 
+			new Rectangle((WIDTH - DOORWIDTH) / 2, WALLWIDTH[0] - 5, 
 					DOORWIDTH,	DOORHEIGHT), // Up
-			new Rectangle(WIDTH - WALLWIDTH[1] - DOORHEIGHT, (HEIGHT - DOORWIDTH) / 2,
+			new Rectangle(WIDTH - WALLWIDTH[1] - DOORHEIGHT + 5, (HEIGHT - DOORWIDTH) / 2,
 					DOORHEIGHT, DOORWIDTH), // Right
-			new Rectangle((WIDTH - DOORWIDTH) / 2, HEIGHT - WALLWIDTH[2]
+			new Rectangle((WIDTH - DOORWIDTH) / 2, HEIGHT - WALLWIDTH[2] + 5
 					- DOORHEIGHT, DOORWIDTH, DOORHEIGHT), // Down
-			new Rectangle(WALLWIDTH[3], (HEIGHT - DOORWIDTH) / 2,
+			new Rectangle(WALLWIDTH[3] - 5, (HEIGHT - DOORWIDTH) / 2,
 					DOORHEIGHT,	DOORWIDTH) }; // Left
 
 	// Input handling

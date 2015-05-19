@@ -211,6 +211,7 @@ public class MapManager {
 			"res/images/Entities/kidbeardRight.png",
 			"res/images/Entities/kidbeardRight.png",
 			"res/images/Entities/kidbeardLeft.png" });
+		sawbeardKid1.addInteraction("Bobby", "When I growy up I wanny be dusty.", null, null, false, false, false);
 		sawbeardKid1.addInteraction("Bobby", "Thank you for the sawdust, I love it!", "SAWDUST", null, true, false, true);
 		sawbeardKid1.addInteraction("Bobby", "When I growy up I wanny be dusty.", null, null, true, false, false);
 		level4[1].addNPC(sawbeardKid1);
@@ -219,16 +220,18 @@ public class MapManager {
 			"res/images/Entities/kidbeardRight.png",
 			"res/images/Entities/kidbeardRight.png",
 			"res/images/Entities/kidbeardLeft.png" });
-		sawbeardKid2.addInteraction("Hobby", "Hehehe, dust...", null, null, true, false, false);
+		sawbeardKid2.addInteraction("Hobby", "Hehehe, dust...", null, null, false, false, false);
 		sawbeardKid2.addInteraction("Hobby", "Thank you for the sawdust, I love it!", "SAWDUST", null, true, false, true);
+		sawbeardKid2.addInteraction("Hobby", "Hehehe, dust...", null, null, true, false, false);
 		level4[1].addNPC(sawbeardKid2);
 		NPC sawbeardKid3 = new NPC(new Rectangle(940, 120, 73, 80), new String[] {
 			"res/images/Entities/kidbeardLeft.png",
 			"res/images/Entities/kidbeardRight.png",
 			"res/images/Entities/kidbeardRight.png",
 			"res/images/Entities/kidbeardLeft.png" });
-		sawbeardKid3.addInteraction("Robby", "Dusty is lovey, dusty is lifey.", null, null, true, false, false);
+		sawbeardKid3.addInteraction("Robby", "Dusty is lovey, dusty is lifey.", null, null, false, false, false);
 		sawbeardKid3.addInteraction("Robby", "Thank you for the sawdust, I love it!", "SAWDUST", null, true, false, true);
+		sawbeardKid3.addInteraction("Robby", "Dusty is lovey, dusty is lifey.", null, null, true, false, false);
 		level4[1].addNPC(sawbeardKid3);
 
 		level4[2].setExit(level4[1], 3);

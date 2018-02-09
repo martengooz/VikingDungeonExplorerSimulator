@@ -1,12 +1,12 @@
 # Viking Dungeon Explorer Simulator
 A 2D dungeon crawler game for the course INDA14.
 
-###Uses: 
+### Uses: 
 * Slick2D library (build 237)
 * LWJGL 2.9.2
 * JRE 1.7+ 
 
-###Installation
+### Installation
 1. Install Slick2D with LWJGL
 2. Build JAR file (not runnable)
   1. In Eclipse, File > Export
